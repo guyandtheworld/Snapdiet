@@ -3,9 +3,15 @@
 
 ## Ground rules on github.
 
-* Two people shouldn't work on the same file. Keep your work seperate and collaborate to avoid confusion.
+* Always keep your fork (origin) updated with the master branch of the master (upstream).
 
-* Always do a Pull request to add anything from a line of code to a feature.
+    `git fetch upstream`
+
+    `git rebase upstream/master`
+
+    where upstream is https://github.com/isht3/stuff.
+
+* Two people shouldn't work on the same file. Keep your work seperate and collaborate to avoid confusion.
 
 * Don't push directly to the repository, always push to your own fork first and from there do a Pull request to the main repo.
 
