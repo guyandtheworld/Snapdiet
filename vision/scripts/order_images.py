@@ -1,5 +1,5 @@
 import os, os.path
-
+import time
 
 ROOT = '../../../../FOOD'
 
@@ -18,5 +18,6 @@ while 1:
         print("Moving " + files[0] + "...")
         cur_dir = ROOT + "/" + files[0]
         to_move_dir = directory + "/" + str(i) + "." + EXT
+        time.sleep(0.2)
         os.rename(cur_dir, to_move_dir)
         i += 1
