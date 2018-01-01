@@ -59,19 +59,16 @@ foodTypeName = ["Tea/Coffee/Milk Items","Cereals/Porridge","South Indian Dishes"
                   "Mutton/Meat Varieties","Salads/Chutney/Others",
                   "Desserts","Biscuits","Cakes/ Pasteries","Sweets",
                   "Savories","Chat Items"]
-val = 11
 foodVal = 1
-itemno = 87
+itemno = 0
 FOOD = { }
 
 
-
-for foodVal in range(val, 26):
+for foodVal in range(1, 26):
 
 	print("Checking " + str(foodVal) + " foodtype") # Debugging
 
 	foodItems = { }
-
 
 	while(True):
 
@@ -94,7 +91,6 @@ for foodVal in range(val, 26):
 			print("Didnt get " + checkBoxID + " in fooditem " + str(foodVal)) # Debugging
 			itemno -= 1
 			break
-
 
 		foodNameID = "row" + str(itemno) + "food"
 		foodName = driver.find_element_by_id(foodNameID).text 	
@@ -131,9 +127,10 @@ for foodVal in range(val, 26):
 		foodItems[foodName] = foodCalorie
 
 	FOOD[foodTypeName[foodVal - 1]] = foodItems
-	print(FOOD)
 
-	with open('soup.json', 'w') as f:
-		json.dump(FOOD, f)
+	print(FOOD) # Debugging
+
+with open('soup.json', 'a') as f:
+	json.dump(FOOD, f)
 
 driver.close()
