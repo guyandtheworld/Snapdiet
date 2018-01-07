@@ -10,6 +10,9 @@ class Calorie extends React.Component{
         this.state={
             weeklyGoal:'',
             monthlyGoal:'',
+            currentCalorie:0,
+            caloriesConsumed:0,
+            modalVisible:true,
         }
     }
 
@@ -19,8 +22,6 @@ class Calorie extends React.Component{
                 weeklyGoal:parseInt(text)*7,
                 monthlyGoal:parseInt(text)*31,
                 currentCalorie:0,
-                fabActive:false,
-                showModal:false
             });
         }
         else{
@@ -29,6 +30,11 @@ class Calorie extends React.Component{
                 monthlyGoal:'',
             });
         }
+    }
+
+    addCalories=() => {
+        this.setState({modalVisible:false,
+            currentCalorie:this.state.currentCalorie+this.state.caloriesConsumed});
     }
 
     render(){
@@ -45,28 +51,35 @@ class Calorie extends React.Component{
                 <Grid>
                     <Row size={10}/>
                     <Row size={10}>
-                        <Text style={{color:'white'}}>Weekly calorie goal:{this.state.weeklyGoal}</Text>
+                        <Text style={{color:'white'}}>Weekly calorie goal: {this.state.weeklyGoal}</Text>
                     </Row>
                     <Row size={10}>
-                        <Text style={{color:'white'}}>Monthly calorie goal:{this.state.monthlyGoal}</Text>
+                        <Text style={{color:'white'}}>Monthly calorie goal: {this.state.monthlyGoal}</Text>
                     </Row>
                     <Row size={10}>
-                        <Text style={{color:'white'}}>Calories consumed today:{this.state.currentCalorie}</Text>
+                        <Text style={{color:'white'}}>Calories consumed today: {this.state.currentCalorie}</Text>
                     </Row>
                     <Row size={60}/>
                 </Grid>
-                <Fab
-                    active={this.state.fabActive}
-                    direction="up"
-                    containerStyle={{ }}
-                    style={{ backgroundColor: '#5067FF' }}
-                    position="bottomRight"
-                    onPress={() => this.setState({ fabActive: !this.state.fabActive })}>
-                    <Icon name="add" />
-                    <Button style={{ backgroundColor: '#34A34F' }} onPress={this.setState({showModal:true})}>
-                        <Icon name="cafe" />
-                    </Button>
+
+                <Fab onPress={() => {this.setState({modalVisible:true})}} position='bottomRight'>
+                    <Icon name='add'/>
                 </Fab>
+                <Modal animationType = {'fade'} transparent = {true}
+                visible = {this.state.modalVisible}
+                onRequestClose = {() => { console.log("Modal has been closed.") } }>
+                    <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center',alignItems: 'center',backgroundColor:'rgba(0,0,0,0.6)'}}>
+                        <View style = {{height:'30%', width:'85%', backgroundColor: 'rgb(50,50,50)', alignItems: 'center'}}>
+                            <Form>
+                                <Item floatingLabel style={{width:'80%', height:60}}>
+                                    <Label style={{color:'rgba(255,255,255,0.5)'}}>Calories consumed</Label>
+                                    <Input onChangeText={(text) => {this.setState({caloriesConsumed:parseInt(text)})}} keyboardType='numeric' style={{color:'white'}}/>
+                                </Item>
+                            </Form>
+                            <Button onPress={this.addCalories} style={{marginLeft:'37%', marginTop:'10%'}}><Text>Add</Text></Button>
+                        </View>
+                    </View>
+                </Modal>
             </KeyboardAvoidingView>
         );
     }
