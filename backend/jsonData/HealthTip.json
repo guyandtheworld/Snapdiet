@@ -1,1 +1,10 @@
-
+{
+  
+  {"Tip 1" : "Don’t skip breakfast", "Tip 2" : "Brush up on hygiene", "Tip 3" : "Neurobics for your mind", 
+   "Tip 4" : "Whole grains are a good option!", "Tip 5" : "Drink two cups of water in the morning", 
+   "Tip 6" : "Get in a workout daily", "Tip 7" : "Eat your dinner two hours before bed", 
+   "Tip 8" : "Get a good sleep", "Tip 9" : "Help children develop healthy habits early in life that will bring lifelong benefits",
+   "Tip 9" : "Chicken, fish and beans are good choices for protein", "Tip 10" : "Read food nutrition labels",
+   "Tip 11" : "Break up with Sneaky Salt!", "Tip 12" : "Watch out for added sugar", "Tip 13" : "Load up on Vitamin C",
+   "Tip 14" : "Do regular health checkups", "Tip 15" : "Say no to Smoking", "Tip 16" : "Maintain a regular diet"}
+}
