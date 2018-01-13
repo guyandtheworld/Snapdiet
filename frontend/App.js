@@ -1,12 +1,13 @@
 import * as Expo from 'expo';
 import React from 'react';
+import {StatusBar, Platform} from 'react-native';
 import {Provider} from 'react-redux';
 import {TabNavigator} from 'react-navigation';
-import Main from './Main';
-import CameraTest from './CameraTest';
-import Calorie from './Calorie';
-import Store from './Store';
-import GetInfo from './getInfo';
+import Main from './components/Main';
+import CameraTest from './components/CameraTest';
+import Calorie from './components/Calorie';
+import Store from './components/Store';
+import GetInfo from './components/getInfo';
 
 const Tabnavigation=TabNavigator(
   {
@@ -18,7 +19,8 @@ const Tabnavigation=TabNavigator(
   {
     tabBarOptions:{
       style:{
-        backgroundColor:'rgb(50,50,50)'
+        backgroundColor:'rgb(50,50,50)',
+        paddingTop:Platform.OS=='ios'?0:StatusBar.currentHeight
       },
       labelStyle:{
         color:'rgba(255,255,255,0.7)'
