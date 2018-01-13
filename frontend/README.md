@@ -16,6 +16,6 @@ Clone this repository and run `npm install`. Once npm downloads the dependecies 
 
 * Properly implement KeyboardAvoidingView so the input fields are not covered by the virtual keyboard
 
-* Fix notifications bar partially overlapping with tabs
+* Change color palette
 
 * Redo FABs with TouchableNativeFeedback so as to get circular ripple effect
