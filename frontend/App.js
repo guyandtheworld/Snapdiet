@@ -6,12 +6,14 @@ import Main from './Main';
 import CameraTest from './CameraTest';
 import Calorie from './Calorie';
 import Store from './Store';
+import GetInfo from './getInfo';
 
 const Tabnavigation=TabNavigator(
   {
     Home:{screen:Main},
     Camera:{screen:CameraTest},
     Calorie:{screen:Calorie},
+    Info:{screen:GetInfo}
   },
   {
     tabBarOptions:{
