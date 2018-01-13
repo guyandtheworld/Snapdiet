@@ -7,12 +7,14 @@ import Main from './components/Main';
 import CameraTest from './components/CameraTest';
 import Calorie from './components/Calorie';
 import Store from './components/Store';
+import GetInfo from './components/getInfo';
 
 const Tabnavigation=TabNavigator(
   {
     Home:{screen:Main},
     Camera:{screen:CameraTest},
     Calorie:{screen:Calorie},
+    Info:{screen:GetInfo}
   },
   {
     tabBarOptions:{
