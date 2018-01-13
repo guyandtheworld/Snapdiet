@@ -16,7 +16,9 @@ class Main extends React.Component {
         }
 
         handleSignup=() => {
-            this.setState({showLogin:false});
+            this.setState({
+              showLogin:false
+            });
         }
   
   render() {
