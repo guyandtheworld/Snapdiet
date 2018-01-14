@@ -1,10 +1,18 @@
 {
   
-  {"Tip 1" : "Don’t skip breakfast", "Tip 2" : "Brush up on hygiene", "Tip 3" : "Neurobics for your mind", 
-   "Tip 4" : "Whole grains are a good option!", "Tip 5" : "Drink two cups of water in the morning", 
-   "Tip 6" : "Get in a workout daily", "Tip 7" : "Eat your dinner two hours before bed", 
-   "Tip 8" : "Get a good sleep", "Tip 9" : "Help children develop healthy habits early in life that will bring lifelong benefits",
-   "Tip 9" : "Chicken, fish and beans are good choices for protein", "Tip 10" : "Read food nutrition labels",
-   "Tip 11" : "Break up with Sneaky Salt!", "Tip 12" : "Watch out for added sugar", "Tip 13" : "Load up on Vitamin C",
-   "Tip 14" : "Do regular health checkups", "Tip 15" : "Say no to Smoking", "Tip 16" : "Maintain a regular diet"}
+  "General": {"Tip 1" : "Don’t skip breakfast, It keeps the day going", "Tip 2" : "Brush up on hygiene", 
+              "Tip 3" : "Neurobics for your mind", "Tip 4" : "Whole grains are a good option!", 
+              "Tip 5" : "Drink two cups of water in the morning", "Tip 6" : "Get in a workout daily and reduce body fat", 
+              "Tip 7" : "Eat your dinner two hours before bed for proper digestion", "Tip 8" : "Get a good sleep as it heals the body",
+              "Tip 9" : "Help children develop healthy habits early in life that will bring lifelong benefits",
+              "Tip 10" : "Chicken, fish and beans are good choices for protein", "Tip 11" : "Read food nutrition labels and pick healthy food",
+              "Tip 12" : "Break up with Sneaky Salt!", "Tip 13" : "Watch out for added sugar, they add up extra calories", 
+              "Tip 14" : "Load up on Vitamin C","Tip 15" : "Do regular health checkups", "Tip 16" : "Say no to smoking", 
+              "Tip 17" : "Maintain a regular diet", "Tip 18":"Warm lemon juice in the morning helps flush out toxins from the body"}
+  
+  "Facts":   {"Almond" : "Almond reduces cholestrol, helps weight loss, boosts energy and alkalize the body", 
+              "Apple" : "Apple provides antioxidants, helps in cancer and asthma prevention, weight loss and diabetes management",
+              "Clove" : "Clove acts as antiseptic, helps gastric upsets, control high cholesterol levels and reduces mouth ulcers",
+              "Capsicum" : "Capsicum is rich in vitamin A and C and helps burn body fat and fight against heart diseases and cancer"}   
+              
 }
