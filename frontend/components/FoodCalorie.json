@@ -1,0 +1,114 @@
+{
+ 
+ "Soup": {"Sweet Corn and Chicken Soup": "170", "Clear Vegetable Soup": "178",
+          "Green Pea Soup": "109", "Lentil Soup": "73", "Tomato Soup": "46", 
+          "Mutton Soup": "99", "Minestrone Soup": "176"},
+
+ "Salads": {"Doodhi (Bottle Gourd) Raita": "130", "Curd Salad": "86", "Tomato Raita": "50", 
+            "Sprouted Greengram": "149", "Boondhi Raita": "169", "Cucumber and Tomato Salad": "12", 
+            "Carrot Raita": "59", "Cucumber Raita": "71"},
+
+ "Biscuits": {"Biscuits": "110", "Sesam Biscuits": "155", "Groundnut Biscuits": "95",
+              "Nut Biscuits": "104"},
+
+ "Fish Varieties": {"Fish Fried (big)": "95", "Fish Cutlet": "95", "Prawn Curry": "219", 
+                    "Fish Jhol": "141", "Prawn do Piazza": "275", "Fillet of Fish": "179"},
+
+ "Vegetable Gravy/Curry": {"Bagara Baigan": "230", "Vegetable Kofta": "220", 
+                           "Beans and Potato curry": "94", "Potato with Gravy": "130", 
+                           "Vegetables with Gravy": "130"},
+
+ "South Indian Dishes": {"Rava Dosai": "176", "Perugu Atukulu (Pohe + curd)": "175",
+                         "Pongal": "270", "Dosa (Plain)": "125", "Idli": "75", "Upma": "203",
+                         "Pesarattu": "145", "Ragi Idli": "86", "Onion Dosa": "155", 
+                         "Adai": "145", "Sevian Upma": "168", "Puri": "100", "Masala Dosa": "200"},
+
+ "Cakes/ Pasteries": {"Lemon Tart": "204", "Queen Cakes (Cup Cake)": "214", "Jam Tart": "331", 
+                      "Fruit Cake": "270"},
+
+ "Salads/Chutney/Others": {"Curd Salad": "86", "Tomato Raita": "50", "Cucumber Raita": "71", 
+                           "Carrot Raita": "59", "Doodhi (Bottle Gourd) Raita": "130", 
+                           "Boondhi Raita": "169", "Cucumber and Tomato Salad": "12", "Papad (large)": "29"},
+
+ "Desserts": {"Ice-Cream": "400", "Suji Kheer": "260", "Custard/ Pudding": "180", "Fruit Cake": "270", 
+              "Floating Island": "131", "Jelly/Jam": "20"},
+
+ "Chat Items": {"Aloo-Pattice": "137", "Bhel": "150", "Paapdi Chat": "285", "Aloo Chat": "116", 
+                "Pea-Kachori": "190", "Chat (Dahi-Pakori)": "44"},
+
+ "Savories": {"Namak Para": "68", "Potato Bonda": "100", "Sago Vada": "105", 
+              "Bajji or Pakora (small)": "35", "Vada": "70", "Masala Vada": "75", 
+              "Chidwa (Mixture)": "217", "Dahi Vada": "90", "Cheese Balls": "125", 
+              "Besan ki Puri/Besan Puri": "220", "Samosa": "200", "Vegetable Puff": "200",
+              "Mutton Cutlet": "169", "Sandwiches (butter- 2tbsp)": "100"}, 
+
+ "Chicken Dishes": {"Grilled Chicken (leg)": "199", "Chicken Vindaloo": "340", 
+                    "Chicken Curry": "320", "Dam-ka-Chicken": "257"}, 
+
+ "Cereals/Porridge": {"Wheat Porridge": "220", "Puffed Wheat": "53", 
+                      "Sandwiches (butter- 2tbsp)": "100", "Bread Toasted": "85",
+                      "Ragi Ambali (Porridge)": "77", "Semolina Porridge": "220",
+                      "Cereal Flakes with Milk (corn/wheat/rice)": "220"}, 
+
+ "Sweets": {"Barfi": "60", "Chikki": "145", "Srikhand": "570", "Coconut Laddu": "116", 
+            "Black Gram Dhal Laddu": "130", "Pooran Poli": "270", "Dalia (sweet)": "211", 
+            "Besan Barfi (small)": "200", "Sandesh": "70", "Halwa (Suji) Kesari": "430", 
+            "Rice Puttu": "420", "Double ka Meetha": "420"}, 
+
+ "Chutney": {"Tomato": "10", "Mint Chutney": "7", "Tomato Chutney": "32",
+             "Tamarind (with jaggery)": "60", "Coriander Chutney": "47", 
+             "Groundnut Chutney": "66", "Til Chutney": "60", "Instant Chutney": "62", 
+             "Tamarind Chutney": "65", "Coconut Chutney": "62"},
+
+ "Fruits": {"Grapes (30)": "70", "Pineapple": "50", "Papaya": "80", "Muskmelon": "15", 
+            "Pear": "56", "Figs": "18", "Jackfruit": "23", "Custard apple (medium size)": "130", 
+            "Sapota/ Chickoo (medium size)": "80", "Guava (medium size)": "50", 
+            "Banana (medium size)": "90", "Mosambi/Orange (medium size)": "40", 
+            "Watermelon": "15", "Mango (medium size)": "180"}, 
+
+ "Subzi(Dry/Semi Gravy)": {"Dhoodi with Channa Dhal": "115","Potato with Other Vegetables": "120", 
+                           "Ridge Gourd Curry": "97", "Ladies Fingers": "151", "Cabbage Foogath": "104", 
+                           "Brinjal and Potato": "134", "Dry Vegetable Preparations": "115", 
+                           "Yams and Fenugreek Leaves": "121", "Vegetable Kootu": "145", 
+                           "Green Leafy Vegetables": "130", "Stuffed Tomato": "84", "Capsicum-Potato": "116", 
+                           "Dondakaya (Ivy Gourd)": "78", "Beetroot and Cauliflower (steamed)": "68", 
+                           "Vegetable Stew": "100", "Cauliflower and Carrot Bhaji": "100", 
+                           "Cauliflower with Green Peas": "167", "Pumpkin Curry": "110", "Cabbage": "131", 
+                           "Spinach with Dhal": "115", "Beans Foogath": "100"}, 
+
+ "Subzi": {"Vegetables with Gravy": "130", "Paneer Masala": "421", "Aloo Muttar": "41", 
+           "Sambar": "81", "Chole / Sundal": "115", "Palak Paneer": "165"}, 
+
+ "Egg Dishes": {"Fried Egg": "160", "Scrambled Egg": "101", "Ommelette": "160", "Boiled Egg": "90"},
+
+ "Rice Varieties": {"Vegetable Fried Rice": "148", "Kichda": "485", "Prawn Pulav": "211", 
+                    "Tomato Rice": "178", "Lemon Rice": "185", "Vegetable Briyani": "236", 
+                    "Puliyodarai": "462", "Mutton Briyani": "255", "Plain Rice": "111", 
+                    "Masoor Briyani": "179", "Pulao": "179", "Green Pea Pulav": "260", 
+                    "Bisibell Huli Anna": "304", "Khicheri": "215", "Coconut Rice": "379", 
+                    "Curd Rice": "433", "Vegetable Pulav": "269", "Navratna Pulav": "217", 
+                    "Chicken Fried Rice": "228"}, 
+
+ "Dhal Items": {"Rajmah": "153", "Lentil Dal (Bengali)": "79", "Black Gram Dal": "161", 
+                "Varan": "100", "Bengal Gram Dal": "124", "Lentil Dal": "248", 
+                "Lentil (whole)": "95", "Green Gram (whole)": "113", "cudhy": "118", 
+                "Green Gram Dal": "316", "Red Gram Dal": "109", "Dhoodi with Channa Dhal": "115",
+                "Chole / Sundal": "115", "Sambar": "81"}, 
+
+ "Paratha/Roti": {"Phulka": "80", "Methi Paratha": "128", "Paratha": "150", "Ragi Roti": "150", 
+                  "Bathura": "154", "Cauliflower Stuffed Paratha (small)": "80", "Tandoori Roti": "147", 
+                  "Potato Paratha": "213"}, 
+
+ "Tea/Coffee/Milk Items": {"Horlicks (with milk)": "148", "Coffee": "100", "Black Tea": "60",
+                           "Cocoa (with milk)": "133", "Bournvita (with milk)": "139", 
+                           "Cow milk (2 tsp sugar)": "180", "Buffalo milk (2 tsp sugar)": "320", 
+                           "Tea (2 tsp sugar)": "75"}, 
+
+ "Mutton/Meat Varieties": {"Mutton Rogan Josh": "127", "Mutton Cutlet": "169", "Mutton Curry": "346", 
+                           "Liver do Piazza": "330", "Keema Kofta Curry (6 small koftas)": "320", 
+                           "Mutton Ball Curry (6 small balls)": "237"}, 
+
+ "Non-Alcoholic Beverages": {"Syrups (Sherbat)": "200", "Squash": "75", "Cold Drinks": "150", 
+                             "Fresh Lime Juice": "60"}
+
+}

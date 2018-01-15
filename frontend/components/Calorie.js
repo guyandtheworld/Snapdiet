@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {StyleSheet, View, KeyboardAvoidingView, TouchableNativeFeedback, Modal} from 'react-native';
 import {Grid, Row, Col} from 'react-native-easy-grid';
 import {Picker, Text, H1, Container, Content, Button, Card, CardItem, Body, Form, Item, Label, Input, Icon, Fab} from 'native-base';
-import foodData from '../../backend/jsonData/FoodCalorie.json';
+import foodData from './FoodCalorie.json';
 
 class Calorie extends React.Component{
     constructor(){
@@ -12,7 +12,7 @@ class Calorie extends React.Component{
             weeklyGoal:'',
             monthlyGoal:'',
             currentCalorie:0,
-            modalVisible:true,
+            modalVisible:false,
             selectedItem:'',
             selectedSubItem:'',
             foodItems:[],
@@ -97,25 +97,25 @@ class Calorie extends React.Component{
 
     render(){
         return(
-            <KeyboardAvoidingView behavior='padding' style={{height:'100%',backgroundColor:'rgba(0,0,0,0.87)', padding:10}}>
+            <KeyboardAvoidingView behavior='padding' style={styles.container}>
             <Text>{this.props.name}</Text>
                 <Form style={{flexDirection:'row'}}>
-                    <Item stackedLabel style={{width:'60%', height:60, paddingLeft:5, paddingRight:5}}>
+                    <Item stackedLabel style={styles.calorieGoalInput}>
                         <Label>Daily calorie goal:</Label>
-                        <Input keyboardType='numeric' style={{color:'white'}} onChangeText={this.textbind}/>
+                        <Input keyboardType='numeric' style={{color:'black'}} onChangeText={this.textbind}/>
                     </Item>
-                    <Button style={{marginLeft:15, marginTop:15}}><Text>Set</Text></Button>
+                    <Button style={styles.calorieSetButton}><Text>Set</Text></Button>
                 </Form>
                 <Grid>
                     <Row size={10}/>
                     <Row size={10}>
-                        <Text style={{color:'white'}}>Weekly calorie goal: {this.state.weeklyGoal}</Text>
+                        <Text style={{color:'black'}}>Weekly calorie goal: {this.state.weeklyGoal}</Text>
                     </Row>
                     <Row size={10}>
-                        <Text style={{color:'white'}}>Monthly calorie goal: {this.state.monthlyGoal}</Text>
+                        <Text style={{color:'black'}}>Monthly calorie goal: {this.state.monthlyGoal}</Text>
                     </Row>
                     <Row size={10}>
-                        <Text style={{color:'white'}}>Calories consumed today: {this.state.currentCalorie}</Text>
+                        <Text style={{color:'black'}}>Calories consumed today: {this.state.currentCalorie}</Text>
                     </Row>
                     <Row size={60}/>
                 </Grid>
@@ -127,14 +127,14 @@ class Calorie extends React.Component{
                 <Modal animationType = {'fade'} transparent = {true}
                 visible = {this.state.modalVisible}
                 onRequestClose = {this.closeModal}>
-                    <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center',alignItems: 'center',backgroundColor:'rgba(0,0,0,0.6)'}}>
-                        <View style = {{height:'40%', width:'85%', backgroundColor: 'rgb(50,50,50)', alignItems: 'center', justifyContent:'center'}}>
+                    <View style={styles.modalContainer}>
+                        <View style = {styles.modalMain}>
                             <Form>
                                 <Picker
                                     mode="dialog"
                                     selectedValue={this.state.selectedItem}
                                     onValueChange={this.displaySubMenu}
-                                    style={{color:'white', width:250}}
+                                    style={{color:'black', width:250}}
                                     >
                                     {this.state.items}
                                 </Picker>
@@ -143,7 +143,7 @@ class Calorie extends React.Component{
                                         mode="dialog"
                                         selectedValue={this.state.selectedSubItem}
                                         onValueChange={this.selectSubMenu}
-                                        style={{color:'white', width:250}}
+                                        style={{color:'black',width:250}}
                                         >
                                         {this.state.subItems}
                                     </Picker>
@@ -159,6 +159,39 @@ class Calorie extends React.Component{
         );
     }
 }
+
+const styles=StyleSheet.create({
+    container:{
+        height:'100%',
+        backgroundColor:'rgba(255,255,255,0.87)',
+        padding:10
+    },
+    calorieGoalInput:{
+        width:'70%', 
+        height:70, 
+        paddingLeft:5, 
+        paddingRight:5
+    },
+    calorieSetButton:{
+        marginLeft:15, 
+        marginTop:15
+    },
+    modalContainer:{
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor:'rgba(0,0,0,0.6)'
+    },
+    modalMain:{
+        height:'40%', 
+        width:'85%', 
+        backgroundColor: 'rgb(255,255,255)', 
+        alignItems: 'center', 
+        justifyContent:'center',
+        borderRadius:10
+    }
+});
 
 export default connect(
     (store) => {
