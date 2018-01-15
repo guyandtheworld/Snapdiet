@@ -19,17 +19,16 @@ const Tabnavigation=TabNavigator(
   {
     tabBarOptions:{
       style:{
-        backgroundColor:'rgb(50,50,50)',
-        paddingTop:Platform.OS=='ios'?0:StatusBar.currentHeight
+        backgroundColor:'rgb(255,252,0)',
       },
       labelStyle:{
-        color:'rgba(255,255,255,0.7)'
+        color:'rgb(0,0,0)'
       },
       indicatorStyle:{
-        backgroundColor:'rgb(10,220,220)'
+        backgroundColor:'rgb(37,211,102)'
       },
-      activeTintColor:'rgb(10,220,220)',
-      inactiveTintColor:'rgba(255,255,255,0.7)'
+      activeTintColor:'rgb(0,0,0)',
+      inactiveTintColor:'rgb(70,70,70)'
     }
   }
 );
@@ -53,3 +52,6 @@ export default class App extends React.Component {
       return <Expo.AppLoading/>;
   }
 }
+
+
+//paddingTop:Platform.OS=='ios'?0:StatusBar.currentHeight <--Use inside tabBarOptions.style if statusbar overlaps tabs
