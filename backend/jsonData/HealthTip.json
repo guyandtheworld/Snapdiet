@@ -20,8 +20,7 @@
               "T18" : "Maintain a regular diet", 
               "T19" : "Only 5% of people wash their hands properly, make sure your one of them",
               "T20" : "Drink coffee to have a better nap",
-              "T21" : "Eat your meals the same time everyday because later than usual can spike levels of the stress hormones",
-              "T22" : "Top your burger with avocado as it protects liver from damage and ailment and reduce risk of cardiovascular diseases"},
+              "T21" : "Eat your meals the same time everyday because later than usual can spike levels of the stress hormones"},
   
   "Facts":   {"F1" : "Almond reduces cholestrol, helps weight loss and alkalize the body", 
               "F2" : "Apple provides antioxidants, helps in cancer and asthma prevention and diabetes management",
@@ -42,7 +41,8 @@
               "F17" : "Chocolate improves blood flow for vascularity, improves digetion and reduces stress",
               "F18" : "Today, more than 95% of all chronic disease is caused by food choices, toxic food incredients, nutritional deficiencies and lack of excersise",
               "F19" : "Ginger improves immunity, controls cholestrol level and prevents cancer",
-              "F20" : "A single donut will meet your maximum allowance for Trans Fats for the whole day"}
+              "F20" : "A single donut will meet your maximum allowance for Trans Fats for the whole day",
+              "F21" : "Top your burger with avocado as it protects liver from damage and ailment and reduce risk of cardiovascular diseases"}
               
               
 }
