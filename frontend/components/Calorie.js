@@ -9,6 +9,7 @@ class Calorie extends React.Component{
     constructor(){
         super();
         this.state={
+            dailyGoal:'',
             weeklyGoal:'',
             monthlyGoal:'',
             currentCalorie:0,
@@ -40,6 +41,7 @@ class Calorie extends React.Component{
     textbind=(text) => {
         if(!isNaN(text) && text!=''){
             this.setState({
+                dailyGoal:parseInt(text),
                 weeklyGoal:parseInt(text)*7,
                 monthlyGoal:parseInt(text)*31,
                 currentCalorie:0,
@@ -57,7 +59,13 @@ class Calorie extends React.Component{
         this.setState({
             modalVisible:false,
             currentCalorie:this.state.currentCalorie+parseInt(foodData[this.state.selectedItem][this.state.selectedSubItem])
+        },() => {
+            this.props.update('updateCalorie',{currentCalorie:this.state.currentCalorie});
         });
+    }
+
+    setDailyGoal=() => {
+        this.props.update('updateGoal',{dailyGoal:this.state.dailyGoal});
     }
 
     displaySubMenu=(value) => {
@@ -98,13 +106,12 @@ class Calorie extends React.Component{
     render(){
         return(
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
-            <Text>{this.props.name}</Text>
                 <Form style={{flexDirection:'row'}}>
                     <Item stackedLabel style={styles.calorieGoalInput}>
                         <Label>Daily calorie goal:</Label>
                         <Input keyboardType='numeric' style={{color:'black'}} onChangeText={this.textbind}/>
                     </Item>
-                    <Button style={styles.calorieSetButton}><Text>Set</Text></Button>
+                    <Button onPress={this.setDailyGoal} style={styles.calorieSetButton}><Text>Set</Text></Button>
                 </Form>
                 <Grid>
                     <Row size={10}/>
@@ -115,7 +122,7 @@ class Calorie extends React.Component{
                         <Text style={{color:'black'}}>Monthly calorie goal: {this.state.monthlyGoal}</Text>
                     </Row>
                     <Row size={10}>
-                        <Text style={{color:'black'}}>Calories consumed today: {this.state.currentCalorie}</Text>
+                        <Text style={{color:'black'}}>Calories consumed today: {this.props.currentCalorie}</Text>
                     </Row>
                     <Row size={60}/>
                 </Grid>
@@ -196,5 +203,12 @@ const styles=StyleSheet.create({
 export default connect(
     (store) => {
         return store;
+    },
+    (dispatch) => {
+        return {
+            update:(dispatchType,dispatchPayload) => {
+                dispatch({type:dispatchType,payload:dispatchPayload});
+            }
+        }
     }
 )(Calorie);
