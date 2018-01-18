@@ -4,6 +4,7 @@ import {StyleSheet, View, KeyboardAvoidingView} from 'react-native';
 import {Grid, Row, Col} from 'react-native-easy-grid';
 import {Text, H1, Container, Content, Button, Card, CardItem, Body, Form, Item, Label, Input, Icon} from 'native-base';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
+import Notif from './Notification'
 
 class Main extends React.Component {
     constructor(){
@@ -27,7 +28,7 @@ class Main extends React.Component {
     const percent=this.props.dailyGoal?(parseInt((this.props.currentCalorie/this.props.dailyGoal)*100)):0;
    
     return (
-      <View style={styles.container}>
+      <View style={styles.container}>        
         <AnimatedCircularProgress
           size={225}
           width={13}
@@ -46,6 +47,7 @@ class Main extends React.Component {
         </AnimatedCircularProgress>
         <View style={{height:20}}/>
         <Text style={{color:'rgba(0,0,0,0.6)'}}>Calories consumed today vs your goal</Text>
+        <Notif />
       </View>
     );
   }
