@@ -1,0 +1,114 @@
+{
+ 
+ "Soup": {"Sweet Corn and Chicken Soup": "", "Clear Vegetable Soup": "",
+          "Green Pea Soup": "", "Lentil Soup": "", "Tomato Soup": "", 
+          "Mutton Soup": "", "Minestrone Soup": ""},
+
+ "Salads": {"Doodhi (Bottle Gourd) Raita": "", "Curd Salad": "", "Tomato Raita": "", 
+            "Sprouted Greengram": "", "Boondhi Raita": "", "Cucumber and Tomato Salad": "", 
+            "Carrot Raita": "", "Cucumber Raita": ""},
+
+ "Biscuits": {"Biscuits": "", "Sesam Biscuits": "", "Groundnut Biscuits": "",
+              "Nut Biscuits": ""},
+
+ "Fish Varieties": {"Fish Fried (big)": "", "Fish Cutlet": "", "Prawn Curry": "", 
+                    "Fish Jhol": "", "Prawn do Piazza": "", "Fillet of Fish": ""},
+
+ "Vegetable Gravy/Curry": {"Bagara Baigan": "", "Vegetable Kofta": "", 
+                           "Beans and Potato curry": "", "Potato with Gravy": "", 
+                           "Vegetables with Gravy": ""},
+
+ "South Indian Dishes": {"Rava Dosai": "", "Perugu Atukulu (Pohe + curd)": "",
+                         "Pongal": "", "Dosa (Plain)": "", "Idli": "", "Upma": "",
+                         "Pesarattu": "", "Ragi Idli": "", "Onion Dosa": "", 
+                         "Adai": "", "Sevian Upma": "", "Puri": "", "Masala Dosa": ""},
+
+ "Cakes/ Pasteries": {"Lemon Tart": "", "Queen Cakes (Cup Cake)": "", "Jam Tart": "", 
+                      "Fruit Cake": ""},
+
+ "Salads/Chutney/Others": {"Curd Salad": "", "Tomato Raita": "", "Cucumber Raita": "", 
+                           "Carrot Raita": "", "Doodhi (Bottle Gourd) Raita": "", 
+                           "Boondhi Raita": "", "Cucumber and Tomato Salad": "", "Papad (large)": ""},
+
+ "Desserts": {"Ice-Cream": "", "Suji Kheer": "", "Custard/ Pudding": "", "Fruit Cake": "", 
+              "Floating Island": "", "Jelly/Jam": ""},
+
+ "Chat Items": {"Aloo-Pattice": "", "Bhel": "", "Paapdi Chat": "", "Aloo Chat": "", 
+                "Pea-Kachori": "", "Chat (Dahi-Pakori)": ""},
+
+ "Savories": {"Namak Para": "", "Potato Bonda": "", "Sago Vada": "", 
+              "Bajji or Pakora (small)": "", "Vada": "", "Masala Vada": "", 
+              "Chidwa (Mixture)": "", "Dahi Vada": "", "Cheese Balls": "", 
+              "Besan ki Puri/Besan Puri": "", "Samosa": "", "Vegetable Puff": "",
+              "Mutton Cutlet": "", "Sandwiches (butter- 2tbsp)": ""}, 
+
+ "Chicken Dishes": {"Grilled Chicken (leg)": "", "Chicken Vindaloo": "", 
+                    "Chicken Curry": "", "Dam-ka-Chicken": ""}, 
+
+ "Cereals/Porridge": {"Wheat Porridge": "", "Puffed Wheat": "", 
+                      "Sandwiches (butter- 2tbsp)": "", "Bread Toasted": "",
+                      "Ragi Ambali (Porridge)": "", "Semolina Porridge": "",
+                      "Cereal Flakes with Milk (corn/wheat/rice)": ""}, 
+
+ "Sweets": {"Barfi": "", "Chikki": "", "Srikhand": "", "Coconut Laddu": "", 
+            "Black Gram Dhal Laddu": "", "Pooran Poli": "", "Dalia (sweet)": "", 
+            "Besan Barfi (small)": "", "Sandesh": "", "Halwa (Suji) Kesari": "", 
+            "Rice Puttu": "", "Double ka Meetha": ""}, 
+
+ "Chutney": {"Tomato": "", "Mint Chutney": "", "Tomato Chutney": "",
+             "Tamarind (with jaggery)": "", "Coriander Chutney": "", 
+             "Groundnut Chutney": "", "Til Chutney": "", "Instant Chutney": "", 
+             "Tamarind Chutney": "", "Coconut Chutney": ""},
+
+ "Fruits": {"Grapes (30)": "", "Pineapple": "", "Papaya": "", "Muskmelon": "", 
+            "Pear": "", "Figs": "", "Jackfruit": "", "Custard apple (medium size)": "", 
+            "Sapota/ Chickoo (medium size)": "", "Guava (medium size)": "", 
+            "Banana (medium size)": "", "Mosambi/Orange (medium size)": "", 
+            "Watermelon": "", "Mango (medium size)": ""}, 
+
+ "Subzi(Dry/Semi Gravy)": {"Dhoodi with Channa Dhal": "","Potato with Other Vegetables": "", 
+                           "Ridge Gourd Curry": "", "Ladies Fingers": "", "Cabbage Foogath": "", 
+                           "Brinjal and Potato": "", "Dry Vegetable Preparations": "", 
+                           "Yams and Fenugreek Leaves": "", "Vegetable Kootu": "", 
+                           "Green Leafy Vegetables": "", "Stuffed Tomato": "", "Capsicum-Potato": "", 
+                           "Dondakaya (Ivy Gourd)": "", "Beetroot and Cauliflower (steamed)": "", 
+                           "Vegetable Stew": "", "Cauliflower and Carrot Bhaji": "", 
+                           "Cauliflower with Green Peas": "", "Pumpkin Curry": "", "Cabbage": "", 
+                           "Spinach with Dhal": "", "Beans Foogath": ""}, 
+
+ "Subzi": {"Vegetables with Gravy": "", "Paneer Masala": "", "Aloo Muttar": "", 
+           "Sambar": "", "Chole / Sundal": "", "Palak Paneer": ""}, 
+
+ "Egg Dishes": {"Fried Egg": "", "Scrambled Egg": "", "Ommelette": "", "Boiled Egg": ""},
+
+ "Rice Varieties": {"Vegetable Fried Rice": "", "Kichda": "", "Prawn Pulav": "", 
+                    "Tomato Rice": "", "Lemon Rice": "", "Vegetable Briyani": "", 
+                    "Puliyodarai": "", "Mutton Briyani": "", "Plain Rice": "", 
+                    "Masoor Briyani": "", "Pulao": "", "Green Pea Pulav": "", 
+                    "Bisibell Huli Anna": "", "Khicheri": "", "Coconut Rice": "", 
+                    "Curd Rice": "", "Vegetable Pulav": "", "Navratna Pulav": "", 
+                    "Chicken Fried Rice": ""}, 
+
+ "Dhal Items": {"Rajmah": "", "Lentil Dal (Bengali)": "", "Black Gram Dal": "", 
+                "Varan": "", "Bengal Gram Dal": "", "Lentil Dal": "", 
+                "Lentil (whole)": "", "Green Gram (whole)": "", "cudhy": "", 
+                "Green Gram Dal": "", "Red Gram Dal": "", "Dhoodi with Channa Dhal": "",
+                "Chole / Sundal": "", "Sambar": ""}, 
+
+ "Paratha/Roti": {"Phulka": "", "Methi Paratha": "", "Paratha": "", "Ragi Roti": "", 
+                  "Bathura": "", "Cauliflower Stuffed Paratha (small)": "", "Tandoori Roti": "", 
+                  "Potato Paratha": ""}, 
+
+ "Tea/Coffee/Milk Items": {"Horlicks (with milk)": "", "Coffee": "", "Black Tea": "",
+                           "Cocoa (with milk)": "", "Bournvita (with milk)": "", 
+                           "Cow milk (2 tsp sugar)": "", "Buffalo milk (2 tsp sugar)": "", 
+                           "Tea (2 tsp sugar)": ""}, 
+
+ "Mutton/Meat Varieties": {"Mutton Rogan Josh": "", "Mutton Cutlet": "", "Mutton Curry": "", 
+                           "Liver do Piazza": "", "Keema Kofta Curry (6 small koftas)": "", 
+                           "Mutton Ball Curry (6 small balls)": ""}, 
+
+ "Non-Alcoholic Beverages": {"Syrups (Sherbat)": "", "Squash": "", "Cold Drinks": "", 
+                             "Fresh Lime Juice": ""}
+
+}
