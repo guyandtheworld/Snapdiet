@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, KeyboardAvoidingView, TouchableNativeFeedback, Modal} from 'react-native';
+import {StyleSheet, View, KeyboardAvoidingView, TouchableNativeFeedback, Modal, AsyncStorage} from 'react-native';
 import {Grid, Row, Col} from 'react-native-easy-grid';
 import {Picker, Text, H1, Container, Content, Button, Card, CardItem, Body, Form, Item, Label, Input, Icon, Fab} from 'native-base';
 import foodData from './FoodCalorie.json';
@@ -61,11 +61,29 @@ class Calorie extends React.Component{
             currentCalorie:this.state.currentCalorie+parseInt(foodData[this.state.selectedItem][this.state.selectedSubItem])
         },() => {
             this.props.update('updateCalorie',{currentCalorie:this.state.currentCalorie});
+            storeCurrentCalorieOffline = async () => {
+                try{
+                    await AsyncStorage.setItem('SNAPDIET_CURRENTCALORIE',this.state.currentCalorie.toString());
+                }
+                catch(e){
+                    console.log(e);
+                }
+            }
+            storeCurrentCalorieOffline();   
         });
     }
 
     setDailyGoal=() => {
         this.props.update('updateGoal',{dailyGoal:this.state.dailyGoal});
+        storeDailyGoalOffline = async () => {
+            try{
+                await AsyncStorage.setItem('SNAPDIET_DAILYGOAL',this.state.dailyGoal.toString());
+            }
+            catch(e){
+                console.log(e);
+            }
+        }
+        storeDailyGoalOffline();
     }
 
     displaySubMenu=(value) => {

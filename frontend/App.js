@@ -2,20 +2,19 @@ import * as Expo from 'expo';
 import React from 'react';
 import {StatusBar, Platform} from 'react-native';
 import {Provider} from 'react-redux';
-import {TabNavigator} from 'react-navigation';
+import {TabNavigator, DrawerNavigator} from 'react-navigation';
 import Main from './components/Main';
 import CameraTest from './components/CameraTest';
 import Calorie from './components/Calorie';
 import Store from './components/Store';
 import GetInfo from './components/getInfo';
-import Notif from './components/Notification'
+import Login from './components/Login';
+import Sidebar from './components/Sidebar';
 
 const Tabnavigation=TabNavigator(
   {
     Home:{screen:Main},
-    Camera:{screen:CameraTest},
     Calorie:{screen:Calorie},
-    Info:{screen:GetInfo},
   },
   {
     tabBarOptions:{
@@ -34,6 +33,20 @@ const Tabnavigation=TabNavigator(
   }
 );
 
+const Drawernavigation=DrawerNavigator(
+  {
+    Home:{screen:Tabnavigation},
+    Login:{screen:Login},
+    GetInfo:{screen:GetInfo}
+  },
+  {
+    drawerOpenRoute: 'DrawerOpen',
+    drawerCloseRoute: 'DrawerClose',
+    drawerToggleRoute: 'DrawerToggle',
+    contentComponent: ({navigation}) => <Sidebar navigation={navigation}/>
+  }
+);
+
 export default class App extends React.Component {
   state = { fontsAreLoaded: false };
 
@@ -48,7 +61,7 @@ export default class App extends React.Component {
 
   render() {
     if (this.state.fontsAreLoaded)
-      return <Provider store={Store}><Tabnavigation/></Provider>;
+      return <Provider store={Store}><Drawernavigation/></Provider>;
     else
       return <Expo.AppLoading/>;
   }

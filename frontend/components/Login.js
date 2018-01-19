@@ -4,7 +4,7 @@ import {StyleSheet, View, KeyboardAvoidingView} from 'react-native';
 import {Grid, Row, Col} from 'react-native-easy-grid';
 import {Text, H1, Container, Content, Button, Card, CardItem, Body, Form, Item, Label, Input, Icon} from 'native-base';
 
-class Main extends React.Component {
+class Login extends React.Component {
     constructor(){
         super();
         this.state={
@@ -92,4 +92,4 @@ export default connect(
         }
     }
 
-)(Main);
+)(Login);
