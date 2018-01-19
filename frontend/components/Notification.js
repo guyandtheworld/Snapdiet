@@ -1,9 +1,10 @@
 import React from 'react';
 import { Notifications } from 'expo';
-import { Text,  View, Switch} from 'react-native';
+import { connect } from 'react-redux';
+import { Text,  View, Switch, AsyncStorage} from 'react-native';
 import {Left, Right} from 'native-base';
 
-export default class Notif extends React.Component {
+class Notif extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -12,6 +13,10 @@ export default class Notif extends React.Component {
 			notifMessage: "Touch to add calorie",			
 		};
 		this.putNotif = this.putNotif.bind(this);
+	}
+
+	componentDidMount(){
+		this.setState({showNotif:this.props.showNotif});
 	}
 
 	putNotif(){
@@ -38,6 +43,18 @@ export default class Notif extends React.Component {
 			else{
 				Notifications.dismissAllNotificationsAsync();
 			}
+			this.props.update('updateNotif',{showNotif:this.state.showNotif});
+
+			storeNotifStateOffline = async () => {
+                try{
+					await AsyncStorage.setItem('SNAPDIET_NOTIFSTATE',this.state.showNotif.toString());
+                }
+                catch(e){
+                    console.log(e);
+                }
+			}
+			
+            storeNotifStateOffline();
 		}
 		);
 	}
@@ -48,10 +65,23 @@ export default class Notif extends React.Component {
 				<Left>
 					<Text style={{fontSize:18, paddingLeft:20}}>Notification:</Text>
 				</Left>
-				<Right>
+				<Right style={{paddingRight:20}}>
 					<Switch value={this.state.showNotif} onValueChange={this.notifToggle}/>
 				</Right>
 			</View>
 		);
 	}
 }
+
+export default connect(
+	(store) => {
+        return store;
+    },
+    (dispatch) => {
+        return{
+            update:(dispatchType,dispatchPayload) => {
+                dispatch({type:dispatchType,payload:dispatchPayload});
+            }
+        }
+    }
+)(Notif);

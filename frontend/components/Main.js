@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, AsyncStorage} from 'react-native';
 import {Text} from 'native-base';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 
@@ -11,6 +11,45 @@ class Main extends React.Component {
             showLogin:true
         };
         }
+    
+    componentDidMount(){
+        getCurrentCalorieOffline = async () => {
+          try{
+            await AsyncStorage.getItem('SNAPDIET_CURRENTCALORIE',(error,data) => {
+              this.props.update('updateCalorie',{currentCalorie:parseInt(data)})
+            });
+          }
+          catch(e){
+            console.log(e);
+          }
+        }
+
+        getDailyGoalOffline = async () => {
+          try{
+            await AsyncStorage.getItem('SNAPDIET_DAILYGOAL',(error,data) => {
+              this.props.update('updateGoal',{dailyGoal:parseInt(data)});
+            });
+          }
+          catch(e){
+            console.log(e);
+          }
+          getCurrentCalorieOffline();
+        }
+
+        getDailyGoalOffline();
+
+        getNotifStateOffline = async () => {
+          try{
+            await AsyncStorage.getItem('SNAPDIET_NOTIFSTATE',(error,data) => {
+              this.props.update('updateNotif',{showNotif:(data=='true')?true:false});
+            });
+          }
+          catch(e){
+            console.log(e);
+          }
+        }
+        getNotifStateOffline();
+    }
 
     handleSignup=() => {
         this.setState({
@@ -32,7 +71,7 @@ class Main extends React.Component {
           width={13}
           fill={percent}
           tintColor={(percent<100)?'rgb(77,194,71)':'rgb(255,0,0)'}
-          onAnimationComplete={() => console.log('onAnimationComplete')}
+          onAnimationComplete={() => {}}
           backgroundColor="rgba(125,160,175,0.6)"
           rotation={180}>
           {
@@ -72,8 +111,9 @@ export default connect(
         return store;
     },
     (dispatch) => {
-        return{update:() => {
-                dispatch({type:'TEST'});
+        return{
+            update:(dispatchType,dispatchPayload) => {
+                dispatch({type:dispatchType,payload:dispatchPayload});
             }
         }
     }
