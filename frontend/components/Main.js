@@ -1,10 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, KeyboardAvoidingView} from 'react-native';
-import {Grid, Row, Col} from 'react-native-easy-grid';
-import {Text, H1, Container, Content, Button, Card, CardItem, Body, Form, Item, Label, Input, Icon} from 'native-base';
+import {StyleSheet, View} from 'react-native';
+import {Text} from 'native-base';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
-import Notif from './Notification'
 
 class Main extends React.Component {
     constructor(){
@@ -47,7 +45,6 @@ class Main extends React.Component {
         </AnimatedCircularProgress>
         <View style={{height:20}}/>
         <Text style={{color:'rgba(0,0,0,0.6)'}}>Calories consumed today vs your goal</Text>
-        <Notif />
       </View>
     );
   }
