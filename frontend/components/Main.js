@@ -13,42 +13,72 @@ class Main extends React.Component {
         }
     
     componentDidMount(){
-        getCurrentCalorieOffline = async () => {
-          try{
-            await AsyncStorage.getItem('SNAPDIET_CURRENTCALORIE',(error,data) => {
-              this.props.update('updateCalorie',{currentCalorie:parseInt(data)})
-            });
-          }
-          catch(e){
-            console.log(e);
-          }
+      getCurrentCalorieOffline = async () => {
+        try{
+          await AsyncStorage.getItem('SNAPDIET_CURRENTCALORIEZ',(error,data) => {
+            if(error){
+              console.log(error);
+              this.props.update('updateCalorie',{currentCalorie:0});
+            }
+            else if(data==null){
+              console.log("Data does not exist");
+              this.props.update('updateCalorie',{currentCalorie:0});
+            }
+            else{
+              this.props.update('updateCalorie',{currentCalorie:parseInt(data)});
+            }
+          });
         }
+        catch(e){
+          console.log(e);
+        }
+      }
 
-        getDailyGoalOffline = async () => {
-          try{
-            await AsyncStorage.getItem('SNAPDIET_DAILYGOAL',(error,data) => {
+      getDailyGoalOffline = async () => {
+        try{
+          await AsyncStorage.getItem('SNAPDIET_DAILYGOALZ',(error,data) => {
+            if(error){
+              console.log(error);
+              this.props.update('updateGoal',{dailyGoal:0});
+            }
+            else if(data==null){
+              console.log("Data does not exist");
+              this.props.update('updateGoal',{dailyGoal:0});
+            }
+            else{
               this.props.update('updateGoal',{dailyGoal:parseInt(data)});
-            });
-          }
-          catch(e){
-            console.log(e);
-          }
-          getCurrentCalorieOffline();
+            }
+          });
         }
+        catch(e){
+          console.log(e);
+        }
+        getCurrentCalorieOffline();
+      }
 
-        getDailyGoalOffline();
+      getDailyGoalOffline();
 
-        getNotifStateOffline = async () => {
-          try{
-            await AsyncStorage.getItem('SNAPDIET_NOTIFSTATE',(error,data) => {
+      getNotifStateOffline = async () => {
+        try{
+          await AsyncStorage.getItem('SNAPDIET_NOTIFSTATE',(error,data) => {
+            if(error){
+              console.log(error);
+              this.props.update('updateNotif',{showNotif:false});
+            }
+            else if(data==null){
+              console.log("Data does not exist");
+              this.props.update('updateNotif',{showNotif:false});
+            }
+            else{
               this.props.update('updateNotif',{showNotif:(data=='true')?true:false});
-            });
-          }
-          catch(e){
-            console.log(e);
-          }
+            }
+          });
         }
-        getNotifStateOffline();
+        catch(e){
+          console.log(e);
+        }
+      }
+      getNotifStateOffline();
     }
 
     handleSignup=() => {
@@ -63,7 +93,7 @@ class Main extends React.Component {
   
   render() {
     const percent=this.props.dailyGoal?(parseInt((this.props.currentCalorie/this.props.dailyGoal)*100)):0;
-   
+   console.log(percent);
     return (
       <View style={styles.container}>        
         <AnimatedCircularProgress
