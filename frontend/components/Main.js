@@ -1,21 +1,31 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, AsyncStorage} from 'react-native';
-import {Text} from 'native-base';
+import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, Modal} from 'react-native';
+import {Picker, Text, Button, Form, Item, Label, Input, Icon, Fab} from 'native-base';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
+import foodData from './FoodCalorie.json';
 
 class Main extends React.Component {
     constructor(){
         super();
         this.state={
-            showLogin:true
+            currentCalorie:0,
+            modalVisible:false,
+            selectedItem:'',
+            selectedSubItem:'',
+            foodItems:[],
+            foodSubItems:[],
+            items:'',
+            subItems:'',
+            displaySubItems:false,
+            disableAddButton:true
         };
         }
     
     componentDidMount(){
       getCurrentCalorieOffline = async () => {
         try{
-          await AsyncStorage.getItem('SNAPDIET_CURRENTCALORIEZ',(error,data) => {
+          await AsyncStorage.getItem('SNAPDIET_CURRENTCALORIE',(error,data) => {
             if(error){
               console.log(error);
               this.props.update('updateCalorie',{currentCalorie:0});
@@ -26,6 +36,9 @@ class Main extends React.Component {
             }
             else{
               this.props.update('updateCalorie',{currentCalorie:parseInt(data)});
+              this.setState({
+                currentCalorie:this.props.currentCalorie
+              });
             }
           });
         }
@@ -36,7 +49,7 @@ class Main extends React.Component {
 
       getDailyGoalOffline = async () => {
         try{
-          await AsyncStorage.getItem('SNAPDIET_DAILYGOALZ',(error,data) => {
+          await AsyncStorage.getItem('SNAPDIET_DAILYGOAL',(error,data) => {
             if(error){
               console.log(error);
               this.props.update('updateGoal',{dailyGoal:0});
@@ -81,14 +94,70 @@ class Main extends React.Component {
       getNotifStateOffline();
     }
 
-    handleSignup=() => {
+    componentWillMount(){
+      for (i in foodData){
+          this.setState({
+              foodItems:this.state.foodItems.push(i)
+          });
+      }
+      this.setState({
+          items:this.state.foodItems.map((item) => {
+              return(<Picker.Item style={{height:8}} label={item} value={item} key={item}/>);
+          })
+      });
+    }
+
+    addCalories=() => {
+      this.setState({
+          modalVisible:false,
+          currentCalorie:this.state.currentCalorie+parseInt(foodData[this.state.selectedItem][this.state.selectedSubItem])
+      },() => {
+          this.props.update('updateCalorie',{currentCalorie:this.state.currentCalorie});
+          storeCurrentCalorieOffline = async () => {
+              try{
+                  await AsyncStorage.setItem('SNAPDIET_CURRENTCALORIE',this.state.currentCalorie.toString());
+              }
+              catch(e){
+                  console.log(e);
+              }
+          }
+          storeCurrentCalorieOffline();   
+      });
+    }
+
+    displaySubMenu=(value) => {
         this.setState({
-          showLogin:false
+            selectedItem:value,
+            foodSubItems:[],
+            displaySubItems:false
+        },
+        () => {
+            for (i in foodData[value]){
+                this.setState({
+                    foodSubItems:this.state.foodSubItems.push(i)
+                });
+            }
+            this.setState({
+                subItems:this.state.foodSubItems.map((item) => {
+                return(<Picker.Item style={{height:8}} label={item} value={item} key={item}/>);
+                }),
+                selectedSubItem:Object.keys(foodData[value])[0],
+                displaySubItems:true,
+                disableAddButton:false
+            });    
         });
     }
 
-    setShowLogin=() => {
-      this.setState({showLogin:true});
+    selectSubMenu=(value) => {
+        this.setState({
+            selectedSubItem:value
+        });
+    }
+
+    closeModal=() => {
+        this.setState({
+            modalVisible:false
+        });
     }
   
   render() {
@@ -114,6 +183,45 @@ class Main extends React.Component {
         </AnimatedCircularProgress>
         <View style={{height:20}}/>
         <Text style={{color:'rgba(0,0,0,0.6)'}}>Calories consumed today vs your goal</Text>
+
+          <Button onPress={() => {this.props.navigation.navigate('Calorie')}}><Text>Press</Text></Button>
+
+        <Fab onPress={() => {this.setState({modalVisible:true})}} position='bottomRight'>
+            <Icon name='add'/>
+        </Fab>
+
+        <Modal animationType = {'fade'} transparent = {true}
+        visible = {this.state.modalVisible}
+        onRequestClose = {this.closeModal}>
+            <View style={styles.modalContainer}>
+                <View style = {styles.modalMain}>
+                    <Form>
+                        <Picker
+                            mode="dialog"
+                            selectedValue={this.state.selectedItem}
+                            onValueChange={this.displaySubMenu}
+                            style={{color:'black', width:250}}
+                            >
+                            {this.state.items}
+                        </Picker>
+                        {this.state.displaySubItems?
+                            <Picker
+                                mode="dialog"
+                                selectedValue={this.state.selectedSubItem}
+                                onValueChange={this.selectSubMenu}
+                                style={{color:'black',width:250}}
+                                >
+                                {this.state.subItems}
+                            </Picker>
+                        :null}
+                    </Form>
+                    <View>
+                        <Button disabled={this.state.disableAddButton} onPress={this.addCalories} style={{marginTop:'10%'}}><Text>Add</Text></Button>
+                    </View>
+                </View>
+            </View>
+        </Modal>
+
       </View>
     );
   }
@@ -133,6 +241,21 @@ const styles=StyleSheet.create({
   },
   snapchatYellow:{
     color:'rgb(255,252,0)'
+  },
+  modalContainer:{
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor:'rgba(0,0,0,0.6)'
+  },
+  modalMain:{
+      height:'40%', 
+      width:'85%', 
+      backgroundColor: 'rgb(255,255,255)', 
+      alignItems: 'center', 
+      justifyContent:'center',
+      borderRadius:10
   }
 });
 

@@ -1,8 +1,9 @@
 import * as Expo from 'expo';
 import React from 'react';
-import {StatusBar, Platform} from 'react-native';
+import {StatusBar, Platform, View, StyleSheet} from 'react-native';
+import {Text, Icon} from 'native-base';
 import {Provider} from 'react-redux';
-import {TabNavigator, DrawerNavigator} from 'react-navigation';
+import {StackNavigator, DrawerNavigator} from 'react-navigation';
 import Main from './components/Main';
 import CameraTest from './components/CameraTest';
 import Calorie from './components/Calorie';
@@ -11,31 +12,33 @@ import GetInfo from './components/getInfo';
 import Login from './components/Login';
 import Sidebar from './components/Sidebar';
 
-const Tabnavigation=TabNavigator(
+const Stacknavigation=StackNavigator(
   {
-    Home:{screen:Main},
-    Calorie:{screen:Calorie},
-  },
-  {
-    tabBarOptions:{
-      style:{
-        backgroundColor:'rgb(255,252,0)',
-      },
-      labelStyle:{
-        color:'rgb(0,0,0)'
-      },
-      indicatorStyle:{
-        backgroundColor:'rgb(37,211,102)'
-      },
-      activeTintColor:'rgb(0,0,0)',
-      inactiveTintColor:'rgb(70,70,70)'
-    }
+    Home:{
+      screen:Main,
+      navigationOptions:({navigation}) => ({
+        title:'Home',
+        headerStyle:{
+          backgroundColor:'rgb(255,252,0)'
+        },
+        headerLeft:<View navigation={navigation} style={{paddingLeft:20}} onPress={() => {this.props.navigation.navigate('DrawerOpen')}}><Icon name='menu'/></View>
+      })
+    },
+    Calorie:{
+      screen:Calorie,
+      navigationOptions:({navigation}) => ({
+        title:'Calorie',
+        headerStyle:{
+          backgroundColor:'rgb(255,252,0)'
+        },
+      })
+    },
   }
 );
 
 const Drawernavigation=DrawerNavigator(
   {
-    Home:{screen:Tabnavigation},
+    Home:{screen:Stacknavigation},
     Login:{screen:Login},
     GetInfo:{screen:GetInfo}
   },
@@ -66,6 +69,18 @@ export default class App extends React.Component {
       return <Expo.AppLoading/>;
   }
 }
+
+const styles=StyleSheet.create({
+  header:{
+    backgroundColor:'rgb(255,252,0)',
+    height:50,
+    shadowColor: 'black',
+    shadowOffset: { width: 2, height: -2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    paddingTop:Platform.OS=='ios'?0:StatusBar.currentHeight
+  }
+});
 
 
 //paddingTop:Platform.OS=='ios'?0:StatusBar.currentHeight <--Use inside tabBarOptions.style if statusbar overlaps tabs
