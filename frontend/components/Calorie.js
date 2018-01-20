@@ -3,14 +3,14 @@ import {connect} from 'react-redux';
 import {StyleSheet, View, KeyboardAvoidingView, AsyncStorage} from 'react-native';
 import {Grid, Row, Col} from 'react-native-easy-grid';
 import {Text, H1, Container, Content, Button, Card, CardItem, Body, Form, Item, Label, Input} from 'native-base';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 class Calorie extends React.Component{
     constructor(){
         super();
         this.state={
-            dailyGoal:'',
-            weeklyGoal:'',
-            monthlyGoal:'',
+            calorieConsumed: '0',
+            dailyGoal:'0',
         }
     }
 
@@ -46,48 +46,38 @@ class Calorie extends React.Component{
 
     render(){
         return(
-            <KeyboardAvoidingView behavior='padding' style={styles.container}>
-                <Form style={{flexDirection:'row'}}>
-                    <Item stackedLabel style={styles.calorieGoalInput}>
-                        <Label>Daily calorie goal:</Label>
-                        <Input keyboardType='numeric' style={{color:'black'}} onChangeText={this.textbind}/>
-                    </Item>
-                    <Button onPress={this.setDailyGoal} style={styles.calorieSetButton}><Text>Set</Text></Button>
-                </Form>
-                <Grid>
-                    <Row size={10}/>
-                    <Row size={10}>
-                        <Text style={{color:'black'}}>Weekly calorie goal: {this.state.weeklyGoal}</Text>
-                    </Row>
-                    <Row size={10}>
-                        <Text style={{color:'black'}}>Monthly calorie goal: {this.state.monthlyGoal}</Text>
-                    </Row>
-                    <Row size={10}>
-                        <Text style={{color:'black'}}>Calories consumed today: {this.props.currentCalorie}</Text>
-                    </Row>
-                    <Row size={60}/>
-                </Grid>
+            <KeyboardAvoidingView behavior='padding' >
+                <View style = {styles.container}>
+                    <Text style = {styles.header} > Calories consumed: </Text>
+                    <Text style = {styles.currentCal} > {this.state.calorieConsumed} </Text>
+                    <Text style = {styles.header} > Daily Calorie Goal: </Text>
+                    <Text style = {styles.goalCal} > {this.state.dailyGoal} </Text>
+                </View>
             </KeyboardAvoidingView>
         );
     }
 }
 
-const styles=StyleSheet.create({
-    container:{
-        height:'100%',
-        backgroundColor:'rgba(255,255,255,0.87)',
-        padding:10
+const styles = EStyleSheet.create({
+    container: {
+        marginVertical: 45,
+        alignItems: 'center',
     },
-    calorieGoalInput:{
-        width:'70%', 
-        height:70, 
-        paddingLeft:5, 
-        paddingRight:5
+    header: {
+        fontSize: 35,
+        fontWeight: 'bold',
+        marginTop: 10,
     },
-    calorieSetButton:{
-        marginLeft:15, 
-        marginTop:15
-    }
+    currentCal: {
+        fontSize: 100,
+        color: '$neutralBlue',
+        fontWeight: 'bold',
+    },
+    goalCal: {
+        fontSize: 100,
+        fontWeight: 'bold',
+        color: '$goalGreen',
+    },
 });
 
 export default connect(
