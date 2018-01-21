@@ -11,6 +11,7 @@ import Store from './components/Store';
 import GetInfo from './components/getInfo';
 import Login from './components/Login';
 import Sidebar from './components/Sidebar';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 const Stacknavigation=StackNavigator(
   {
@@ -70,7 +71,14 @@ export default class App extends React.Component {
   }
 }
 
-const styles=StyleSheet.create({
+EStyleSheet.build({
+  $notGoodRed: '#FF3232',
+  $cautiousYellow: '#FFCC00',
+  $neutralBlue: '#57CBFF',
+  $goalGreen: '#78CC5B',
+});
+
+const styles = EStyleSheet.create({
   header:{
     backgroundColor:'rgb(255,252,0)',
     height:50,
