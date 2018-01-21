@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Button, ScrollView } from 'react-native';
+import {View, StyleSheet, Button, ScrollView, AsyncStorage} from 'react-native';
 import {connect} from 'react-redux';
 
 import t from 'tcomb-form-native';
@@ -8,7 +8,8 @@ const Form = t.form.Form;
 
 var Gender = t.enums({
   M: 'Male',
-  F: 'Female'
+  F: 'Female',
+  O: 'Other'
 });
 
 var LifeStyles = t.enums({
@@ -57,41 +58,29 @@ class GetInfo extends React.Component {
 	handleSubmit = () => {
 	    const value = this._form.getValue(); // Information from form is stored in value
 	    console.log('value: ', value); // Check terminal for the information entered
-  	}
-
-
+	  }
+	  
 	render() {
 		return(
-
 			<View style={styles.container}>
-
-				<ScrollView 
-					showsVerticalScrollIndicator={false} 
-					keyboardDismissMode='on-drag'>
-
+				<ScrollView showsVerticalScrollIndicator={false} keyboardDismissMode='on-drag'>
 						<Form 
 							ref={c => this._form = c} 
 							type={GetThings} 
 							options={options} 
 						/> 
-
 						<Button title="Save" onPress={this.handleSubmit} />
-
 				</ScrollView>
-
 			</View>			
-
 		);
-
 	}
-
 }
 
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     marginTop: 10,
-    padding: 20,
+	padding: 20,
     backgroundColor: '#ffffff',
   },
 });
@@ -99,5 +88,12 @@ const styles = StyleSheet.create({
 export default connect(
     (store) => {
         return store;
+	},
+	(dispatch) => {
+        return {
+            update:(dispatchType,dispatchPayload) => {
+                dispatch({type:dispatchType,payload:dispatchPayload});
+            }
+        }
     }
 )(GetInfo);

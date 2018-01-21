@@ -1,16 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, KeyboardAvoidingView, AsyncStorage} from 'react-native';
+import {StyleSheet, View, KeyboardAvoidingView, AsyncStorage, ToastAndroid, Keyboard} from 'react-native';
 import {Grid, Row, Col} from 'react-native-easy-grid';
 import {Text, H1, Container, Content, Button, Card, CardItem, Body, Form, Item, Label, Input} from 'native-base';
-import EStyleSheet from 'react-native-extended-stylesheet';
 
 class Calorie extends React.Component{
     constructor(){
         super();
         this.state={
-            calorieConsumed: '0',
             dailyGoal:'0',
+            goalGreen:'#78CC5B'
         }
     }
 
@@ -18,47 +17,58 @@ class Calorie extends React.Component{
         if(!isNaN(text) && text!=''){
             this.setState({
                 dailyGoal:parseInt(text),
-                weeklyGoal:parseInt(text)*7,
-                monthlyGoal:parseInt(text)*31,
-                currentCalorie:0,
-            });
+            },()=>{console.log(this.state.dailyGoal)});
         }
         else{
             this.setState({
-                weeklyGoal:'',
-                monthlyGoal:'',
-            });
+                dailyGoal:0,
+            },()=>{console.log(this.state.dailyGoal)});
         }
     }
 
     setDailyGoal=() => {
-        this.props.update('updateGoal',{dailyGoal:this.state.dailyGoal});
-        storeDailyGoalOffline = async () => {
-            try{
-                await AsyncStorage.setItem('SNAPDIET_DAILYGOAL',this.state.dailyGoal.toString());
+        Keyboard.dismiss();
+        if(this.state.dailyGoal!='' && !(isNaN(this.state.dailyGoal))){
+            this.props.update('updateGoal',{dailyGoal:this.state.dailyGoal});
+            storeDailyGoalOffline = async () => {
+                try{
+                    await AsyncStorage.setItem('SNAPDIET_DAILYGOAL',this.state.dailyGoal.toString());
+                }
+                catch(e){
+                    console.log(e);
+                }
             }
-            catch(e){
-                console.log(e);
-            }
+            storeDailyGoalOffline();
+            ToastAndroid.show('Daily Goal Updated!', ToastAndroid.LONG);
         }
-        storeDailyGoalOffline();
+        else{
+            ToastAndroid.show('Please enter a number!', ToastAndroid.LONG);
+        }
     }
 
     render(){
         return(
             <KeyboardAvoidingView behavior='padding' >
+                <Form style={{flexDirection:'row'}}>
+                     <Item stackedLabel style={styles.calorieGoalInput}>
+                         <Label>Daily calorie goal:</Label>
+                         <Input keyboardType='numeric' style={{color:'black'}} onChangeText={this.textbind}/>
+                     </Item>
+                     <Button onPress={this.setDailyGoal} style={styles.calorieSetButton}><Text>Set</Text></Button>
+                </Form>
+
                 <View style = {styles.container}>
                     <Text style = {styles.header} > Calories consumed: </Text>
-                    <Text style = {styles.currentCal} > {this.state.calorieConsumed} </Text>
+                    <Text style = {[styles.currentCal,{color:this.props.currentColor}]} > {this.props.currentCalorie} </Text>
                     <Text style = {styles.header} > Daily Calorie Goal: </Text>
-                    <Text style = {styles.goalCal} > {this.state.dailyGoal} </Text>
+                    <Text style = {styles.goalCal}> {this.props.dailyGoal} </Text>
                 </View>
             </KeyboardAvoidingView>
         );
     }
 }
 
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         marginVertical: 45,
         alignItems: 'center',
@@ -67,17 +77,27 @@ const styles = EStyleSheet.create({
         fontSize: 35,
         fontWeight: 'bold',
         marginTop: 10,
+        color:'rgba(0,0,0,0.7)'
     },
     currentCal: {
         fontSize: 100,
-        color: '$neutralBlue',
-        fontWeight: 'bold',
+        fontWeight: 'bold'
     },
     goalCal: {
         fontSize: 100,
         fontWeight: 'bold',
-        color: '$goalGreen',
+        color: '#57CBFF'
     },
+    calorieGoalInput:{
+        width:'70%', 
+        height:70, 
+        paddingLeft:5, 
+        paddingRight:5
+    },
+    calorieSetButton:{
+        marginLeft:15, 
+        marginTop:15
+    }
 });
 
 export default connect(
