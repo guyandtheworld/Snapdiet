@@ -8,8 +8,7 @@ const Form = t.form.Form;
 
 var Gender = t.enums({
   M: 'Male',
-  F: 'Female',
-  O: 'Other'
+  F: 'Female'
 });
 
 var LifeStyles = t.enums({
@@ -56,12 +55,12 @@ const options = {
 class GetInfo extends React.Component {
 
 	handleSubmit = () => {
-	    const value = this._form.getValue();
+	  const value = this._form.getValue();
 		if(value!=null){
 				this.props.update('updateInfo',{userInfo:value});
 		}
 		ToastAndroid.show('Information saved!', ToastAndroid.LONG);
-	  }
+	}
 
 	componentDidUpdate(){
 		storeUserInfoOffline = async () => {
@@ -73,6 +72,54 @@ class GetInfo extends React.Component {
 			}
 		  }
 		storeUserInfoOffline();
+
+		calculateDailyGoal = () => {
+			//Converting height from cm to inches and weight from kg to pounds
+			height = this.props.userInfo.height * 0.393701;
+			weight = this.props.userInfo.weight * 2.20462;
+			age = this.props.userInfo.age;
+			lifeStyle = this.props.userInfo.lifeStyles;
+			activityLevel = 1.2;
+			dailyGoal = 0;
+	
+			if (this.props.userInfo.gender === 'M') {
+					dailyGoal = (12.7*height) + (6.23*weight) - (6.8*age) + 66;
+			}
+			else {
+					dailyGoal = (4.7*height) + (4.35*weight) - (4.7*age) + 655;
+			}
+			
+			switch(lifeStyle) {
+					case 'A': 
+							dailyGoal *= 1.2;
+							break;
+					case 'B': 
+							dailyGoal *= 1.375;
+							break;
+					case 'C': 
+							dailyGoal *= 1.55;
+							break;
+					case 'D': 
+							dailyGoal *= 1.725;
+							break;
+					case 'E': 
+							dailyGoal *= 1.9;
+							break;
+			}
+			dailyGoal = Math.floor(dailyGoal);
+			this.props.update('updateGoal',{dailyGoal:dailyGoal});
+			storeDailyGoalOffline = async () => {
+				try{
+						await AsyncStorage.setItem('SNAPDIET_DAILYGOAL',dailyGoal.toString());
+				}
+				catch(e){
+						console.log(e);
+				}
+			}
+			storeDailyGoalOffline();
+		}
+
+		calculateDailyGoal();
 	}
 
 	componentWillMount(){
@@ -96,7 +143,7 @@ class GetInfo extends React.Component {
 		  }
 		getUserInfoOffline();
 	}
-	  
+
 	render() {
 		return(
 			<View style={styles.container}>

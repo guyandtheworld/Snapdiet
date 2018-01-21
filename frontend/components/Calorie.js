@@ -25,47 +25,6 @@ class Calorie extends React.Component{
             },()=>{console.log(this.state.dailyGoal)});
         }
     }
-
-
-    calculateDailyGoal = () => {
-        
-        //Converting height from cm to inches and weight from kg to pounds
-        height = this.state.height * 0.393701;
-        weight = this.state.weight * 2.20462;
-        age = this.state.age;
-        lifeStyle = this.state.LifeStyles;
-        activityLevel = 1.2;
-        dailyGoal = 0;
-
-        if (this.state.gender === 'M') {
-            dailyGoal = (12.7*height) + (6.23*weight) - (6.8*age) + 66;
-        }
-        else {
-            dailyGoal = (4.7*height) + (4.35*weight) - (4.7*age) + 655;
-        }
-        
-        switch(lifeStyle) {
-            case 'A': 
-                dailyGoal *= 1.2;
-                break;
-            case 'B': 
-                dailyGoal *= 1.375;
-                break;
-            case 'C': 
-                dailyGoal *= 1.55;
-                break;
-            case 'D': 
-                dailyGoal *= 1.725;
-                break;
-            case 'E': 
-                dailyGoal *= 1.9;
-                break;
-        }
-
-        return Math.floor(dailyGoal);
-
-    }
-
     
     setDailyGoal=() => {
         Keyboard.dismiss();
@@ -98,6 +57,8 @@ class Calorie extends React.Component{
                      <Button onPress={this.setDailyGoal} style={styles.calorieSetButton}><Text>Set</Text></Button>
                 </Form>
 
+                <Text style={styles.infobox} >Fill personal information form to automatically calculate the optimal daily calorie goal for you.</Text>
+
                 <View style = {styles.container}>
                     <Text style = {styles.header} > Calories consumed: </Text>
                     <Text style = {[styles.currentCal,{color:this.props.currentColor}]} > {this.props.currentCalorie} </Text>
@@ -111,7 +72,7 @@ class Calorie extends React.Component{
 
 const styles = StyleSheet.create({
     container: {
-        marginVertical: 45,
+        marginVertical: 20,
         alignItems: 'center',
     },
     header: {
@@ -138,6 +99,12 @@ const styles = StyleSheet.create({
     calorieSetButton:{
         marginLeft:15, 
         marginTop:15
+    },
+    infobox:{
+        color:'rgba(0,0,0,0.6)',
+        paddingLeft:20,
+        paddingRight:20,
+        fontSize:12
     }
 });
 
