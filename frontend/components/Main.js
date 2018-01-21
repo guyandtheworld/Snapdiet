@@ -222,7 +222,7 @@ class Main extends React.Component {
           tintColor={(percent<100)?'rgb(77,194,71)':'rgb(255,0,0)'}
           onAnimationComplete={() => {}}
           backgroundColor="rgba(125,160,175,0.6)"
-          rotation={180}>
+          rotation={0}>
           {
             (fill) => (
               <Text style={styles.percent}>
