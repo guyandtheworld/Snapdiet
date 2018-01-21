@@ -1,6 +1,6 @@
 import * as Expo from 'expo';
 import React from 'react';
-import {StatusBar, Platform, View, StyleSheet} from 'react-native';
+import {StatusBar, Platform, View, StyleSheet, TouchableOpacity} from 'react-native';
 import {Text, Icon} from 'native-base';
 import {Provider} from 'react-redux';
 import {StackNavigator, DrawerNavigator} from 'react-navigation';
@@ -11,7 +11,16 @@ import Store from './components/Store';
 import GetInfo from './components/getInfo';
 import Login from './components/Login';
 import Sidebar from './components/Sidebar';
-import EStyleSheet from 'react-native-extended-stylesheet';
+
+const DrawerButton = (props) => {
+	return (
+    <View style={{paddingLeft:20}}>
+      <TouchableOpacity onPress={() => {props.navigation.navigate('DrawerOpen')}}>
+        <Icon name='menu'/>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const Stacknavigation=StackNavigator(
   {
@@ -22,7 +31,7 @@ const Stacknavigation=StackNavigator(
         headerStyle:{
           backgroundColor:'rgb(255,252,0)'
         },
-        headerLeft:<View navigation={navigation} style={{paddingLeft:20}} onPress={() => {this.props.navigation.navigate('DrawerOpen')}}><Icon name='menu'/></View>
+        headerLeft:<DrawerButton navigation={navigation}/>
       })
     },
     Calorie:{
@@ -71,14 +80,7 @@ export default class App extends React.Component {
   }
 }
 
-EStyleSheet.build({
-  $notGoodRed: '#FF3232',
-  $cautiousYellow: '#FFCC00',
-  $neutralBlue: '#57CBFF',
-  $goalGreen: '#78CC5B',
-});
-
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   header:{
     backgroundColor:'rgb(255,252,0)',
     height:50,

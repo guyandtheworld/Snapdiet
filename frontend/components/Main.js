@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, Modal} from 'react-native';
+import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, Modal, AppState} from 'react-native';
 import {Picker, Text, Button, Form, Item, Label, Input, Icon, Fab} from 'native-base';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import foodData from './FoodCalorie.json';
@@ -95,6 +95,7 @@ class Main extends React.Component {
     }
 
     componentWillMount(){
+      AppState.addEventListener('change',this.appStateChanged);
       for (i in foodData){
           this.setState({
               foodItems:this.state.foodItems.push(i)
@@ -105,6 +106,45 @@ class Main extends React.Component {
               return(<Picker.Item style={{height:8}} label={item} value={item} key={item}/>);
           })
       });
+    }
+
+    appStateChanged=(nextstate) => {
+      if(nextstate=='background'){
+        d = new Date();
+        storeTimeOffline = async () => {
+          try{
+            await AsyncStorage.setItem('SNAPDIET_LASTSEENTIME',d.getHours().toString());
+          }
+          catch(e){
+            console.log(e);
+          }
+        }
+        storeTimeOffline();
+      }
+      else if(nextstate=='active'){
+        getTimeOffline = async () => {
+          try{
+            await AsyncStorage.getItem('SNAPDIET_LASTSEENTIME',(error,data) => {
+              d = new Date();
+              if(parseInt(data)>d.getHours()){
+                storeCurrentCalorieOffline = async () => {
+                  try{
+                      await AsyncStorage.setItem('SNAPDIET_CURRENTCALORIE','0');
+                  }
+                  catch(e){
+                      console.log(e);
+                  }
+                }
+                storeCurrentCalorieOffline(); 
+              }
+            });
+          }
+          catch(e){
+            console.log(e);
+          }
+        }
+      getTimeOffline();  
+      }
     }
 
     addCalories=() => {
@@ -162,7 +202,17 @@ class Main extends React.Component {
   
   render() {
     const percent=this.props.dailyGoal?(parseInt((this.props.currentCalorie/this.props.dailyGoal)*100)):0;
-   console.log(percent);
+    console.log(percent);
+    if(percent>=80 && percent<100){
+      this.props.update('updateColor',{currentColor:'#FFCC00'});
+    }
+    else if(percent>=100){
+      this.props.update('updateColor',{currentColor:'#FF3232'});
+    }
+    else{
+      this.props.update('updateColor',{currentColor:'#78CC5B'});
+    }
+    
     return (
       <View style={styles.container}>        
         <AnimatedCircularProgress
@@ -183,11 +233,16 @@ class Main extends React.Component {
         </AnimatedCircularProgress>
         <View style={{height:20}}/>
         <Text style={{color:'rgba(0,0,0,0.6)'}}>Calories consumed today vs your goal</Text>
+        <View style={{height:70,justifyContent:'center',alignItems:'center'}}>
+        <TouchableNativeFeedback>
+        <Button style={styles.snapchatYellow} onPress={() => {this.props.navigation.navigate('Calorie')}}>
+          <Icon style={{color:'black'}} name='create'/>
+        </Button>
+        </TouchableNativeFeedback>
+        </View>
 
-          <Button onPress={() => {this.props.navigation.navigate('Calorie')}}><Text>Press</Text></Button>
-
-        <Fab onPress={() => {this.setState({modalVisible:true})}} position='bottomRight'>
-            <Icon name='add'/>
+        <Fab style={styles.snapchatYellow} onPress={() => {this.setState({modalVisible:true})}} position='bottomRight'>
+            <Icon style={{color:'black'}} name='add'/>
         </Fab>
 
         <Modal animationType = {'fade'} transparent = {true}
@@ -240,7 +295,7 @@ const styles=StyleSheet.create({
     fontSize:50
   },
   snapchatYellow:{
-    color:'rgb(255,252,0)'
+    backgroundColor:'rgb(255,252,0)'
   },
   modalContainer:{
     flex: 1,
