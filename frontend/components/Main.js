@@ -212,6 +212,7 @@ class Main extends React.Component {
     else{
       this.props.update('updateColor',{currentColor:'#78CC5B'});
     }
+    
     return (
       <View style={styles.container}>        
         <AnimatedCircularProgress

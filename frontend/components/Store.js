@@ -16,6 +16,9 @@ const reducer=(state,action) => {
     else if(action.type=='updateColor'){
         return Object.assign({},state,{currentColor:action.payload.currentColor});
     }
+    else if(action.type=='updateInfo'){
+        return Object.assign({},state,{userInfo:action.payload.userInfo});
+    }
     else return state;
 }
 

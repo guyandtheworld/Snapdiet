@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, StyleSheet, Button, ScrollView, AsyncStorage} from 'react-native';
+import {View, StyleSheet, Button, ScrollView, AsyncStorage, ToastAndroid} from 'react-native';
 import {connect} from 'react-redux';
 
 import t from 'tcomb-form-native';
@@ -56,9 +56,46 @@ const options = {
 class GetInfo extends React.Component {
 
 	handleSubmit = () => {
-	    const value = this._form.getValue(); // Information from form is stored in value
-	    console.log('value: ', value); // Check terminal for the information entered
+	    const value = this._form.getValue();
+		if(value!=null){
+				this.props.update('updateInfo',{userInfo:value});
+		}
+		ToastAndroid.show('Information saved!', ToastAndroid.LONG);
 	  }
+
+	componentDidUpdate(){
+		storeUserInfoOffline = async () => {
+			try{
+			  await AsyncStorage.setItem('SNAPDIET_USERINFO',JSON.stringify(this.props.userInfo));
+			}
+			catch(e){
+			  console.log(e);
+			}
+		  }
+		storeUserInfoOffline();
+	}
+
+	componentWillMount(){
+		getUserInfoOffline = async () => {
+			try{
+			  await AsyncStorage.getItem('SNAPDIET_USERINFO',(error,data) => {
+				if(error){
+				  console.log(error);
+				}
+				else if(data==null){
+				  console.log("Data does not exist");
+				}
+				else{
+				  this.props.update('updateInfo',{userInfo:JSON.parse(data)});
+				}
+			  });
+			}
+			catch(e){
+			  console.log(e);
+			}
+		  }
+		getUserInfoOffline();
+	}
 	  
 	render() {
 		return(
@@ -68,6 +105,7 @@ class GetInfo extends React.Component {
 							ref={c => this._form = c} 
 							type={GetThings} 
 							options={options} 
+							value={this.props.userInfo}
 						/> 
 						<Button title="Save" onPress={this.handleSubmit} />
 				</ScrollView>
