@@ -26,6 +26,47 @@ class Calorie extends React.Component{
         }
     }
 
+
+    calculateDailyGoal = () => {
+        
+        //Converting height from cm to inches and weight from kg to pounds
+        height = this.state.height * 0.393701;
+        weight = this.state.weight * 2.20462;
+        age = this.state.age;
+        lifeStyle = this.state.LifeStyles;
+        activityLevel = 1.2;
+        dailyGoal = 0;
+
+        if (this.state.gender === 'M') {
+            dailyGoal = (12.7*height) + (6.23*weight) - (6.8*age) + 66;
+        }
+        else {
+            dailyGoal = (4.7*height) + (4.35*weight) - (4.7*age) + 655;
+        }
+        
+        switch(lifeStyle) {
+            case 'A': 
+                dailyGoal *= 1.2;
+                break;
+            case 'B': 
+                dailyGoal *= 1.375;
+                break;
+            case 'C': 
+                dailyGoal *= 1.55;
+                break;
+            case 'D': 
+                dailyGoal *= 1.725;
+                break;
+            case 'E': 
+                dailyGoal *= 1.9;
+                break;
+        }
+
+        return Math.floor(dailyGoal);
+
+    }
+
+    
     setDailyGoal=() => {
         Keyboard.dismiss();
         if(this.state.dailyGoal!='' && !(isNaN(this.state.dailyGoal))){
