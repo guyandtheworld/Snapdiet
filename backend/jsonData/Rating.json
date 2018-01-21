@@ -26,10 +26,6 @@
  "Cakes/ Pasteries": {"Lemon Tart": "", "Queen Cakes (Cup Cake)": "", "Jam Tart": "", 
                       "Fruit Cake": ""},
 
- "Salads/Chutney/Others": {"Curd Salad": "", "Tomato Raita": "", "Cucumber Raita": "", 
-                           "Carrot Raita": "", "Doodhi (Bottle Gourd) Raita": "", 
-                           "Boondhi Raita": "", "Cucumber and Tomato Salad": "", "Papad (large)": ""},
-
  "Desserts": {"Ice-Cream": "", "Suji Kheer": "", "Custard/ Pudding": "", "Fruit Cake": "", 
               "Floating Island": "", "Jelly/Jam": ""},
 
@@ -55,10 +51,9 @@
             "Besan Barfi (small)": "", "Sandesh": "", "Halwa (Suji) Kesari": "", 
             "Rice Puttu": "", "Double ka Meetha": ""}, 
 
- "Chutney": {"Tomato": "", "Mint Chutney": "", "Tomato Chutney": "",
-             "Tamarind (with jaggery)": "", "Coriander Chutney": "", 
-             "Groundnut Chutney": "", "Til Chutney": "", "Instant Chutney": "", 
-             "Tamarind Chutney": "", "Coconut Chutney": ""},
+ "Chutney": {"Mint Chutney": "", "Tomato Chutney": "", "Tamarind (with jaggery)": "", 
+             "Coriander Chutney": "", "Groundnut Chutney": "", "Til Chutney": "", 
+             "Instant Chutney": "", "Tamarind Chutney": "", "Coconut Chutney": ""},
 
  "Fruits": {"Grapes (30)": "", "Pineapple": "", "Papaya": "", "Muskmelon": "", 
             "Pear": "", "Figs": "", "Jackfruit": "", "Custard apple (medium size)": "", 
