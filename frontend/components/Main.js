@@ -106,6 +106,31 @@ class Main extends React.Component {
               return(<Picker.Item style={{height:8}} label={item} value={item} key={item}/>);
           })
       });
+
+      getTimeOffline = async () => {
+        try{
+          await AsyncStorage.getItem('SNAPDIET_LASTSEENTIME',(error,data) => {
+            d = new Date();
+            if(parseInt(data)>d.getHours()){
+              storeCurrentCalorieOffline = async () => {
+                try{
+                    await AsyncStorage.setItem('SNAPDIET_CURRENTCALORIE','0');
+                    this.props.update('updateCalorie',{currentCalorie:0});
+                }
+                catch(e){
+                    console.log(e);
+                }
+              }
+              storeCurrentCalorieOffline(); 
+            }
+          });
+        }
+        catch(e){
+          console.log(e);
+        }
+      }
+      getTimeOffline(); 
+
     }
 
     appStateChanged=(nextstate) => {
@@ -120,30 +145,6 @@ class Main extends React.Component {
           }
         }
         storeTimeOffline();
-      }
-      else if(nextstate=='active'){
-        getTimeOffline = async () => {
-          try{
-            await AsyncStorage.getItem('SNAPDIET_LASTSEENTIME',(error,data) => {
-              d = new Date();
-              if(parseInt(data)>d.getHours()){
-                storeCurrentCalorieOffline = async () => {
-                  try{
-                      await AsyncStorage.setItem('SNAPDIET_CURRENTCALORIE','0');
-                  }
-                  catch(e){
-                      console.log(e);
-                  }
-                }
-                storeCurrentCalorieOffline(); 
-              }
-            });
-          }
-          catch(e){
-            console.log(e);
-          }
-        }
-      getTimeOffline();  
       }
     }
 
