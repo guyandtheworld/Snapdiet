@@ -26,10 +26,6 @@
  "Cakes/ Pasteries": {"Lemon Tart": "204", "Queen Cakes (Cup Cake)": "214", "Jam Tart": "331", 
                       "Fruit Cake": "270"},
 
- "Salads/Chutney/Others": {"Curd Salad": "86", "Tomato Raita": "50", "Cucumber Raita": "71", 
-                           "Carrot Raita": "59", "Doodhi (Bottle Gourd) Raita": "130", 
-                           "Boondhi Raita": "169", "Cucumber and Tomato Salad": "12", "Papad (large)": "29"},
-
  "Desserts": {"Ice-Cream": "400", "Suji Kheer": "260", "Custard/ Pudding": "180", "Fruit Cake": "270", 
               "Floating Island": "131", "Jelly/Jam": "20"},
 
@@ -55,10 +51,9 @@
             "Besan Barfi (small)": "200", "Sandesh": "70", "Halwa (Suji) Kesari": "430", 
             "Rice Puttu": "420", "Double ka Meetha": "420"}, 
 
- "Chutney": {"Tomato": "10", "Mint Chutney": "7", "Tomato Chutney": "32",
-             "Tamarind (with jaggery)": "60", "Coriander Chutney": "47", 
-             "Groundnut Chutney": "66", "Til Chutney": "60", "Instant Chutney": "62", 
-             "Tamarind Chutney": "65", "Coconut Chutney": "62"},
+ "Chutney": {"Mint Chutney": "7", "Tomato Chutney": "32", "Tamarind (with jaggery)": "60", 
+             "Coriander Chutney": "47", "Groundnut Chutney": "66", "Til Chutney": "60", 
+             "Instant Chutney": "62", "Tamarind Chutney": "65", "Coconut Chutney": "62"},
 
  "Fruits": {"Grapes (30)": "70", "Pineapple": "50", "Papaya": "80", "Muskmelon": "15", 
             "Pear": "56", "Figs": "18", "Jackfruit": "23", "Custard apple (medium size)": "130", 
@@ -91,7 +86,7 @@
 
  "Dhal Items": {"Rajmah": "153", "Lentil Dal (Bengali)": "79", "Black Gram Dal": "161", 
                 "Varan": "100", "Bengal Gram Dal": "124", "Lentil Dal": "248", 
-                "Lentil (whole)": "95", "Green Gram (whole)": "113", "cudhy": "118", 
+                "Lentil (whole)": "95", "Green Gram (whole)": "113", "Cudhy": "118", 
                 "Green Gram Dal": "316", "Red Gram Dal": "109", "Dhoodi with Channa Dhal": "115",
                 "Chole / Sundal": "115", "Sambar": "81"}, 
 
