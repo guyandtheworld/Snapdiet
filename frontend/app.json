@@ -1,6 +1,16 @@
 {
   "expo": {
+    "name":"SnapDiet-Alpha",
+    "icon":"./snapdiet_logo.png",
+    "version":"1.0.0",
+    "slug": "snapdiet",
     "sdkVersion": "23.0.0",
     "orientation":"portrait",
+    "ios": {
+      "bundleIdentifier": "com.agzuniverse.snapdiet"
+    },
+    "android": {
+      "package": "com.agzuniverse.snapdiet"
+    }
   }
 }
