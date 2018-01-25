@@ -242,7 +242,7 @@ class Main extends React.Component {
         </TouchableNativeFeedback>
         </View>
 
-        <Fab style={styles.snapchatYellow} onPress={() => {this.setState({modalVisible:true})}} position='bottomRight'>
+        <Fab style={styles.fabDesign} onPress={() => {this.setState({modalVisible:true})}} position='bottomRight'>
             <Icon style={{color:'black'}} name='add'/>
         </Fab>
 
@@ -283,7 +283,7 @@ class Main extends React.Component {
   }
 }
 
-const styles=StyleSheet.create({
+const styles = StyleSheet.create({
   container:{
     height:'100%',
     backgroundColor:'rgba(255,255,255,0.87)', 
@@ -296,7 +296,13 @@ const styles=StyleSheet.create({
     fontSize:50
   },
   snapchatYellow:{
-    backgroundColor:'rgb(255,252,0)'
+    backgroundColor:'rgb(255,252,0)', 
+  },
+  fabDesign: {
+    backgroundColor:'rgb(255,252,0)',
+    width: 60,   
+    height: 60,
+    borderRadius: 40,
   },
   modalContainer:{
     flex: 1,
