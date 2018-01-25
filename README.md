@@ -43,7 +43,7 @@
 <br>
 
 
--  [ ] Drop the app drawer, make the notification permanent after the app is installed. Everytime I click on the persistent notification to add a food, it dissapears right after. Fix it. AND DROP THE DRAWER.
+-  [ ] Drop the app drawer, make the notification permanent after the app is installed. Everytime I click on the persistent notification to add a food, it dissapears right after. Fix it. AND DROP THE DRAWER. (Claimed by Albin, January 25, 2018)
 <br>
 
 
@@ -63,7 +63,7 @@
 <br>
 
 
--  [ ] Everytime in the first screen, below the calorie goal meter, show a new health quote.  
+-  [ ] Everytime in the first screen, below the calorie goal meter, show a new health quote. (Claimed by Albin, January 25, 2018)
 <br>
 
 
