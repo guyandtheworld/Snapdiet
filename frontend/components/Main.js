@@ -4,6 +4,7 @@ import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, Modal, AppState
 import {Picker, Text, Button, Form, Item, Label, Input, Icon, Fab} from 'native-base';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import foodData from './FoodCalorie.json';
+import Notif from './Notification'
 
 class Main extends React.Component {
     constructor(){
@@ -23,6 +24,7 @@ class Main extends React.Component {
         }
     
     componentDidMount(){
+
       getCurrentCalorieOffline = async () => {
         try{
           await AsyncStorage.getItem('SNAPDIET_CURRENTCALORIE',(error,data) => {
@@ -71,6 +73,7 @@ class Main extends React.Component {
 
       getDailyGoalOffline();
 
+
       getNotifStateOffline = async () => {
         try{
           await AsyncStorage.getItem('SNAPDIET_NOTIFSTATE',(error,data) => {
@@ -94,8 +97,12 @@ class Main extends React.Component {
       getNotifStateOffline();
     }
 
-    componentWillMount(){
+
+    componentWillMount() {
+      console.log("its here");
+
       AppState.addEventListener('change',this.appStateChanged);
+
       for (i in foodData){
           this.setState({
               foodItems:this.state.foodItems.push(i)
@@ -134,6 +141,7 @@ class Main extends React.Component {
     }
 
     appStateChanged=(nextstate) => {
+
       if(nextstate=='background'){
         d = new Date();
         storeTimeOffline = async () => {
@@ -215,69 +223,71 @@ class Main extends React.Component {
     }
     
     return (
-      <View style={styles.container}>        
-        <AnimatedCircularProgress
-          size={225}
-          width={13}
-          fill={percent}
-          tintColor={(percent<100)?'rgb(77,194,71)':'rgb(255,0,0)'}
-          onAnimationComplete={() => {}}
-          backgroundColor="rgba(125,160,175,0.6)"
-          rotation={0}>
-          {
-            (fill) => (
-              <Text style={styles.percent}>
-                {percent}%
-              </Text>
-            )
-          }
-        </AnimatedCircularProgress>
-        <View style={{height:20}}/>
-        <Text style={{color:'rgba(0,0,0,0.6)'}}>Calories consumed today vs your goal</Text>
-        <View style={{height:70,justifyContent:'center',alignItems:'center'}}>
-        <TouchableNativeFeedback>
-        <Button style={styles.snapchatYellow} onPress={() => {this.props.navigation.navigate('Calorie')}}>
-          <Icon style={{color:'black'}} name='create'/>
-        </Button>
-        </TouchableNativeFeedback>
+      <View> 
+        
+        <View style={styles.container}>      
+          <AnimatedCircularProgress
+            size={225}
+            width={13}
+            fill={percent}
+            tintColor={(percent<100)?'rgb(77,194,71)':'rgb(255,0,0)'}
+            onAnimationComplete={() => { <Notif perc={percent} /> }}
+            backgroundColor="rgba(125,160,175,0.6)"
+            rotation={0}>
+            {
+              (fill) => (
+                <Text style={styles.percent}>
+                  {percent}%
+                </Text>
+              )
+            }
+          </AnimatedCircularProgress>
+          <View style={{height:20}}/>
+          <Text style={{color:'rgba(0,0,0,0.6)'}}>Calories consumed today vs your goal</Text>
+          <View style={{height:70,justifyContent:'center',alignItems:'center'}}>
+          <TouchableNativeFeedback>
+          <Button style={styles.snapchatYellow} onPress={() => {this.props.navigation.navigate('Calorie')}}>
+            <Icon style={{color:'black'}} name='create'/>
+          </Button>
+          </TouchableNativeFeedback>
+          </View>
+
+          <Fab style={styles.fabDesign} onPress={() => {this.setState({modalVisible:true})}} position='bottomRight'>
+              <Icon style={{color:'black'}} name='add'/>
+          </Fab>
+
+          <Modal animationType = {'fade'} transparent = {true}
+          visible = {this.state.modalVisible}
+          onRequestClose = {this.closeModal}>
+              <View style={styles.modalContainer}>
+                  <View style = {styles.modalMain}>
+                      <Form>
+                          <Picker
+                              mode="dialog"
+                              selectedValue={this.state.selectedItem}
+                              onValueChange={this.displaySubMenu}
+                              style={{color:'black', width:250}}
+                              >
+                              {this.state.items}
+                          </Picker>
+                          {this.state.displaySubItems?
+                              <Picker
+                                  mode="dialog"
+                                  selectedValue={this.state.selectedSubItem}
+                                  onValueChange={this.selectSubMenu}
+                                  style={{color:'black',width:250}}
+                                  >
+                                  {this.state.subItems}
+                              </Picker>
+                          :null}
+                      </Form>
+                      <View>
+                          <Button disabled={this.state.disableAddButton} onPress={this.addCalories} style={{marginTop:'10%'}}><Text>Add</Text></Button>
+                      </View>
+                  </View>
+              </View>
+          </Modal>
         </View>
-
-        <Fab style={styles.fabDesign} onPress={() => {this.setState({modalVisible:true})}} position='bottomRight'>
-            <Icon style={{color:'black'}} name='add'/>
-        </Fab>
-
-        <Modal animationType = {'fade'} transparent = {true}
-        visible = {this.state.modalVisible}
-        onRequestClose = {this.closeModal}>
-            <View style={styles.modalContainer}>
-                <View style = {styles.modalMain}>
-                    <Form>
-                        <Picker
-                            mode="dialog"
-                            selectedValue={this.state.selectedItem}
-                            onValueChange={this.displaySubMenu}
-                            style={{color:'black', width:250}}
-                            >
-                            {this.state.items}
-                        </Picker>
-                        {this.state.displaySubItems?
-                            <Picker
-                                mode="dialog"
-                                selectedValue={this.state.selectedSubItem}
-                                onValueChange={this.selectSubMenu}
-                                style={{color:'black',width:250}}
-                                >
-                                {this.state.subItems}
-                            </Picker>
-                        :null}
-                    </Form>
-                    <View>
-                        <Button disabled={this.state.disableAddButton} onPress={this.addCalories} style={{marginTop:'10%'}}><Text>Add</Text></Button>
-                    </View>
-                </View>
-            </View>
-        </Modal>
-
       </View>
     );
   }
