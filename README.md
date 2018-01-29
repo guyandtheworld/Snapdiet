@@ -35,7 +35,7 @@
 
 <br>
 
-- [ ] Adding food is too hectic, the drop-down menu looks like shit. I couldn't find the `+`, it is too hard to find (So make it more obvious and make it a hardcoded button. The food is hard to add. Add search option to food items, no of quantity for certain items like dosa, idli and multiply calorie. fix the pop-up food addition UI. (See how popular apps hands pop up UI) This is a big feature to be in a pop-up. So drop the pop up and take a whole view, sliding up and down like how Quality time handles it.
+- [ ] Adding food is too hectic, the drop-down menu looks like shit. I couldn't find the `+`, it is too hard to find (So make it more obvious and make it a hardcoded button. The food is hard to add. Add search option to food items, no of quantity for certain items like dosa, idli and multiply calorie. fix the pop-up food addition UI. (See how popular apps hands pop up UI) This is a big feature to be in a pop-up. So drop the pop up and take a whole view, sliding up and down like how Quality time handles it. (Claimed by Aswin G, Jan 29th 2018)
 <br>
 
 
