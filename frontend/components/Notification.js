@@ -1,26 +1,36 @@
-import React from 'react';
+import React, { Component, Proptypes } from 'react';
 import { Notifications } from 'expo';
 import { connect } from 'react-redux';
-import { Text,  View, Switch, AsyncStorage} from 'react-native';
+import { Text,  View, Switch, AsyncStorage, AppState } from 'react-native';
 import {Left, Right} from 'native-base';
 
 class Notif extends React.Component {
+
 	constructor(props) {
 		super(props);
 		this.state = {
 			showNotif:false,
-			notifTitle: "SnapDiet",
-			notifMessage: "Touch to add calorie",			
+			notifTitle: "Touch to add calorie",
+			notifMessage: "Some % completed",		
 		};
 		this.putNotif = this.putNotif.bind(this);
 	}
 
-	componentDidMount(){
-		this.setState({showNotif:this.props.showNotif});
-	}
+	componentDidMount() {
+    	AppState.addEventListener('change', this.putNotif);
+  	}
+
+  	componentWillUnmount() {
+    	AppState.removeEventListener('change', this.nothing());
+  	}
+
+  	nothing () {
+
+  	}
 
 	putNotif(){
-		Notifications.dismissAllNotificationsAsync();
+		if (AppState.currentState == 'active')
+			Notifications.dismissAllNotificationsAsync();
 
 		const localNotification = {
 		    title: this.state.notifTitle,
@@ -30,44 +40,15 @@ class Notif extends React.Component {
 				priority:'max'
 			}
 		}
-		Notifications.presentLocalNotificationAsync(localNotification);
+		console.log(AppState.currentState);
+		if (AppState.currentState == 'background')
+			Notifications.presentLocalNotificationAsync(localNotification);
 	}
 	
-	notifToggle=() => {
-		this.setState({
-			showNotif:!(this.state.showNotif)
-		},() => {
-			if(this.state.showNotif){
-				this.putNotif();
-			}
-			else{
-				Notifications.dismissAllNotificationsAsync();
-			}
-			this.props.update('updateNotif',{showNotif:this.state.showNotif});
-
-			storeNotifStateOffline = async () => {
-                try{
-					await AsyncStorage.setItem('SNAPDIET_NOTIFSTATE',this.state.showNotif.toString());
-                }
-                catch(e){
-                    console.log(e);
-                }
-			}
-			
-            storeNotifStateOffline();
-		}
-		);
-	}
 
 	render() {
 		return (
-			<View style={{width:'100%',flexDirection:'row',justifyContent:'center'}}>
-				<Left>
-					<Text style={{fontSize:18, paddingLeft:20}}>Notification:</Text>
-				</Left>
-				<Right style={{paddingRight:20}}>
-					<Switch value={this.state.showNotif} onValueChange={this.notifToggle}/>
-				</Right>
+			<View>
 			</View>
 		);
 	}
@@ -84,4 +65,4 @@ export default connect(
             }
         }
     }
-)(Notif);
+)(Notif); 
