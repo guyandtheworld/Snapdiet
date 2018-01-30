@@ -4,7 +4,7 @@
           "Green Pea Soup": "7/10", "Lentil Soup": "7/10", "Tomato Soup": "7/10", 
           "Mutton Soup": "8/10", "Minestrone Soup": "7/10"},
 
- "Salads": {"Doodhi (Bottle Gourd) Raita": "7/10", "Curd Salad": "8/10", "Tomato Raita": "7/10", 
+ "Salads": {"Doodhi Raita": "7/10", "Curd Salad": "8/10", "Tomato Raita": "7/10", 
             "Sprouted Greengram": "8/10", "Boondhi Raita": "7/10", "Cucumber and Tomato Salad": "8/10", 
             "Carrot Raita": "7/10", "Cucumber Raita": "7/10"},
 
@@ -12,51 +12,52 @@
               "Nut Biscuits": "6/10"},
 
  "Fish Varieties": {"Fish Fried (big)": "7/10", "Fish Cutlet": "7/10", "Prawn Curry": "7/10", 
-                    "Fish Jhol": "8/10", "Prawn do Piazza": "6/10", "Fillet of Fish": "7/10"},
+                    "Fish Jhol": "8/10", "Prawn dopiaza": "6/10", "Fillet of Fish": "7/10"},
 
- "Vegetable Gravy/Curry": {"Bagara Baigan": "7/10", "Vegetable Kofta": "7/10", 
-                           "Beans and Potato curry": "8/10", "Potato with Gravy": "7/10", 
-                           "Vegetables with Gravy": "8/10"},
+ "Vegetable Curry": {"Bagara Baingan": "7/10", "Vegetable Kofta": "7/10", 
+                     "Beans and Potato Curry": "8/10", "Potato with Gravy": "7/10", 
+                     "Vegetables with Gravy": "8/10", "Chana Masala" : "8/10"},
 
- "South Indian Dishes": {"Rava Dosai": "7/10", "Perugu Atukulu (Pohe + curd)": "7/10",
+ "South Indian Dishes": {"Rava Dosa": "7/10", "Perugu Atukulu (Pohe + Curd)": "7/10",
                          "Pongal": "5/10", "Dosa (Plain)": "7/10", "Idli": "9/10", "Upma": "8/10",
                          "Pesarattu": "6/10", "Ragi Idli": "9/10", "Onion Dosa": "7/10", 
-                         "Adai": "8/10", "Sevian Upma": "8/10", "Puri": "5/10", "Masala Dosa": "6/10"},
+                         "Adai": "8/10", "Seviyan Upma": "8/10", "Puri": "5/10", "Masala Dosa": "6/10",
+                         "Puttu" : "8/10", "Appam" : "8/10"},
 
- "Cakes/ Pasteries": {"Lemon Tart": "7/10", "Queen Cakes (Cup Cake)": "7/10", "Jam Tart": "5/10", 
-                      "Fruit Cake": "8/10"},
+ "Cakes/Pasteries": {"Lemon Tart": "7/10", "Queen Cakes (Cup Cake)": "7/10", "Jam Tart": "5/10", 
+                     "Fruit Cake": "8/10"},
 
- "Desserts": {"Ice-Cream": "5/10", "Suji Kheer": "6/10", "Custard/ Pudding": "7/10", "Fruit Cake": "8/10", 
+ "Desserts": {"Icecream": "5/10", "Suji Kheer": "6/10", "Custard/Pudding": "7/10", "Fruit Cake": "8/10", 
               "Floating Island": "6/10", "Jelly/Jam": "6/10"},
 
- "Chat Items": {"Aloo-Pattice": "6/10", "Bhel": "6/10", "Paapdi Chat": "5/10", "Aloo Chat": "6/10", 
-                "Pea-Kachori": "5/10", "Chat (Dahi-Pakori)": "6/10"},
+ "Chat Items": {"Aloo Pattice": "6/10", "Bhel": "6/10", "Papdi Chat": "5/10", "Aloo Chat": "6/10", 
+                "Pea Kachori": "5/10", "Chat ": "6/10"},
 
  "Savories": {"Namak Para": "6/10", "Potato Bonda": "6/10", "Sago Vada": "6/10", 
-              "Bajji or Pakora (small)": "5/10", "Vada": "6/10", "Masala Vada": "6/10", 
+              "Bajji/Pakora (small)": "5/10", "Vada": "6/10", "Masala Vada": "6/10", 
               "Chidwa (Mixture)": "5/10", "Dahi Vada": "6/10", "Cheese Balls": "5/10", 
-              "Besan ki Puri/Besan Puri": "5/10", "Samosa": "7/10", "Vegetable Puff": "7/10",
-              "Mutton Cutlet": "7/10", "Sandwiches (butter- 2tbsp)": "6/10"}, 
+              "Besan Puri": "5/10", "Samosa": "7/10", "Vegetable Puff": "7/10",
+              "Mutton Cutlet": "7/10", "Sandwiches": "6/10"}, 
 
  "Chicken Dishes": {"Grilled Chicken (leg)": "9/10", "Chicken Vindaloo": "7/10", 
-                    "Chicken Curry": "7/10", "Dam-ka-Chicken": "7/10"}, 
+                    "Chicken Curry": "7/10", "Dam-ka-Chicken": "7/10", "Chicken Fry" : "6/10"}, 
 
  "Cereals/Porridge": {"Wheat Porridge": "7/10", "Puffed Wheat": "8/10", 
-                      "Sandwiches (butter- 2tbsp)": "6/10", "Bread Toasted": "7/10",
+                      "Sandwiches": "6/10", "Bread Toasted": "7/10",
                       "Ragi Ambali (Porridge)": "7/10", "Semolina Porridge": "7/10",
                       "Cereal Flakes with Milk (corn/wheat/rice)": "8/10"}, 
 
  "Sweets": {"Barfi": "7/10", "Chikki": "6/10", "Srikhand": "5/10", "Coconut Laddu": "7/10", 
-            "Black Gram Dhal Laddu": "7/10", "Pooran Poli": "6/10", "Dalia (sweet)": "6/10", 
-            "Besan Barfi (small)": "6/10", "Sandesh": "7/10", "Halwa (Suji) Kesari": "5/10", 
+            "Black Gram Dal Laddu": "7/10", "Puran Poli": "6/10", "Dalia": "6/10", 
+            "Besan Barfi (small)": "6/10", "Sandesh": "7/10", "Kesari Halwa": "5/10", 
             "Rice Puttu": "6/10", "Double ka Meetha": "5/10"}, 
 
- "Chutney": {"Mint Chutney": "7/10", "Tomato Chutney": "7/10", "Tamarind (with jaggery)": "7/10", 
+ "Chutney": {"Mint Chutney": "7/10", "Tomato Chutney": "7/10", "Tamarind (with Jaggery)": "7/10", 
              "Coriander Chutney": "7/10", "Groundnut Chutney": "6/10", "Til Chutney": "7/10", 
              "Instant Chutney": "7/10", "Tamarind Chutney": "8/10", "Coconut Chutney": "7/10"},
 
  "Fruits": {"Grapes (30)": "8/10", "Pineapple": "8/10", "Papaya": "9/10", "Muskmelon": "8/10", 
-            "Pear": "8/10", "Figs": "8/10", "Jackfruit": "8/10", "Custard apple (medium size)": "8/10", 
+            "Pear": "8/10", "Figs": "8/10", "Jackfruit": "8/10", "Custard Apple (medium size)": "8/10", 
             "Sapota/ Chickoo (medium size)": "8/10", "Guava (medium size)": "8/10", 
             "Banana (medium size)": "8/10", "Mosambi/Orange (medium size)": "8/10", 
             "Watermelon": "8/10", "Mango (medium size)": "8/10"}, 
@@ -69,30 +70,29 @@
                            "Dondakaya (Ivy Gourd)": "7/10", "Beetroot and Cauliflower (steamed)": "8/10", 
                            "Vegetable Stew": "7/10", "Cauliflower and Carrot Bhaji": "7/10", 
                            "Cauliflower with Green Peas": "8/10", "Pumpkin Curry": "7/10", "Cabbage": "7/10", 
-                           "Spinach with Dhal": "7/10", "Beans Foogath": "7/10"}, 
+                           "Spinach with Dhal": "7/10", "Beans Foogath": "7/10","Vegetables with Gravy": "7/10", 
+                           "Paneer Masala": "5/10", "Aloo Muttar": "6/10","Sambar": "7/10", "Chole/Sundal": "7/10", "Palak Paneer": "5/10"}, 
 
- "Subzi": {"Vegetables with Gravy": "7/10", "Paneer Masala": "5/10", "Aloo Muttar": "6/10", 
-           "Sambar": "7/10", "Chole / Sundal": "7/10", "Palak Paneer": "5/10"}, 
+ "Egg Dishes": {"Fried Egg": "6/10", "Scrambled Egg": "6/10", "Ommelette": "6/10", "Boiled Egg": "8/10",
+                "Egg Curry (with one Boiled Egg)" : "8/10"},
 
- "Egg Dishes": {"Fried Egg": "6/10", "Scrambled Egg": "6/10", "Ommelette": "6/10", "Boiled Egg": "8/10"},
-
- "Rice Varieties": {"Vegetable Fried Rice": "7/10", "Kichda": "6/10", "Prawn Pulav": "6/10", 
+ "Rice Varieties": {"Vegetable Fried Rice": "7/10", "Khichdi": "6/10", "Prawn Pulao": "6/10", 
                     "Tomato Rice": "7/10", "Lemon Rice": "7/10", "Vegetable Briyani": "6/10", 
-                    "Puliyodarai": "6/10", "Mutton Briyani": "8/10", "Plain Rice": "8/10", 
-                    "Masoor Briyani": "6/10", "Pulao": "6/10", "Green Pea Pulav": "7/10", 
-                    "Bisibell Huli Anna": "6/10", "Khicheri": "6/10", "Coconut Rice": "7/10", 
-                    "Curd Rice": "6/10", "Vegetable Pulav": "7/10", "Navratna Pulav": "6/10", 
+                    "Puliyodharai": "6/10", "Mutton Briyani": "8/10", "Plain Rice": "8/10", 
+                    "Masoor Briyani": "6/10", "Pulao": "6/10", "Green Pea Pulao": "7/10", 
+                    "Bisi Bele Huli Anna": "6/10", "Khicheri": "6/10", "Coconut Rice": "7/10", 
+                    "Curd Rice": "6/10", "Vegetable Pulao": "7/10", "Navratna Pulao": "6/10", 
                     "Chicken Fried Rice": "7/10"}, 
 
- "Dhal Items": {"Rajmah": "7/10", "Lentil Dal (Bengali)": "7/10", "Black Gram Dal": "7/10", 
-                "Varan": "7/10", "Bengal Gram Dal": "7/10", "Lentil Dal": "6/10", 
-                "Lentil (whole)": "7/10", "Green Gram (whole)": "7/10", "Cudhy": "7/10", 
-                "Green Gram Dal": "6/10", "Red Gram Dal": "7/10", "Dhoodi with Channa Dhal": "7/10",
-                "Chole / Sundal": "7/10", "Sambar": "7/10"}, 
+ "Dal Items": {"Rajmah": "7/10", "Lentil Dal (Bengali)": "7/10", "Black Gram Dal": "7/10", 
+               "Varan": "7/10", "Bengal Gram Dal": "7/10", "Lentil Dal": "6/10", 
+               "Lentil (whole)": "7/10", "Green Gram (whole)": "7/10", "Cudhy": "7/10", 
+               "Green Gram Dal": "6/10", "Red Gram Dal": "7/10", "Dhoodi with Chana Dal": "7/10",
+               "Chole/Sundal": "7/10", "Sambar": "7/10"}, 
 
  "Paratha/Roti": {"Phulka": "8/10", "Methi Paratha": "7/10", "Paratha": "7/10", "Ragi Roti": "8/10", 
                   "Bathura": "8/10", "Cauliflower Stuffed Paratha (small)": "8/10", "Tandoori Roti": "7/10", 
-                  "Potato Paratha": "6/10"}, 
+                  "Aloo Paratha": "6/10"}, 
 
  "Tea/Coffee/Milk Items": {"Horlicks (with milk)": "8/10", "Coffee": "6/10", "Black Tea": "8/10",
                            "Cocoa (with milk)": "8/10", "Bournvita (with milk)": "8/10", 
@@ -100,10 +100,10 @@
                            "Tea (2 tsp sugar)": "8/10"}, 
 
  "Mutton/Meat Varieties": {"Mutton Rogan Josh": "8/10", "Mutton Cutlet": "8/10", "Mutton Curry": "7/10", 
-                           "Liver do Piazza": "6/10", "Keema Kofta Curry (6 small koftas)": "7/10", 
-                           "Mutton Ball Curry (6 small balls)": "7/10"}, 
+                           "Liver dopiaza": "6/10", "Keema Kofta Curry (6 small koftas)": "7/10", 
+                           "Mutton Ball Curry (6 small balls)": "7/10", "Beef Roast" : "6/10"}, 
 
- "Non-Alcoholic Beverages": {"Syrups (Sherbat)": "6/10", "Squash": "6/10", "Cold Drinks": "6/10", 
-                             "Fresh Lime Juice": "8/10"}
+ "Non-Alcoholic Beverages": {"Syrups (Sherbat)": "6/10", "Squash": "6/10", "Soft Drinks": "6/10", 
+                             "Fresh Lime Juice": "8/10", "Milk Shakes" : "5/10"}
 
 }
