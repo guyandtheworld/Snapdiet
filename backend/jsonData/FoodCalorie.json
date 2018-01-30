@@ -16,12 +16,13 @@
 
  "Vegetable Curry": {"Bagara Baingan": "230", "Vegetable Kofta": "220", 
                      "Beans and Potato Curry": "94", "Potato with Gravy": "130", 
-                     "Vegetables with Gravy": "130"},
+                     "Vegetables with Gravy": "130", "Chana Masala" : "269"},
 
- "South Indian Dishes": {"Rava Dosai": "176", "Perugu Atukulu (Pohe + Curd)": "175",
+ "South Indian Dishes": {"Rava Dosa": "176", "Perugu Atukulu (Pohe + Curd)": "175",
                          "Pongal": "270", "Dosa (Plain)": "125", "Idli": "75", "Upma": "203",
                          "Pesarattu": "145", "Ragi Idli": "86", "Onion Dosa": "155", 
-                         "Adai": "145", "Seviyan Upma": "168", "Puri": "100", "Masala Dosa": "200"},
+                         "Adai": "145", "Seviyan Upma": "168", "Puri": "100", "Masala Dosa": "200",
+                         "Puttu" : "125", "Appam" : "120"},
 
  "Cakes/Pasteries": {"Lemon Tart": "204", "Queen Cakes (Cup Cake)": "214", "Jam Tart": "331", 
                       "Fruit Cake": "270"},
@@ -39,7 +40,7 @@
               "Mutton Cutlet": "169", "Sandwiches": "100"}, 
 
  "Chicken Dishes": {"Grilled Chicken (leg)": "199", "Chicken Vindaloo": "340", 
-                    "Chicken Curry": "320", "Dam-ka-Chicken": "257"}, 
+                    "Chicken Curry": "320", "Dam-ka-Chicken": "257", "Chicken Fry" : "192"}, 
 
  "Cereals/Porridge": {"Wheat Porridge": "220", "Puffed Wheat": "53", 
                       "Sandwiches": "100", "Bread Toasted": "85",
@@ -72,7 +73,8 @@
                       "Spinach with Dal": "115", "Beans Foogath": "100","Vegetables with Gravy": "130", 
                       "Paneer Masala": "421", "Aloo Muttar": "41","Sambar": "81", "Chole/Sundal": "115", "Palak Paneer": "165"},  
 
- "Egg Dishes": {"Fried Egg": "160", "Scrambled Egg": "101", "Ommelette": "160", "Boiled Egg": "90"},
+ "Egg Dishes": {"Fried Egg": "160", "Scrambled Egg": "101", "Ommelette": "160", "Boiled Egg": "90",
+                "Egg Curry (with one Boiled Egg)" : "170"},
 
  "Rice Varieties": {"Vegetable Fried Rice": "148", "Khichdi": "485", "Prawn Pulao": "211", 
                     "Tomato Rice": "178", "Lemon Rice": "185", "Vegetable Briyani": "236", 
@@ -99,9 +101,9 @@
 
  "Mutton/Meat Varieties": {"Mutton Rogan Josh": "127", "Mutton Cutlet": "169", "Mutton Curry": "346", 
                            "Liver Dopiaza": "330", "Keema Kofta Curry (6 small koftas)": "320", 
-                           "Mutton Ball Curry (6 small balls)": "237"}, 
+                           "Mutton Ball Curry (6 small balls)": "237", "Beef Roast" : "358"}, 
 
- "Non-Alcoholic Beverages": {"Syrups (Sherbat)": "200", "Squash": "75", "Cold Drinks": "150", 
-                             "Fresh Lime Juice": "60"}
+ "Non-Alcoholic Beverages": {"Syrups (Sherbat)": "200", "Squash": "75", "Soft Drinks": "150", 
+                             "Fresh Lime Juice": "60", "Milk Shakes" : "350"}
 
 }
