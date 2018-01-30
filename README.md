@@ -39,7 +39,7 @@
 <br>
 
 
-- [ ] The database should be more clean, make the food item names more obvious to both North and South Indian users.
+- [x] The database should be more clean, make the food item names more obvious to both North and South Indian users.(Claimed by Alfred, January 30, 2018)
 <br>
 
 
