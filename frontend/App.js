@@ -27,12 +27,17 @@ const Stacknavigation=StackNavigator(
   {
     Home:{
       screen:Main,
-      navigationOptions:({navigation}) => ({
-        title:'Home',
+      navigationOptions:({navigation}) => ({ 
         headerStyle:{
-          backgroundColor:'rgb(255,252,0)'
+          backgroundColor:'rgb(255,252,0)', 
         },
-        headerLeft:<DrawerButton navigation={navigation}/>
+        headerTitleStyle: {
+          alignSelf: 'center',
+          fontSize: 28,
+          color: 'black',
+        },
+        title:'SnapDiet',
+        // headerLeft:<DrawerButton navigation={navigation}/>
       })
     },
     Calorie:{

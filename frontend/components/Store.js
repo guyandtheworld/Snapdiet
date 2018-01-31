@@ -20,7 +20,7 @@ export default createStore(reducer, {
   name: 'REDUX TEST',
   dailyGoal: 0,
   currentCalorie: 0,
-  showNotif: false,
+  showNotif: true,
   currentColor: '#78CC5B',
   userInfo: {
     age: '',

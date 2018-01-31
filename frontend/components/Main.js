@@ -4,16 +4,18 @@ import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState} from 
 import {Picker, Text, Button, Form, Item, Label, Input, Icon, Fab} from 'native-base';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import foodData from './FoodCalorie.json';
+import Notif from './Notification'
 
 class Main extends React.Component {
     constructor(){
         super();
         this.state={
-            currentCalorie:0,
+            currentCalorie:0
         };
-    }
+        }
     
     componentDidMount(){
+
       getCurrentCalorieOffline = async () => {
         try{
           await AsyncStorage.getItem('SNAPDIET_CURRENTCALORIE',(error,data) => {
@@ -62,6 +64,7 @@ class Main extends React.Component {
 
       getDailyGoalOffline();
 
+
       getNotifStateOffline = async () => {
         try{
           await AsyncStorage.getItem('SNAPDIET_NOTIFSTATE',(error,data) => {
@@ -85,7 +88,10 @@ class Main extends React.Component {
       getNotifStateOffline();
     }
 
-    componentWillMount(){
+
+    componentWillMount() {
+      console.log("its here");
+
       AppState.addEventListener('change',this.appStateChanged);
 
       getTimeOffline = async () => {
@@ -115,6 +121,7 @@ class Main extends React.Component {
     }
 
     appStateChanged=(nextstate) => {
+
       if(nextstate=='background'){
         d = new Date();
         storeTimeOffline = async () => {
@@ -128,7 +135,7 @@ class Main extends React.Component {
         storeTimeOffline();
       }
     }
-
+  
   render() {
     const percent=this.props.dailyGoal?(parseInt((this.props.currentCalorie/this.props.dailyGoal)*100)):0;
     console.log(percent);
@@ -143,43 +150,46 @@ class Main extends React.Component {
     }
     
     return (
-      <View style={styles.container}>        
-        <AnimatedCircularProgress
-          size={225}
-          width={13}
-          fill={percent}
-          tintColor={(percent<100)?'rgb(77,194,71)':'rgb(255,0,0)'}
-          onAnimationComplete={() => {}}
-          backgroundColor="rgba(125,160,175,0.6)"
-          rotation={0}>
-          {
-            (fill) => (
-              <Text style={styles.percent}>
-                {percent}%
-              </Text>
-            )
-          }
-        </AnimatedCircularProgress>
-        <View style={{height:20}}/>
-        <Text style={{color:'rgba(0,0,0,0.6)'}}>Calories consumed today vs your goal</Text>
-        <View style={{height:70,justifyContent:'center',alignItems:'center'}}>
-        <TouchableNativeFeedback>
-        <Button style={styles.snapchatYellow} onPress={() => {this.props.navigation.navigate('Calorie')}}>
-          <Icon style={{color:'black'}} name='create'/>
-        </Button>
-        </TouchableNativeFeedback>
+      <View> 
+        
+        <View style={styles.container}>      
+          <AnimatedCircularProgress
+            size={225}
+            width={13}
+            fill={percent}
+            tintColor={(percent<100)?'rgb(77,194,71)':'rgb(255,0,0)'}
+            onAnimationComplete={() => { <Notif perc={percent} /> }}
+            backgroundColor="rgba(125,160,175,0.6)"
+            rotation={0}>
+            {
+              (fill) => (
+                <Text style={styles.percent}>
+                  {percent}%
+                </Text>
+              )
+            }
+          </AnimatedCircularProgress>
+          <View style={{height:20}}/>
+          <Text style={{color:'rgba(0,0,0,0.6)'}}>Calories consumed today vs your goal</Text>
+          <View style={{height:70,justifyContent:'center',alignItems:'center'}}>
+          <TouchableNativeFeedback>
+          <Button style={styles.snapchatYellow} onPress={() => {this.props.navigation.navigate('Calorie')}}>
+            <Icon style={{color:'black'}} name='create'/>
+          </Button>
+          </TouchableNativeFeedback>
+          </View>
+
+          <Fab style={styles.fabDesign} onPress={() => {this.setState({modalVisible:true})}} position='bottomRight'>
+              <Icon style={{color:'black'}} name='add'/>
+          </Fab>
+
         </View>
-
-        <Fab style={styles.snapchatYellow} onPress={() => {this.props.navigation.navigate('Addcalorie')}} position='bottomRight'>
-            <Icon style={{color:'black'}} name='add'/>
-        </Fab>
-
       </View>
     );
   }
 }
 
-const styles=StyleSheet.create({
+const styles = StyleSheet.create({
   container:{
     height:'100%',
     backgroundColor:'rgba(255,255,255,0.87)', 
@@ -192,7 +202,13 @@ const styles=StyleSheet.create({
     fontSize:50
   },
   snapchatYellow:{
-    backgroundColor:'rgb(255,252,0)'
+    backgroundColor:'rgb(255,252,0)', 
+  },
+  fabDesign: {
+    backgroundColor:'rgb(255,252,0)',
+    width: 60,   
+    height: 60,
+    borderRadius: 40,
   }
 });
 
