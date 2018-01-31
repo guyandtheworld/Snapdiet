@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, Modal, AppState} from 'react-native';
+import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState} from 'react-native';
 import {Picker, Text, Button, Form, Item, Label, Input, Icon, Fab} from 'native-base';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import foodData from './FoodCalorie.json';
@@ -10,17 +10,8 @@ class Main extends React.Component {
         super();
         this.state={
             currentCalorie:0,
-            modalVisible:false,
-            selectedItem:'',
-            selectedSubItem:'',
-            foodItems:[],
-            foodSubItems:[],
-            items:'',
-            subItems:'',
-            displaySubItems:false,
-            disableAddButton:true
         };
-        }
+    }
     
     componentDidMount(){
       getCurrentCalorieOffline = async () => {
@@ -96,16 +87,6 @@ class Main extends React.Component {
 
     componentWillMount(){
       AppState.addEventListener('change',this.appStateChanged);
-      for (i in foodData){
-          this.setState({
-              foodItems:this.state.foodItems.push(i)
-          });
-      }
-      this.setState({
-          items:this.state.foodItems.map((item) => {
-              return(<Picker.Item style={{height:8}} label={item} value={item} key={item}/>);
-          })
-      });
 
       getTimeOffline = async () => {
         try{
@@ -148,59 +129,6 @@ class Main extends React.Component {
       }
     }
 
-    addCalories=() => {
-      this.setState({
-          modalVisible:false,
-          currentCalorie:this.state.currentCalorie+parseInt(foodData[this.state.selectedItem][this.state.selectedSubItem])
-      },() => {
-          this.props.update('updateCalorie',{currentCalorie:this.state.currentCalorie});
-          storeCurrentCalorieOffline = async () => {
-              try{
-                  await AsyncStorage.setItem('SNAPDIET_CURRENTCALORIE',this.state.currentCalorie.toString());
-              }
-              catch(e){
-                  console.log(e);
-              }
-          }
-          storeCurrentCalorieOffline();   
-      });
-    }
-
-    displaySubMenu=(value) => {
-        this.setState({
-            selectedItem:value,
-            foodSubItems:[],
-            displaySubItems:false
-        },
-        () => {
-            for (i in foodData[value]){
-                this.setState({
-                    foodSubItems:this.state.foodSubItems.push(i)
-                });
-            }
-            this.setState({
-                subItems:this.state.foodSubItems.map((item) => {
-                return(<Picker.Item style={{height:8}} label={item} value={item} key={item}/>);
-                }),
-                selectedSubItem:Object.keys(foodData[value])[0],
-                displaySubItems:true,
-                disableAddButton:false
-            });    
-        });
-    }
-
-    selectSubMenu=(value) => {
-        this.setState({
-            selectedSubItem:value
-        });
-    }
-
-    closeModal=() => {
-        this.setState({
-            modalVisible:false
-        });
-    }
-  
   render() {
     const percent=this.props.dailyGoal?(parseInt((this.props.currentCalorie/this.props.dailyGoal)*100)):0;
     console.log(percent);
@@ -242,41 +170,9 @@ class Main extends React.Component {
         </TouchableNativeFeedback>
         </View>
 
-        <Fab style={styles.snapchatYellow} onPress={() => {this.setState({modalVisible:true})}} position='bottomRight'>
+        <Fab style={styles.snapchatYellow} onPress={() => {this.props.navigation.navigate('Addcalorie')}} position='bottomRight'>
             <Icon style={{color:'black'}} name='add'/>
         </Fab>
-
-        <Modal animationType = {'fade'} transparent = {true}
-        visible = {this.state.modalVisible}
-        onRequestClose = {this.closeModal}>
-            <View style={styles.modalContainer}>
-                <View style = {styles.modalMain}>
-                    <Form>
-                        <Picker
-                            mode="dialog"
-                            selectedValue={this.state.selectedItem}
-                            onValueChange={this.displaySubMenu}
-                            style={{color:'black', width:250}}
-                            >
-                            {this.state.items}
-                        </Picker>
-                        {this.state.displaySubItems?
-                            <Picker
-                                mode="dialog"
-                                selectedValue={this.state.selectedSubItem}
-                                onValueChange={this.selectSubMenu}
-                                style={{color:'black',width:250}}
-                                >
-                                {this.state.subItems}
-                            </Picker>
-                        :null}
-                    </Form>
-                    <View>
-                        <Button disabled={this.state.disableAddButton} onPress={this.addCalories} style={{marginTop:'10%'}}><Text>Add</Text></Button>
-                    </View>
-                </View>
-            </View>
-        </Modal>
 
       </View>
     );
@@ -297,21 +193,6 @@ const styles=StyleSheet.create({
   },
   snapchatYellow:{
     backgroundColor:'rgb(255,252,0)'
-  },
-  modalContainer:{
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor:'rgba(0,0,0,0.6)'
-  },
-  modalMain:{
-      height:'40%', 
-      width:'85%', 
-      backgroundColor: 'rgb(255,255,255)', 
-      alignItems: 'center', 
-      justifyContent:'center',
-      borderRadius:10
   }
 });
 

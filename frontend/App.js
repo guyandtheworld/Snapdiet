@@ -11,6 +11,7 @@ import Store from './components/Store';
 import GetInfo from './components/getInfo';
 import Login from './components/Login';
 import Sidebar from './components/Sidebar';
+import Addcalorie from './components/Addcalorie';
 
 const DrawerButton = (props) => {
 	return (
@@ -43,6 +44,15 @@ const Stacknavigation=StackNavigator(
         },
       })
     },
+    Addcalorie:{
+      screen:Addcalorie,
+      navigationOptions:({navigation}) => ({
+        title:'Add Food',
+        headerStyle:{
+          backgroundColor:'rgb(255,252,0)'
+        },
+      })
+    }
   }
 );
 
