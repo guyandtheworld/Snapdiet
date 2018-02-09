@@ -29,9 +29,6 @@ class Main extends React.Component {
             }
             else{
               this.props.update('updateCalorie',{currentCalorie:parseInt(data)});
-              this.setState({
-                currentCalorie:this.props.currentCalorie
-              });
             }
           });
         }
@@ -179,7 +176,7 @@ class Main extends React.Component {
           </TouchableNativeFeedback>
           </View>
 
-          <Fab style={styles.fabDesign} onPress={() => {this.setState({modalVisible:true})}} position='bottomRight'>
+          <Fab style={styles.fabDesign} onPress={() => {this.props.navigation.navigate('Addcalorie')}} position='bottomRight'>
               <Icon style={{color:'black'}} name='add'/>
           </Fab>
 
