@@ -126,10 +126,8 @@ class Addcalorie extends React.Component{
             chosenCalories:this.state.chosenCalories.concat([this.state.foodValues[this.state.foodNames.indexOf(item)]])
         },() => {
             for(i in this.state.chosenCalories){
-                console.log(this.state.chosenCalories[i]);
                 total+=parseInt(this.state.chosenCalories[i]);
             }
-            console.log(total);
             if(total!=0){
                 this.setState({
                     totalCalorie:total,
@@ -137,6 +135,44 @@ class Addcalorie extends React.Component{
                 });
             }
         });
+    }
+
+    removeItem=(item) => {
+        console.log(item);
+        for(i in this.state.chosenFoods){
+            if(this.state.chosenFoods[i]==item){
+                //Remove food name
+                let arr=this.state.chosenFoods;
+                arr.splice(i,1);
+                this.setState({
+                    chosenFoods:arr
+                },() => {
+                    //Remove food calorie
+                    let arr=this.state.chosenCalories;
+                    arr.splice(i,1);
+                    this.setState({
+                        chosenCalories:arr
+                    },() => {
+                        //Recalculate total
+                        let total=0;
+                        for(i in this.state.chosenCalories){
+                            total+=this.state.chosenCalories[i];
+                        }
+                        if(total==0){
+                            this.setState({
+                                totalCalorie:0,
+                                disableAddButton:true
+                            });
+                        }
+                        else{
+                            this.setState({
+                                totalCalorie:total
+                            });
+                        }
+                    });
+                });
+            }
+        }
     }
 
     render(){
@@ -149,6 +185,17 @@ class Addcalorie extends React.Component{
         const chosenCalories=this.state.chosenCalories.map((calorie) => {
             return(
                     <Text style={{color:'rgba(0,0,0,0.87)', fontWeight:'500'}}>{calorie}</Text>
+            );
+        });
+
+        const removeButtons=this.state.chosenFoods.map((food) => {
+            return(
+                    <TouchableOpacity onPress={() => {this.removeItem(food)}}>
+                        <View style={styles.removeButton}>
+                            <Text style={{fontSize:12, color:'white'}}>X</Text>
+                        </View>
+                        <View style={{height:7}}/>
+                    </TouchableOpacity>
             );
         });
 
@@ -192,8 +239,9 @@ class Addcalorie extends React.Component{
                     :null}
                     </Form>*/}
                 <View style={{height:20}}/>
+
                 <Grid>
-                    <Col>
+                    <Col size={45}>
                         <Row size={8}>
                             <Text style={{fontWeight:'700'}}>Food</Text>
                         </Row>
@@ -201,12 +249,18 @@ class Addcalorie extends React.Component{
                             {chosenFoods}
                         </Row>
                     </Col>
-                    <Col>
+                    <Col size={45}>
                         <Row size={8}>
                             <Text style={{fontWeight:'700'}}>Calorie</Text>
                         </Row>
                         <Row size={92} style={{flexDirection:'column'}}>
                             {chosenCalories}
+                        </Row>
+                    </Col>
+                    <Col size={10}>
+                         <Row size={8}/>
+                        <Row size={92} style={{flexDirection:'column'}}>
+                            {removeButtons}
                         </Row>
                     </Col>
                 </Grid>
@@ -241,6 +295,11 @@ const styles=StyleSheet.create({
         width:'100%',
         height:40,
         justifyContent:'center',
+    },
+    removeButton:{
+        backgroundColor:'red',
+        borderRadius:100,
+        alignItems:'center'
     }
   });
   

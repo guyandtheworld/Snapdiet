@@ -115,7 +115,7 @@ class Main extends React.Component {
     
       getFirstLaunchOffline = async () => {
         try{
-            await AsyncStorage.getItem('SNAPDIET_FIRSTLAUNCH_TESTT',(error, data) => {
+            await AsyncStorage.getItem('SNAPDIET_FIRSTLAUNCH_TEST',(error, data) => {
               if(error){
                 console.log(error);
               }
@@ -124,7 +124,7 @@ class Main extends React.Component {
                   await AsyncStorage.setItem('SNAPDIET_FIRSTLAUNCH_TEST','1');
                 }
                 firstLaunchDone();
-                this.props.navigation.navigate('GetInfo');
+                this.props.navigation.navigate('FirstScreen');
               }
             });
           }
