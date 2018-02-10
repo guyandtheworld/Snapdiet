@@ -4,7 +4,6 @@ import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState} from 
 import {Picker, Text, Button, Form, Item, Label, Input, Icon, Fab} from 'native-base';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import foodData from './FoodCalorie.json';
-import Notif from './Notification'
 
 class Main extends React.Component {
     constructor(){
@@ -62,7 +61,7 @@ class Main extends React.Component {
       getDailyGoalOffline();
 
 
-      getNotifStateOffline = async () => {
+     /* getNotifStateOffline = async () => {
         try{
           await AsyncStorage.getItem('SNAPDIET_NOTIFSTATE',(error,data) => {
             if(error){
@@ -82,13 +81,11 @@ class Main extends React.Component {
           console.log(e);
         }
       }
-      getNotifStateOffline();
+      getNotifStateOffline();*/
     }
 
 
     componentWillMount() {
-      console.log("its here");
-
       AppState.addEventListener('change',this.appStateChanged);
 
       getTimeOffline = async () => {
@@ -135,7 +132,7 @@ class Main extends React.Component {
   
   render() {
     const percent=this.props.dailyGoal?(parseInt((this.props.currentCalorie/this.props.dailyGoal)*100)):0;
-    console.log(percent);
+//    this.props.update("updatePercent",{percent:percent});
     if(percent>=80 && percent<100){
       this.props.update('updateColor',{currentColor:'#FFCC00'});
     }
@@ -155,7 +152,7 @@ class Main extends React.Component {
             width={13}
             fill={percent}
             tintColor={(percent<100)?'rgb(77,194,71)':'rgb(255,0,0)'}
-            onAnimationComplete={() => { <Notif perc={percent} /> }}
+            onAnimationComplete={() => {  }}
             backgroundColor="rgba(125,160,175,0.6)"
             rotation={0}>
             {
