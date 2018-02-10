@@ -4,6 +4,7 @@ import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState} from 
 import {Picker, Text, Button, Form, Item, Label, Input, Icon, Fab} from 'native-base';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import foodData from './FoodCalorie.json';
+import Tips from './Tips/Tips';
 
 class Main extends React.Component {
     constructor(){
@@ -11,7 +12,7 @@ class Main extends React.Component {
         this.state={
             currentCalorie:0
         };
-        }
+    }
     
     componentDidMount(){
 
@@ -163,8 +164,10 @@ class Main extends React.Component {
               )
             }
           </AnimatedCircularProgress>
-          <View style={{height:20}}/>
-          <Text style={{color:'rgba(0,0,0,0.6)'}}>Calories consumed today vs your goal</Text>
+          <View style={{height:18}}/>
+          
+          <Tips />
+
           <View style={{height:70,justifyContent:'center',alignItems:'center'}}>
           <TouchableNativeFeedback>
           <Button style={styles.snapchatYellow} onPress={() => {this.props.navigation.navigate('Calorie')}}>
@@ -172,7 +175,6 @@ class Main extends React.Component {
           </Button>
           </TouchableNativeFeedback>
           </View>
-
           <Fab style={styles.fabDesign} onPress={() => {this.props.navigation.navigate('Addcalorie')}} position='bottomRight'>
               <Icon style={{color:'black'}} name='add'/>
           </Fab>

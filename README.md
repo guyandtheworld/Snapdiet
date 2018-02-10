@@ -39,7 +39,7 @@
 <br>
 
 
-- [ ] The database should be more clean, make the food item names more obvious to both North and South Indian users.
+- [x] The database should be more clean, make the food item names more obvious to both North and South Indian users.(Claimed by Alfred, January 30, 2018)
 <br>
 
 
@@ -47,7 +47,7 @@
 <br>
 
 
--  [ ] Show the daily progress of the current days diet in the persistent notification.
+-  [ ] Show the daily progress of the current days diet in the persistent notification.(Claimed by Albin, February 9, 2018)
 <br>
 
 
@@ -63,7 +63,7 @@
 <br>
 
 
--  [ ] Everytime in the first screen, below the calorie goal meter, show a new health quote. (Claimed by Albin, January 25, 2018)
+-  [x] Everytime in the first screen, below the calorie goal meter, show a new health quote. (Claimed by Albin, January 25, 2018)
 <br>
 
 
