@@ -12,6 +12,7 @@ import GetInfo from './components/getInfo';
 import Login from './components/Login';
 import Sidebar from './components/Sidebar';
 import Addcalorie from './components/Addcalorie';
+import FirstScreen from './components/FirstScreen';
 
 const DrawerButton = (props) => {
 	return (
@@ -65,7 +66,8 @@ const Drawernavigation=DrawerNavigator(
   {
     Home:{screen:Stacknavigation},
     Login:{screen:Login},
-    GetInfo:{screen:GetInfo}
+    GetInfo:{screen:GetInfo},
+    FirstScreen:{screen:FirstScreen}
   },
   {
     drawerOpenRoute: 'DrawerOpen',

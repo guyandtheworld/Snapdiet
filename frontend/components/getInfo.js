@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {View, StyleSheet, Button, ScrollView, AsyncStorage, ToastAndroid} from 'react-native';
+import {Text} from 'native-base';
 import {connect} from 'react-redux';
 
 import t from 'tcomb-form-native';
@@ -60,6 +61,7 @@ class GetInfo extends React.Component {
 				this.props.update('updateInfo',{userInfo:value});
 		}
 		ToastAndroid.show('Information saved!', ToastAndroid.LONG);
+		this.props.navigation.goBack();
 	}
 
 	componentDidUpdate(){
@@ -163,10 +165,11 @@ class GetInfo extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+		minHeight:'100%',
     justifyContent: 'center',
     marginTop: 10,
-	padding: 20,
-    backgroundColor: '#ffffff',
+		padding: 20,
+    backgroundColor: 'rgb(255,252,0)',
   },
 });
 

@@ -4,7 +4,6 @@ import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState} from 
 import {Picker, Text, Button, Form, Item, Label, Input, Icon, Fab} from 'native-base';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import foodData from './FoodCalorie.json';
-import Notif from './Notification';
 import Tips from './Tips/Tips';
 
 class Main extends React.Component {
@@ -63,7 +62,7 @@ class Main extends React.Component {
       getDailyGoalOffline();
 
 
-      getNotifStateOffline = async () => {
+     /* getNotifStateOffline = async () => {
         try{
           await AsyncStorage.getItem('SNAPDIET_NOTIFSTATE',(error,data) => {
             if(error){
@@ -83,13 +82,11 @@ class Main extends React.Component {
           console.log(e);
         }
       }
-      getNotifStateOffline();
+      getNotifStateOffline();*/
     }
 
 
     componentWillMount() {
-      console.log("its here");
-
       AppState.addEventListener('change',this.appStateChanged);
 
       getTimeOffline = async () => {
@@ -115,7 +112,27 @@ class Main extends React.Component {
         }
       }
       getTimeOffline(); 
-
+    
+      getFirstLaunchOffline = async () => {
+        try{
+            await AsyncStorage.getItem('SNAPDIET_FIRSTLAUNCH_TEST',(error, data) => {
+              if(error){
+                console.log(error);
+              }
+              else if(data==null){
+                firstLaunchDone = async () => {
+                  await AsyncStorage.setItem('SNAPDIET_FIRSTLAUNCH_TEST','1');
+                }
+                firstLaunchDone();
+                this.props.navigation.navigate('FirstScreen');
+              }
+            });
+          }
+          catch(e){
+            console.log(e);
+          }
+        }
+      getFirstLaunchOffline();
     }
 
     appStateChanged=(nextstate) => {
@@ -136,7 +153,7 @@ class Main extends React.Component {
   
   render() {
     const percent=this.props.dailyGoal?(parseInt((this.props.currentCalorie/this.props.dailyGoal)*100)):0;
-    console.log(percent);
+//    this.props.update("updatePercent",{percent:percent});
     if(percent>=80 && percent<100){
       this.props.update('updateColor',{currentColor:'#FFCC00'});
     }
@@ -156,7 +173,7 @@ class Main extends React.Component {
             width={13}
             fill={percent}
             tintColor={(percent<100)?'rgb(77,194,71)':'rgb(255,0,0)'}
-            onAnimationComplete={() => { <Notif perc={percent} /> }}
+            onAnimationComplete={() => {  }}
             backgroundColor="rgba(125,160,175,0.6)"
             rotation={0}>
             {

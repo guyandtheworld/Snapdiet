@@ -11,21 +11,17 @@ class Notif extends React.Component {
 		this.state = {
 			showNotif:false,
 			notifTitle: "Touch to add calorie",
-			notifMessage: "Some % completed",		
+			notifMessage: 0,		
 		};
 		this.putNotif = this.putNotif.bind(this);
 	}
 
 	componentDidMount() {
-    	AppState.addEventListener('change', this.putNotif);
-  	}
+		AppState.addEventListener('change', this.putNotif);
+	}
 
   	componentWillUnmount() {
-    	AppState.removeEventListener('change', this.nothing());
-  	}
-
-  	nothing () {
-
+    	AppState.removeEventListener('change');
   	}
 
 	putNotif(){
@@ -34,7 +30,7 @@ class Notif extends React.Component {
 
 		const localNotification = {
 		    title: this.state.notifTitle,
-			body: this.state.notifMessage,
+			body: parseInt(((parseInt(this.props.currentCalorie)/parseInt(this.props.dailyGoal)))*100).toString() + "% of today's goal consumed",
 			android:{
 				sticky: true,
 				priority:'max'
@@ -48,8 +44,7 @@ class Notif extends React.Component {
 
 	render() {
 		return (
-			<View>
-			</View>
+			<View/>
 		);
 	}
 }
@@ -57,12 +52,5 @@ class Notif extends React.Component {
 export default connect(
 	(store) => {
         return store;
-    },
-    (dispatch) => {
-        return{
-            update:(dispatchType,dispatchPayload) => {
-                dispatch({type:dispatchType,payload:dispatchPayload});
-            }
-        }
     }
 )(Notif); 
