@@ -47,7 +47,7 @@
 <br>
 
 
--  [ ] Show the daily progress of the current days diet in the persistent notification.(Claimed by Albin, February 9, 2018)
+-  [x] Show the daily progress of the current days diet in the persistent notification.(Claimed by Albin & Aswin G, February 9, 2018)
 <br>
 
 
