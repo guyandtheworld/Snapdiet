@@ -13,8 +13,6 @@ const reducer = (state, action) => {
     return Object.assign({}, state, {currentColor: action.payload.currentColor})
   } else if (action.type == 'updateInfo') {
     return Object.assign({}, state, {userInfo: action.payload.userInfo})
-  } else if (action.type == 'updatePercent') {
-    return Object.assign({},state, {percent:action.payload.percent})
   } else return state
 }
 
@@ -23,7 +21,6 @@ export default createStore(reducer, {
   dailyGoal: 0,
   currentCalorie: 0,
   showNotif: true,
-  percent:0,
   currentColor: '#78CC5B',
   userInfo: {
     age: '',

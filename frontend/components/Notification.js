@@ -11,17 +11,13 @@ class Notif extends React.Component {
 		this.state = {
 			showNotif:false,
 			notifTitle: "Touch to add calorie",
-			notifMessage: 50,		
+			notifMessage: 0,		
 		};
 		this.putNotif = this.putNotif.bind(this);
 	}
 
 	componentDidMount() {
 		AppState.addEventListener('change', this.putNotif);
-	}
-
-	componentWillUpdate(){
-		console.log(this.props.currentCalorie,this.props.dailyGoal);
 	}
 
   	componentWillUnmount() {
@@ -34,7 +30,7 @@ class Notif extends React.Component {
 
 		const localNotification = {
 		    title: this.state.notifTitle,
-			body: this.state.notifMessage.toString() + "% of today's goal consumed",
+			body: parseInt(((parseInt(this.props.currentCalorie)/parseInt(this.props.dailyGoal)))*100).toString() + "% of today's goal consumed",
 			android:{
 				sticky: true,
 				priority:'max'

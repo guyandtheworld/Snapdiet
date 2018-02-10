@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {View, StyleSheet, Button, ScrollView, AsyncStorage, ToastAndroid} from 'react-native';
+import {Text, H2} from 'native-base';
 import {connect} from 'react-redux';
 
 import t from 'tcomb-form-native';
@@ -60,6 +61,7 @@ class GetInfo extends React.Component {
 				this.props.update('updateInfo',{userInfo:value});
 		}
 		ToastAndroid.show('Information saved!', ToastAndroid.LONG);
+		this.props.navigation.goBack();
 	}
 
 	componentDidUpdate(){
@@ -147,6 +149,8 @@ class GetInfo extends React.Component {
 	render() {
 		return(
 			<View style={styles.container}>
+				<H2>Welcome to Snapdiet!</H2>
+				<Text>Please fill in some information to calculate an optimized daily calorie goal for you.</Text>
 				<ScrollView showsVerticalScrollIndicator={false} keyboardDismissMode='on-drag'>
 						<Form 
 							ref={c => this._form = c} 
