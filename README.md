@@ -59,7 +59,7 @@
 <br>
 
 
--  [ ] In the Daily Calorie goal box, all the values shouldn't be allowed. Calculate an optimum calorie value for a person and then increment 200+ or 200- calorie to that and display as a drop down menu. (See how popular apps hands pop up UI and drop down boxes)
+-  [ ] In the Daily Calorie goal box, all the values shouldn't be allowed. Calculate an optimum calorie value for a person and then increment 200+ or 200- calorie to that and display as a drop down menu. (See how popular apps hands pop up UI and drop down boxes)(Claimed by Aswin G and Albin)
 <br>
 
 
