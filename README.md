@@ -55,7 +55,7 @@
 <br>
 
 
--  [] Set up the initial user inputs to get user details (Weight, Height, Activity) and the default calorie goal should be the calculated value from that parameters. (Claimed by Aswin G)
+-  [ ] Set up the initial user inputs to get user details (Weight, Height, Activity) and the default calorie goal should be the calculated value from that parameters. (Claimed by Aswin G)
 <br>
 
 
