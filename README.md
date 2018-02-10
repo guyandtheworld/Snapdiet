@@ -31,7 +31,7 @@
 ## Features To-Do.
 
 
-- [ ] Add proper login screen and an sliding intro to our app. (Claimed by Aswin G)
+- [x] Add proper login screen and an sliding intro to our app. (Claimed by Aswin G)
 
 <br>
 
@@ -55,7 +55,7 @@
 <br>
 
 
--  [ ] Set up the initial user inputs to get user details (Weight, Height, Activity) and the default calorie goal should be the calculated value from that parameters. (Claimed by Aswin G)
+-  [x] Set up the initial user inputs to get user details (Weight, Height, Activity) and the default calorie goal should be the calculated value from that parameters. (Claimed by Aswin G)
 <br>
 
 
