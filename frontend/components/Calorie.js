@@ -1,12 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, KeyboardAvoidingView, AsyncStorage, ToastAndroid, Keyboard} from 'react-native';
-import {Grid, Row, Col} from 'react-native-easy-grid';
-import {Text, H1, Button, Container, Content, Card, CardItem, Body, Form, Item, Label, Input} from 'native-base';
+import {StyleSheet, View, KeyboardAvoidingView, AsyncStorage} from 'react-native';
+import {Text, Button} from 'native-base';
 
 class Calorie extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
             dailyGoal: 0,
             goalGreen:'#78CC5B'
@@ -17,26 +16,49 @@ class Calorie extends React.Component{
         if(!isNaN(text) && text!=''){
             this.setState({
                 dailyGoal:parseInt(text),
-            },()=>{console.log(this.state.dailyGoal)});
+            });
         }
         else{
             this.setState({
                 dailyGoal:0,
-            },()=>{console.log(this.state.dailyGoal)});
+            });
         }
     }
     
     increaseDailyGoal=() => {
-
+        this.setState({
+            dailyGoal:this.props.dailyGoal+100
+        },() => {this.updateDailyGoal()});
     }
 
     decreaseDailyGoal=() => {
+        if(this.props.dailyGoal-100>=0){
+            this.setState({
+                dailyGoal:this.props.dailyGoal-100
+            },() => {this.updateDailyGoal()});
+        }
+        else{
+            this.setState({
+                dailyGoal:0
+            },() => {this.updateDailyGoal()});
+        }
+    }
 
+    updateDailyGoal = () => {
+        this.props.update('updateGoal',{dailyGoal:this.state.dailyGoal});
+        storeDailyGoalOffline = async () => {
+            try{
+                await AsyncStorage.setItem('SNAPDIET_DAILYGOAL',this.state.dailyGoal.toString());
+            }
+            catch(e){
+                console.log(e);
+            }
+        }
+        storeDailyGoalOffline();
     }
 
     render(){
         return(
-
             <KeyboardAvoidingView behavior='padding' >                
 
                 <View style = {styles.container}>
@@ -46,12 +68,12 @@ class Calorie extends React.Component{
                     <Text style = {styles.goalCal}> {this.props.dailyGoal} </Text>
 
                     <View style = {styles.buttonContainer}>
-                        <Button success onPress={this.decreaseDailyGoal}> 
-                            <Text> -200 </Text>                    
+                        <Button success onPress={()=>{this.decreaseDailyGoal()}}> 
+                            <Text> -100 </Text>                    
                         </Button>
                         
-                        <Button warning style={{marginLeft: 10,}} onPress={this.increaseDailyGoal}> 
-                            <Text> +200 </Text>                    
+                        <Button warning style={{marginLeft: 10}} onPress={() => {this.increaseDailyGoal()}}> 
+                            <Text> +100 </Text>                    
                         </Button>
                     </View>
 
