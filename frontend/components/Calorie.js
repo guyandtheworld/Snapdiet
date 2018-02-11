@@ -2,13 +2,13 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {StyleSheet, View, KeyboardAvoidingView, AsyncStorage, ToastAndroid, Keyboard} from 'react-native';
 import {Grid, Row, Col} from 'react-native-easy-grid';
-import {Text, H1, Container, Content, Button, Card, CardItem, Body, Form, Item, Label, Input} from 'native-base';
+import {Text, H1, Button, Container, Content, Card, CardItem, Body, Form, Item, Label, Input} from 'native-base';
 
 class Calorie extends React.Component{
     constructor(){
         super();
         this.state={
-            dailyGoal:'0',
+            dailyGoal: 0,
             goalGreen:'#78CC5B'
         }
     }
@@ -26,54 +26,54 @@ class Calorie extends React.Component{
         }
     }
     
-    setDailyGoal=() => {
-        Keyboard.dismiss();
-        if(this.state.dailyGoal!='' && !(isNaN(this.state.dailyGoal))){
-            this.props.update('updateGoal',{dailyGoal:this.state.dailyGoal});
-            storeDailyGoalOffline = async () => {
-                try{
-                    await AsyncStorage.setItem('SNAPDIET_DAILYGOAL',this.state.dailyGoal.toString());
-                }
-                catch(e){
-                    console.log(e);
-                }
-            }
-            storeDailyGoalOffline();
-            ToastAndroid.show('Daily Goal Updated!', ToastAndroid.LONG);
-        }
-        else{
-            ToastAndroid.show('Please enter a number!', ToastAndroid.LONG);
-        }
+    increaseDailyGoal=() => {
+
+    }
+
+    decreaseDailyGoal=() => {
+
     }
 
     render(){
         return(
-            <KeyboardAvoidingView behavior='padding' >
-                <Form style={{flexDirection:'row'}}>
-                     <Item stackedLabel style={styles.calorieGoalInput}>
-                         <Label>Daily calorie goal:</Label>
-                         <Input keyboardType='numeric' style={{color:'black'}} onChangeText={this.textbind}/>
-                     </Item>
-                     <Button onPress={this.setDailyGoal} style={styles.calorieSetButton}><Text>Set</Text></Button>
-                </Form>
 
-                <Text style={styles.infobox} >Fill personal information form to automatically calculate the optimal daily calorie goal for you.</Text>
+            <KeyboardAvoidingView behavior='padding' >                
 
                 <View style = {styles.container}>
                     <Text style = {styles.header} > Calories consumed: </Text>
                     <Text style = {[styles.currentCal,{color:this.props.currentColor}]} > {this.props.currentCalorie} </Text>
                     <Text style = {styles.header} > Daily Calorie Goal: </Text>
                     <Text style = {styles.goalCal}> {this.props.dailyGoal} </Text>
-                </View>
+
+                    <View style = {styles.buttonContainer}>
+                        <Button success onPress={this.decreaseDailyGoal}> 
+                            <Text> -200 </Text>                    
+                        </Button>
+                        
+                        <Button warning style={{marginLeft: 10,}} onPress={this.increaseDailyGoal}> 
+                            <Text> +200 </Text>                    
+                        </Button>
+                    </View>
+
+                    <Text style={{color:'rgba(0,0,0,0.5)'}}> Change Daily Calorie Goal </Text>
+
+                </View> 
+
+
             </KeyboardAvoidingView>
+
         );
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        marginVertical: 20,
+        marginVertical: 17,
         alignItems: 'center',
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        padding: 10,
     },
     header: {
         fontSize: 35,
@@ -120,3 +120,4 @@ export default connect(
         }
     }
 )(Calorie);
+
