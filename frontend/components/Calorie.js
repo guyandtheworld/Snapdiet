@@ -77,7 +77,7 @@ class Calorie extends React.Component{
                         </Button>
                     </View>
 
-                    <Text style={{color:'rgba(0,0,0,0.5)'}}> Change Daily Calorie Goal </Text>
+                    <Text style={{color:'rgba(0,0,0,0.5)', fontFamily:'openSans'}}> Change Daily Calorie Goal </Text>
 
                 </View> 
 
@@ -98,8 +98,8 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     header: {
-        fontSize: 35,
-        fontWeight: 'bold',
+        fontSize: 33,
+        fontFamily:'openSans-bold',
         marginTop: 10,
         color:'rgba(0,0,0,0.7)'
     },

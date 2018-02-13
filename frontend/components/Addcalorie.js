@@ -178,13 +178,13 @@ class Addcalorie extends React.Component{
     render(){
         const chosenFoods=this.state.chosenFoods.map((food) => {
             return(
-                    <Text style={{color:'rgba(0,0,0,0.87)'}}>{food}</Text>
+                    <Text style={{color:'rgba(0,0,0,0.87)',fontFamily:'openSans'}}>{food}</Text>
             );
         });
 
         const chosenCalories=this.state.chosenCalories.map((calorie) => {
             return(
-                    <Text style={{color:'rgba(0,0,0,0.87)', fontWeight:'500'}}>{calorie}</Text>
+                    <Text style={{color:'rgba(0,0,0,0.87)', fontFamily:'openSans-bold'}}>{calorie}</Text>
             );
         });
 
@@ -211,7 +211,7 @@ class Addcalorie extends React.Component{
                             return(
                                 <View key={item.index}>
                                     <TouchableOpacity style={styles.listItem} onPress={() => {this.choseItem(item.item)}}>
-                                            <Text style={{color:'black'}}>{item.item}</Text>
+                                            <Text style={{color:'black',fontFamily:'openSans'}}>{item.item}</Text>
                                     </TouchableOpacity>                                
                                     <View style={{borderBottomColor: 'rgba(0,0,0,0.2)',borderBottomWidth: 1}}/>
                                 </View>
@@ -243,7 +243,7 @@ class Addcalorie extends React.Component{
                 <Grid>
                     <Col size={45}>
                         <Row size={8}>
-                            <Text style={{fontWeight:'700'}}>Food</Text>
+                            <Text style={{fontFamily:'openSans-bold'}}>Food</Text>
                         </Row>
                         <Row size={92} style={{flexDirection:'column'}}>
                             {chosenFoods}
@@ -251,7 +251,7 @@ class Addcalorie extends React.Component{
                     </Col>
                     <Col size={45}>
                         <Row size={8}>
-                            <Text style={{fontWeight:'700'}}>Calorie</Text>
+                            <Text style={{fontFamily:'openSans-bold'}}>Calorie</Text>
                         </Row>
                         <Row size={92} style={{flexDirection:'column'}}>
                             {chosenCalories}

@@ -14,8 +14,6 @@ Clone this repository and run `npm install`. Once npm downloads the dependecies 
 
 ### Specific things to fix
 
-* Properly implement KeyboardAvoidingView so the input fields are not covered by the virtual keyboard
-
-* Change color palette
+* Find a way to put images, fonts etc in an assets folder and load it from there, because the obvious way to do it doesn't work for some reason.
 
 * Redo FABs with TouchableNativeFeedback so as to get circular ripple effect
