@@ -178,9 +178,12 @@ class Main extends React.Component {
             rotation={0}>
             {
               (fill) => (
-                <Text style={styles.percent}>
-                  {percent}%
-                </Text>
+                <View style={{alignItems:'center'}}>
+                  <Text style={styles.percent}>
+                    {percent}%
+                  </Text>
+                  <Text style={styles.percentText}>Of your daily goal reached</Text>
+                </View>
               )
             }
           </AnimatedCircularProgress>
@@ -216,6 +219,11 @@ const styles = StyleSheet.create({
   percent:{
     color:'rgba(0,0,0,0.6)',
     fontSize:50
+  },
+  percentText:{
+    fontSize:12,
+    fontFamily:'openSans',
+    color:'rgba(0,0,0,0.5)'
   },
   snapchatYellow:{
     backgroundColor:'rgb(255,252,0)', 

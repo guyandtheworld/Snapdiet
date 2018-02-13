@@ -175,27 +175,115 @@ class Addcalorie extends React.Component{
         }
     }
 
+    addQty=(item) => {
+        for(i in this.state.chosenFoods){
+            if(this.state.chosenFoods[i]==item){
+                //Calorie increment
+                let arr=this.state.chosenCalories;
+                arr[i]+=this.state.foodValues[this.state.foodNames.indexOf(item)];
+                this.setState({
+                    chosenCalories:arr
+                },() => {
+                    //Recalculate total
+                    let total=0;
+                    for(i in this.state.chosenCalories){
+                        total+=this.state.chosenCalories[i];
+                    }
+                    if(total==0){
+                        this.setState({
+                            totalCalorie:0,
+                            disableAddButton:true
+                        });
+                    }
+                    else{
+                        this.setState({
+                            totalCalorie:total
+                        });
+                    }
+                });
+            }
+        }
+    }
+
+    removeQty=(item) => {
+        for(i in this.state.chosenFoods){
+            if(this.state.chosenFoods[i]==item){
+                //Calorie decrement
+                let arr=this.state.chosenCalories;
+                if(arr[i]-this.state.foodValues[this.state.foodNames.indexOf(item)]>0){
+                    arr[i]-=this.state.foodValues[this.state.foodNames.indexOf(item)];
+                    this.setState({
+                        chosenCalories:arr
+                    },() => {
+                        //Recalculate total
+                        let total=0;
+                        for(i in this.state.chosenCalories){
+                            total+=this.state.chosenCalories[i];
+                        }
+                        if(total==0){
+                            this.setState({
+                                totalCalorie:0,
+                                disableAddButton:true
+                            });
+                        }
+                        else{
+                            this.setState({
+                                totalCalorie:total
+                            });
+                        }
+                    });
+                }
+            }
+        }
+    }
+
     render(){
         const chosenFoods=this.state.chosenFoods.map((food) => {
-            return(
-                    <Text style={{color:'rgba(0,0,0,0.87)',fontFamily:'openSans'}}>{food}</Text>
+            return( <View>
+                        <View style={styles.foodCard}>
+                            <Text style={{color:'rgba(0,0,0,0.87)',fontFamily:'openSans'}}>{food}</Text>
+                        </View>
+                        <View style={{height:5}}/>
+                    </View>
             );
         });
 
         const chosenCalories=this.state.chosenCalories.map((calorie) => {
-            return(
-                    <Text style={{color:'rgba(0,0,0,0.87)', fontFamily:'openSans-bold'}}>{calorie}</Text>
+            return( <View>
+                        <View style={styles.foodCard}>
+                            <Text style={{color:'rgba(0,0,0,0.87)', fontFamily:'openSans-bold'}}>{calorie}</Text>
+                        </View>
+                        <View style={{height:5}}/>
+                    </View>
             );
         });
 
         const removeButtons=this.state.chosenFoods.map((food) => {
-            return(
-                    <TouchableOpacity onPress={() => {this.removeItem(food)}}>
-                        <View style={styles.removeButton}>
-                            <Text style={{fontSize:12, color:'white'}}>X</Text>
+                return( 
+                    <View>
+                        <View style={[{flexDirection:'row', paddingRight:10, alignItems:'center'}, styles.foodCard]}>
+                            <TouchableOpacity onPress={() => {this.addQty(food)}}>
+                                <View style={[styles.buttons,{backgroundColor:'rgb(46,204,113)'}]}>
+                                    <Icon style={{fontSize:14, color:'white'}} name='add'/>
+                                </View>
+                            </TouchableOpacity>
+
+                            <View style={{width:5}}/>
+                            <TouchableOpacity onPress={() => {this.removeQty(food)}}>
+                                <View style={[styles.buttons,{backgroundColor:'rgb(52,152,219)'}]}>
+                                <Icon style={{fontSize:14, color:'white'}} name='remove'/>
+                                </View>
+                            </TouchableOpacity>
+
+                            <View style={{width:5}}/>
+                            <TouchableOpacity onPress={() => {this.removeItem(food)}}>
+                                <View style={[styles.buttons,{backgroundColor:'rgb(231,76,60)'}]}>
+                                    <Icon style={{fontSize:14, color:'white'}} name='close'/>
+                                </View>
+                            </TouchableOpacity>
                         </View>
-                        <View style={{height:7}}/>
-                    </TouchableOpacity>
+                        <View style={{height:5}}/>
+                    </View>
             );
         });
 
@@ -239,9 +327,9 @@ class Addcalorie extends React.Component{
                     :null}
                     </Form>*/}
                 <View style={{height:20}}/>
-
+                {(this.state.chosenFoods.length>0)?
                 <Grid>
-                    <Col size={45}>
+                    <Col size={40}>
                         <Row size={8}>
                             <Text style={{fontFamily:'openSans-bold'}}>Food</Text>
                         </Row>
@@ -249,7 +337,7 @@ class Addcalorie extends React.Component{
                             {chosenFoods}
                         </Row>
                     </Col>
-                    <Col size={45}>
+                    <Col size={33}>
                         <Row size={8}>
                             <Text style={{fontFamily:'openSans-bold'}}>Calorie</Text>
                         </Row>
@@ -257,13 +345,14 @@ class Addcalorie extends React.Component{
                             {chosenCalories}
                         </Row>
                     </Col>
-                    <Col size={10}>
+                    <Col size={27}>
                          <Row size={8}/>
                         <Row size={92} style={{flexDirection:'column'}}>
                             {removeButtons}
                         </Row>
                     </Col>
                 </Grid>
+                :null}
 
                 <View>
                     <Button disabled={this.state.disableAddButton} onPress={() => {this.addCalories()}} style={{marginTop:'10%'}}><Text>Add</Text></Button>
@@ -287,19 +376,32 @@ const styles=StyleSheet.create({
         position:'absolute',
         zIndex:101,
         top:60,
-        left:20,
+        left:10,
         width:'100%',
-        backgroundColor:'rgba(255,255,255,1.0)'
+        backgroundColor:'rgb(240,240,240)',
+        shadowColor:'black',
+        elevation: 10,    
     },
     listItem:{
         width:'100%',
         height:40,
         justifyContent:'center',
+        paddingLeft:10
     },
-    removeButton:{
-        backgroundColor:'red',
-        borderRadius:100,
-        alignItems:'center'
+    buttons:{
+        width:25,
+        height:20,
+        borderRadius:10,
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    foodCard:{
+        backgroundColor:'rgb(255,243,224)',
+        height:40,
+        shadowColor:'black',
+        elevation:1,
+        justifyContent:'center',
+        paddingLeft:10
     }
   });
   
