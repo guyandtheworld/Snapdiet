@@ -51,7 +51,8 @@ export default class Sidebar extends React.Component {
 const styles=StyleSheet.create({
     sideBarText:{
         fontSize:18,
-        paddingLeft:20
+        paddingLeft:20,
+        fontFamily:'openSans'
     },
     sideBarView:{
         width:'100%',

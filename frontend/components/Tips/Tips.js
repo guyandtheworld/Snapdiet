@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
   tip: {
   	fontSize: 17,
   	justifyContent: 'center', 
-  	flex: 6,
+		flex: 6,
+		fontFamily:'openSans'
   }
 
 });
