@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, StyleSheet, Button, ScrollView, AsyncStorage, ToastAndroid} from 'react-native';
+import {View, StyleSheet, Button, ScrollView, AsyncStorage, ToastAndroid, StatusBar, TouchableHighlight} from 'react-native';
 import {Text} from 'native-base';
 import {connect} from 'react-redux';
 
@@ -13,7 +13,7 @@ var Gender = t.enums({
 });
 
 var LifeStyles = t.enums({
-	A: 'Sedentary',
+	A: 'Very Less',
 	B: 'Lightly Active',
 	C: 'Moderately Active',
 	D: 'Very Active',
@@ -34,14 +34,15 @@ const options = {
 			error: "Age is required",
 		},
 		height: {
-			label: "Height(in cm)",
+			label: "Height(in CM)",
 			error: "Height is required",
 		},
 		weight: {
-			label: "Weight(in Kgs)",
+			label: "Weight(in KG)",
 			error: "Weight is required",
 		},
 		gender: {
+			label: "Biological Gender",
 			error: "Please select a gender",
 		},
 		lifestyle: {
@@ -149,6 +150,7 @@ class GetInfo extends React.Component {
 	render() {
 		return(
 			<View style={styles.container}>
+
 				<ScrollView showsVerticalScrollIndicator={false} keyboardDismissMode='on-drag'>
 						<Form 
 							ref={c => this._form = c} 
@@ -156,8 +158,13 @@ class GetInfo extends React.Component {
 							options={options} 
 							value={this.props.userInfo}
 						/> 
-						<Button title="Save" onPress={this.handleSubmit} />
+
+						<TouchableHighlight style={styles.button} onPress={this.handleSubmit} underlayColor='#ff6a6a'>
+				          <Text style={styles.buttonText}>SAVE</Text>
+				        </TouchableHighlight>
+
 				</ScrollView>
+				
 			</View>			
 		);
 	}
@@ -165,11 +172,24 @@ class GetInfo extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-		minHeight:'100%',
+	minHeight:'100%',
     justifyContent: 'center',
-    marginTop: 10,
-		padding: 20,
-    backgroundColor: 'rgb(255,252,0)',
+	padding: 20,
+  },
+  button: {
+    height: 36,
+    backgroundColor: '#ff5a5a',
+    borderColor: '#ff5a5a',
+    borderWidth: 1,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignSelf: 'stretch',
+    justifyContent: 'center'
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center'
   },
 });
 

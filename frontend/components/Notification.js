@@ -18,10 +18,11 @@ class Notif extends React.Component {
 
 	componentDidMount() {
 		AppState.addEventListener('change', this.putNotif);
+		Notifications.dismissAllNotificationsAsync();
 	}
 
   	componentWillUnmount() {
-    	AppState.removeEventListener('change');
+    	AppState.removeEventListener('change', this.putNotif);
   	}
 
 	putNotif(){
@@ -37,8 +38,11 @@ class Notif extends React.Component {
 			}
 		}
 		console.log(AppState.currentState);
-		if (AppState.currentState == 'background')
+		if (AppState.currentState == 'background') {
+			Notifications.dismissAllNotificationsAsync();
 			Notifications.presentLocalNotificationAsync(localNotification);
+		}
+
 	}
 	
 
