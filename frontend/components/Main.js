@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState} from 'react-native';
+import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState, Image} from 'react-native';
 import {Picker, Text, Button, Form, Item, Label, Input, Icon, Fab} from 'native-base';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import foodData from './FoodCalorie.json';
@@ -167,12 +167,15 @@ class Main extends React.Component {
     return (
       <View> 
         
-        <View style={styles.container}>      
+        <View style={styles.container}> 
+
+          <Tips />
+     
           <AnimatedCircularProgress
             size={225}
             width={13}
             fill={percent}
-            tintColor={(percent<100)?'rgb(77,194,71)':'rgb(255,0,0)'}
+            tintColor={(percent<100)?'#b166ae':'rgb(255,0,0)'}
             onAnimationComplete={() => {  }}
             backgroundColor="rgba(125,160,175,0.6)"
             rotation={0}>
@@ -188,15 +191,15 @@ class Main extends React.Component {
             }
           </AnimatedCircularProgress>
           <View style={{height:18}}/>
-          
-          <Tips />
 
           <View style={{height:70,justifyContent:'center',alignItems:'center'}}>
-          <TouchableNativeFeedback>
-          <Button style={styles.snapchatYellow} onPress={() => {this.props.navigation.navigate('Calorie')}}>
-            <Icon style={{color:'black'}} name='create'/>
-          </Button>
-          </TouchableNativeFeedback>
+
+            <TouchableNativeFeedback>
+              <Button style={styles.snapchatYellow} onPress={() => {this.props.navigation.navigate('Calorie')}} bordered danger>
+                <Icon style={{color:'black'}} name='create'/> 
+              </Button>
+            </TouchableNativeFeedback>
+
           </View>
           <Fab style={styles.fabDesign} onPress={() => {this.props.navigation.navigate('Addcalorie')}} position='bottomRight'>
               <Icon style={{color:'black'}} name='add'/>
@@ -226,10 +229,10 @@ const styles = StyleSheet.create({
     color:'rgba(0,0,0,0.5)'
   },
   snapchatYellow:{
-    backgroundColor:'rgb(255,252,0)', 
+    backgroundColor:'white',
   },
   fabDesign: {
-    backgroundColor:'rgb(255,252,0)',
+    backgroundColor:'#ff5a5a',
     width: 60,   
     height: 60,
     borderRadius: 40,

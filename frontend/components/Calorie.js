@@ -62,9 +62,9 @@ class Calorie extends React.Component{
             <KeyboardAvoidingView behavior='padding' >                
 
                 <View style = {styles.container}>
-                    <Text style = {styles.header} > Calories consumed: </Text>
+                    <Text style = {styles.header} > Calories consumed </Text>
                     <Text style = {[styles.currentCal,{color:this.props.currentColor}]} > {this.props.currentCalorie} </Text>
-                    <Text style = {styles.header} > Daily Calorie Goal: </Text>
+                    <Text style = {styles.header} > Daily Calorie Goal </Text>
                     <Text style = {styles.goalCal}> {this.props.dailyGoal} </Text>
 
                     <View style = {styles.buttonContainer}>
