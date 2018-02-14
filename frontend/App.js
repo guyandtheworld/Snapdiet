@@ -1,6 +1,6 @@
 import * as Expo from 'expo';
 import React from 'react';
-import {StatusBar, Platform, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {StatusBar, Platform, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {Text, Icon} from 'native-base';
 import {Provider} from 'react-redux';
 import {StackNavigator, DrawerNavigator} from 'react-navigation';
@@ -30,15 +30,16 @@ const Stacknavigation=StackNavigator(
       screen:Main,
       navigationOptions:({navigation}) => ({ 
         headerStyle:{
-          backgroundColor:'rgb(255,252,0)', 
+          backgroundColor:'#66b169', 
         },
         headerTitleStyle: {
           alignSelf: 'center',
           fontSize: 28,
-          color: 'black',
+          color:'rgba(0,0,0,0.7)',
         },
-        title:'SnapDiet',
-        // headerLeft:<DrawerButton navigation={navigation}/>
+        title: 'SnapDiet',  
+        //<View> <Image source={require("/components/Resources/Icons/flour.png")} resizeMode="contain" /> </View>
+        //headerLeft:<DrawerButton navigation={navigation}/>
       })
     },
     Calorie:{
@@ -46,7 +47,8 @@ const Stacknavigation=StackNavigator(
       navigationOptions:({navigation}) => ({
         title:'Calorie',
         headerStyle:{
-          backgroundColor:'rgb(255,252,0)'
+          backgroundColor:'#66b169',
+          color:'rgba(0,0,0,0.7)',
         },
       })
     },
@@ -55,10 +57,21 @@ const Stacknavigation=StackNavigator(
       navigationOptions:({navigation}) => ({
         title:'Add Food',
         headerStyle:{
-          backgroundColor:'rgb(255,252,0)'
+          backgroundColor:'#66b169',
+          color:'rgba(0,0,0,0.7)',
         },
       })
-    }
+    },
+    GetInfo:{
+      screen:GetInfo,
+      navigationOptions:({navigation}) => ({
+        title:'Personal Details',
+        headerStyle:{
+          backgroundColor:'#66b169',
+          color:'rgba(0,0,0,0.7)',
+        },
+      })
+    },
   }
 );
 
