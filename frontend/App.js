@@ -34,10 +34,10 @@ const Stacknavigation=StackNavigator(
         },
         headerTitleStyle: {
           alignSelf: 'center',
-          fontSize: 28,
+          fontSize: 26,
           color:'rgba(0,0,0,0.7)',
         },
-        title: 'SnapDiet',  
+        title: 'SnapDiet',
         //<View> <Image source={require("/components/Resources/Icons/flour.png")} resizeMode="contain" /> </View>
         //headerLeft:<DrawerButton navigation={navigation}/>
       })

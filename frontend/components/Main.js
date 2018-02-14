@@ -168,8 +168,9 @@ class Main extends React.Component {
       <View> 
         
         <View style={styles.container}> 
-
+          
           <Tips />
+          <View style={{height:50}}/>
      
           <AnimatedCircularProgress
             size={225}
@@ -196,7 +197,7 @@ class Main extends React.Component {
 
             <TouchableNativeFeedback>
               <Button style={styles.snapchatYellow} onPress={() => {this.props.navigation.navigate('Calorie')}} bordered danger>
-                <Icon style={{color:'black'}} name='create'/> 
+                <Text style={{color:'black'}}>Calorie</Text><Icon style={{color:'black'}} name='create'/> 
               </Button>
             </TouchableNativeFeedback>
 
