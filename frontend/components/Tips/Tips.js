@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, AppState, TouchableHighlight, Text } from 'react-native';
+import { View, StyleSheet, AppState} from 'react-native';
+import {Text} from 'native-base';
 
 import tips from './HealthTip.json';
 
@@ -31,22 +32,19 @@ class Tips extends React.Component {
 	render() {
 
 		return(
-				<View>
-                        <TouchableHighlight style={styles.card}>
-                            <Text >Tip: {this.state.tip}</Text>
-        				</TouchableHighlight>
-        		</View>
+					<View style={styles.card}>
+						<Text style={{fontFamily:'openSans', fontSize:14}}>Tip: {this.state.tip}</Text>
+					</View>
 		);
 	}
 } 
 
 const styles = StyleSheet.create({
-  
   card: {
-	borderWidth: 0.1,
-	padding: 10,
-	backgroundColor: '#DDDDDD',
-	justifyContent: 'center',
+		backgroundColor:'rgb(255,243,224)',
+		borderRadius: 7,
+		padding: 10,
+		justifyContent: 'center',
   },
 
 });

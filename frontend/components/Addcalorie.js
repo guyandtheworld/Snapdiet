@@ -355,7 +355,7 @@ class Addcalorie extends React.Component{
                 :null}
 
                 <View>
-                    <Button disabled={this.state.disableAddButton} onPress={() => {this.addCalories()}} style={{marginTop:'10%'}}><Text>Add</Text></Button>
+                    <Button disabled={this.state.disableAddButton} onPress={() => {this.addCalories()}} style={{marginTop:'10%'}}><Text style={{color:'white'}}>Add</Text></Button>
                 </View>
             </View>
         );
