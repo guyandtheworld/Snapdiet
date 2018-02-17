@@ -1,6 +1,6 @@
 import React from 'react';
-import {StyleSheet, View, TouchableNativeFeedback, Switch} from 'react-native';
-import {Container, Text} from 'native-base';
+import {StyleSheet, View, TouchableNativeFeedback, Image, ImageBackground} from 'react-native';
+import {Container, Text, H2, Thumbnail} from 'native-base';
 import {Col, Row, Grid} from 'react-native-easy-grid';
 import Notif from './Notification';
 import Login from './Login';
@@ -21,7 +21,14 @@ export default class Sidebar extends React.Component {
         return(
             <Container>
                 <Grid>
-                    <Row size={5}/>
+                    <Row size={30}>    
+                        <ImageBackground source={{uri:'https://drop.ndtv.com/albums/COOKS/pasta-vegetarian/pastaveg_640x480.jpg'}} style={{width:'100%'}}>
+                            <View style={styles.coverContainer}>
+                                <Thumbnail large source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsAUelg7yg0mepGMf-N93hh6E9XrLnKwsKa4YEQ6swhDknk4F9eQ'}} />
+                                <Text style={{color:'white', fontSize:38, fontWeight:'800'}}>SnapDiet</Text>
+                            </View>
+                        </ImageBackground>
+                    </Row>
                     <Row size={10}>
                         <TouchableNativeFeedback onPress={this.goToLogin}>
                             <View style={styles.sideBarView}>
@@ -41,7 +48,7 @@ export default class Sidebar extends React.Component {
                             <Notif/>
                         </TouchableNativeFeedback>
                     </Row>
-                    <Row size={70}/>
+                    <Row size={40}/>
                 </Grid>
             </Container>
         );
@@ -57,5 +64,11 @@ const styles=StyleSheet.create({
     sideBarView:{
         width:'100%',
         justifyContent:'center'
+    },
+    coverContainer:{
+        height:'100%',
+        justifyContent:'flex-end',
+        alignItems:'center',
+        backgroundColor:'rgba(0,0,0,0.2)'
     }
 });
