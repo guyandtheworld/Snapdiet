@@ -57,6 +57,9 @@ const options = {
 class GetInfo extends React.Component {
 
 	handleSubmit = () => {
+
+		AsyncStorage.setItem('SNAPDIET_FIRSTLAUNCH','1');
+
 	  const value = this._form.getValue();
 		if(value!=null){
 				this.props.update('updateInfo',{userInfo:value});
