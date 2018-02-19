@@ -36,10 +36,11 @@ const Stacknavigation=StackNavigator(
           alignSelf: 'center',
           fontSize: 26,
           color:'rgba(0,0,0,0.7)',
+          marginRight:70
         },
         title: 'SnapDiet',
         //<View> <Image source={require("/components/Resources/Icons/flour.png")} resizeMode="contain" /> </View>
-        //headerLeft:<DrawerButton navigation={navigation}/>
+        headerLeft:<DrawerButton navigation={navigation}/>
       })
     },
     Calorie:{
@@ -99,7 +100,8 @@ export default class App extends React.Component {
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
       Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf"),
       'openSans':require('./OpenSans-Regular.ttf'),
-      'openSans-bold':require('./OpenSans-Bold.ttf')
+      'openSans-bold':require('./OpenSans-Bold.ttf'),
+      'Arial':require('./OpenSans-Bold.ttf')
     });
     this.setState({fontsAreLoaded: true});
   }

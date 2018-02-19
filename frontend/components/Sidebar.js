@@ -16,15 +16,16 @@ export default class Sidebar extends React.Component {
     editInfo=() => {
         this.props.navigation.navigate('GetInfo');
     }
-
     render(){
+        cover = require('./sidebar_cover.jpg');
+        pic = require('./sidebar_pic.png');
         return(
             <Container>
                 <Grid>
                     <Row size={30}>    
-                        <ImageBackground source={{uri:'https://drop.ndtv.com/albums/COOKS/pasta-vegetarian/pastaveg_640x480.jpg'}} style={{width:'100%'}}>
+                        <ImageBackground source={cover} style={{width:'100%'}}>
                             <View style={styles.coverContainer}>
-                                <Thumbnail large source={{uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsAUelg7yg0mepGMf-N93hh6E9XrLnKwsKa4YEQ6swhDknk4F9eQ'}} />
+                                <Thumbnail large source={pic} />
                                 <Text style={{color:'white', fontSize:38, fontWeight:'800'}}>SnapDiet</Text>
                             </View>
                         </ImageBackground>
