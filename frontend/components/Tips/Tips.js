@@ -1,9 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, AppState} from 'react-native';
+import { View, StyleSheet} from 'react-native';
 import {Text} from 'native-base';
-
 import tips from './HealthTip.json';
-
 
 var generalTips = tips["General"];
 
@@ -46,8 +44,6 @@ const styles = StyleSheet.create({
 		padding: 10,
 		justifyContent: 'center',
   },
-
 });
-
 
 export default Tips;

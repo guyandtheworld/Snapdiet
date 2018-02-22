@@ -1,74 +1,47 @@
 import React, { Component } from 'react';
-import {View, TextInput, Switch, Picker, StyleSheet, Button, ScrollView, AsyncStorage, ToastAndroid, StatusBar, TouchableHighlight} from 'react-native';
+import {View, TextInput, Switch, Picker, StyleSheet, ScrollView, AsyncStorage, ToastAndroid, TouchableHighlight} from 'react-native';
 import {Text} from 'native-base';
 import {connect} from 'react-redux';
 
 
 class GetInfo extends React.Component {
 
-
 	constructor(props) {
 	  super(props);
 	
 	  this.state = {
-	  	age: 18,
-	  	weight: 50,
-	  	height: 150,
-	  	lifeStyles: 'A',
-	  	gender: 'M',
+	  	userInfo:{
+				age: '',
+				weight: '',
+				height: '',
+				lifeStyles: 'A',
+				gender: 'M',
+			},
 	  	imperial: false,
 	  	wUnits: "KG",
 	  	hUnits: "CM",
 	  };
 	}
 
-	handleSubmit = () => {
-
-
-		this.props.update('updateInfo',{userInfo:value});
-		AsyncStorage.setItem('SNAPDIET_FIRSTLAUNCH','1');
-
-	  const value = this._form.getValue();
-		if(value!=null){
-				this.props.update('updateInfo',{userInfo:value});
-		}
-
-		ToastAndroid.show('Information saved!', ToastAndroid.LONG);
-		this.props.navigation.goBack();
-	}
-
-	componentDidUpdate(){
-		storeUserInfoOffline = async () => {
-			try{
-			  await AsyncStorage.setItem('SNAPDIET_USERINFO',JSON.stringify(this.props.userInfo));
-			}
-			catch(e){
-			  console.log(e);
-			}
-		  }
-		storeUserInfoOffline();
-
-		calculateDailyGoal = () => {
+		handleSubmit = () => {
 			//Converting height from cm to inches and weight from kg to pounds
 			if (this.state.imperial == false) {
-				height = this.state.height * 0.393701;
-				weight = this.state.weight * 2.20462;
+				height = parseInt(this.state.userInfo.height) * 0.393701;
+				weight = parseInt(this.state.userInfo.weight) * 2.20462;
 			}
 			else {
-				height = this.state.height;
-				weight = this.state.weight ;
+				height = parseInt(this.state.userInfo.height);
+				weight = parseInt(this.state.userInfo.weight) ;
 			}
-			age = this.state.age;
-			lifeStyle = this.state.lifeStyles;
+			age = parseInt(this.state.userInfo.age);
+			lifeStyle = this.state.userInfo.lifeStyles;
 			activityLevel = 1.2;
 			dailyGoal = 0;
-	
-			if (this.props.userInfo.gender === 'M') {
+
+			if (this.state.userInfo.gender === 'M')
 					dailyGoal = (12.7*height) + (6.23*weight) - (6.8*age) + 66;
-			}
-			else {
+			else
 					dailyGoal = (4.7*height) + (4.35*weight) - (4.7*age) + 655;
-			}
 			
 			switch(lifeStyle) {
 					case 'A': 
@@ -87,41 +60,43 @@ class GetInfo extends React.Component {
 							dailyGoal *= 1.9;
 							break;
 			}
+			console.log(dailyGoal);
 			dailyGoal = Math.floor(dailyGoal);
 			this.props.update('updateGoal',{dailyGoal:dailyGoal});
-			storeDailyGoalOffline = async () => {
-				try{
-						await AsyncStorage.setItem('SNAPDIET_DAILYGOAL',dailyGoal.toString());
-				}
-				catch(e){
-						console.log(e);
-				}
-			}
-			storeDailyGoalOffline();
-		}
+			AsyncStorage.setItem('SNAPDIET_DAILYGOAL',dailyGoal.toString());
 
-		calculateDailyGoal();
-	}
+			this.props.update('updateInfo',{userInfo:this.state.userInfo});
+			AsyncStorage.setItem('SNAPDIET_USERINFO',JSON.stringify(this.state.userInfo));
+			AsyncStorage.setItem('SNAPDIET_FIRSTLAUNCH','1');
+			ToastAndroid.show('Information saved!', ToastAndroid.LONG);
+			this.props.navigation.goBack();
+		}
 
 	componentWillMount(){
 		getUserInfoOffline = async () => {
-			try{
-			  await AsyncStorage.getItem('SNAPDIET_USERINFO',(error,data) => {
+			await AsyncStorage.getItem('SNAPDIET_USERINFO',(error,data) => {
 				if(error){
-				  console.log(error);
+					console.log(error);
+					ToastAndroid.show("Error occured.",ToastAndroid.SHORT);
 				}
 				else if(data==null){
-				  console.log("Data does not exist");
+					ToastAndroid.show("Data does not exist",ToastAndroid.SHORT);
 				}
 				else{
-				  this.props.update('updateInfo',{userInfo:JSON.parse(data)});
+					data=JSON.parse(data);
+					this.props.update('updateInfo',{userInfo:data});
+					this.setState({
+						userInfo: Object.assign({},this.state.userInfo,{
+							age:data.age.toString(),
+							height:data.height.toString(),
+							weight:data.weight.toString(),
+							gender:data.gender,
+							lifeStyles:data.lifeStyles
+						})
+					});
 				}
-			  });
-			}
-			catch(e){
-			  console.log(e);
-			}
-		  }
+			});
+		}
 		getUserInfoOffline();
 	}
 
@@ -148,30 +123,33 @@ class GetInfo extends React.Component {
 
 				<ScrollView showsVerticalScrollIndicator={false} keyboardDismissMode='on-drag'>
 						
-						<Text> Age: </Text>
+						<Text style={{fontFamily:'openSans'}}> Age: </Text>
 						<TextInput
 							style={styles.inputBox}
 							keyboardType = 'numeric'
-							onChangeText = {(text) => {}}
+							onChangeText = {(text) => { this.setState({userInfo: Object.assign({},this.state.userInfo,{age:text}) })}}
+							value={this.state.userInfo.age}
 						/>
 
-						<Text> Height (in {this.state.hUnits}): </Text> 
+						<Text style={{fontFamily:'openSans'}}> Height (in {this.state.hUnits}): </Text> 
 						<TextInput
 							style={styles.inputBox}
 							keyboardType = 'numeric'
-							onChangeText = {(text) => {}}
+							onChangeText = {(text) => {this.setState({userInfo: Object.assign({},this.state.userInfo,{height:text}) })}}
+							value={this.state.userInfo.height}
 						/>
 
-						<Text> Weight (in {this.state.wUnits}): </Text> 
+						<Text style={{fontFamily:'openSans'}}> Weight (in {this.state.wUnits}): </Text> 
 						<TextInput
 							style={styles.inputBox}
 							keyboardType = 'numeric'
-							onChangeText = {(text) => {}}
+							onChangeText = {(text) => {this.setState({userInfo: Object.assign({},this.state.userInfo,{weight:text}) })}}
+							value={this.state.userInfo.weight}
 						/>
 
 						<View style={styles.imperialView}>
 
-							<Text> Imperial Units </Text> 
+							<Text style={{fontFamily:'openSans'}}> Imperial Units </Text> 
 							<Switch
 								onValueChange={this.imperialSwitch}
 								value={this.state.imperial}
@@ -179,21 +157,20 @@ class GetInfo extends React.Component {
 
 						</View>
 
-						<Text> Gender: </Text> 
+						<Text style={{fontFamily:'openSans'}}> Gender: </Text> 
 						<Picker
-							selectedValue={this.state.gender}
-							onValueChange={(genderSelected) => {this.setState({gender: genderSelected})}}
+							selectedValue={this.state.userInfo.gender}
+							onValueChange={(genderSelected) => {this.setState({userInfo: Object.assign({},this.state.userInfo,{gender:genderSelected}) })}}
 						>
 
 							<Picker.Item label="Male" value="M" />
 							<Picker.Item label="Female" value="F" />
 
 						</Picker>
-
-						<Text> Lifestyle: </Text> 
+						<Text style={{fontFamily:'openSans'}}> Lifestyle: </Text> 
 						<Picker
-							selectedValue={this.state.lifestyle}
-							onValueChange={(lifestyleSelected) => {this.setState({lifeStyles: lifestyleSelected})}}
+							selectedValue={this.state.userInfo.lifeStyles}
+							onValueChange={(lifestyleSelected) => {this.setState({userInfo: Object.assign({},this.state.userInfo,{lifeStyles:lifestyleSelected})})}}
 						>
 
 							<Picker.Item label="Very Lightly Active" value="A" />
@@ -205,9 +182,9 @@ class GetInfo extends React.Component {
 						</Picker>
 
 
-						<TouchableHighlight style={styles.button} onPress={this.handleSubmit} underlayColor='#ff6a6a'>
+						<TouchableHighlight style={styles.button} onPress={() => this.handleSubmit()} underlayColor='#ff6a6a'>
 				          <Text style={styles.buttonText}>SAVE</Text>
-				        </TouchableHighlight>
+				    </TouchableHighlight>
 
 				</ScrollView>
 				
@@ -218,9 +195,9 @@ class GetInfo extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-	minHeight:'100%',
+		minHeight:'100%',
     justifyContent: 'center',
-	padding: 20,
+		padding: 20,
   },
   button: {
     height: 36,
@@ -233,7 +210,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   buttonText: {
-    fontSize: 18,
+		fontSize: 18,
+		fontFamily:'openSans',
     color: 'white',
     alignSelf: 'center'
   },
