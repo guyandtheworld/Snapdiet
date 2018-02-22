@@ -1,66 +1,30 @@
 import React, { Component } from 'react';
-import {View, StyleSheet, Button, ScrollView, AsyncStorage, ToastAndroid, StatusBar, TouchableHighlight} from 'react-native';
+import {View, TextInput, Switch, Picker, StyleSheet, Button, ScrollView, AsyncStorage, ToastAndroid, StatusBar, TouchableHighlight} from 'react-native';
 import {Text} from 'native-base';
 import {connect} from 'react-redux';
-
-import t from 'tcomb-form-native';
-
-const Form = t.form.Form;
-
-var Gender = t.enums({
-  M: 'Male',
-  F: 'Female'
-});
-
-var LifeStyles = t.enums({
-	A: 'Very Less',
-	B: 'Lightly Active',
-	C: 'Moderately Active',
-	D: 'Very Active',
-	E: 'Extremely Active'
-});
-
-const GetThings = t.struct({
-	age: t.Number,
-	height: t.Number,
-	weight: t.Number,
-	gender: Gender,
-	lifestyle: LifeStyles,	
-});
-
-const options = {
-	fields: {
-		age: {
-			error: "Age is required",
-		},
-		height: {
-			label: "Height(in CM)",
-			error: "Height is required",
-		},
-		weight: {
-			label: "Weight(in KG)",
-			error: "Weight is required",
-		},
-		gender: {
-			label: "Biological Gender",
-			error: "Please select a gender",
-		},
-		lifestyle: {
-			label: "Your Lifestyle & Nature of Work",
-			error: "Please choose an option",
-		},
-
-	},
-};
 
 
 class GetInfo extends React.Component {
 
+
+	constructor(props) {
+	  super(props);
+	
+	  this.state = {
+	  	age: 18,
+	  	weight: 50,
+	  	height: 150,
+	  	lifeStyles: 'A',
+	  	gender: 'M',
+	  	imperial: false,
+	  	wUnits: "KG",
+	  	hUnits: "CM",
+	  };
+	}
+
 	handleSubmit = () => {
-	  const value = this._form.getValue();
-		if(value!=null){
-				this.props.update('updateInfo',{userInfo:value});
-		}
+
+		this.props.update('updateInfo',{userInfo:value});
 		ToastAndroid.show('Information saved!', ToastAndroid.LONG);
 		this.props.navigation.goBack();
 	}
@@ -78,10 +42,16 @@ class GetInfo extends React.Component {
 
 		calculateDailyGoal = () => {
 			//Converting height from cm to inches and weight from kg to pounds
-			height = this.props.userInfo.height * 0.393701;
-			weight = this.props.userInfo.weight * 2.20462;
-			age = this.props.userInfo.age;
-			lifeStyle = this.props.userInfo.lifeStyles;
+			if (this.state.imperial == false) {
+				height = this.state.height * 0.393701;
+				weight = this.state.weight * 2.20462;
+			}
+			else {
+				height = this.state.height;
+				weight = this.state.weight ;
+			}
+			age = this.state.age;
+			lifeStyle = this.state.lifeStyles;
 			activityLevel = 1.2;
 			dailyGoal = 0;
 	
@@ -147,17 +117,85 @@ class GetInfo extends React.Component {
 		getUserInfoOffline();
 	}
 
+	imperialSwitch = () => {
+
+		if (this.state.imperial == true)
+			this.setState({
+				imperial: false,
+				hUnits: "CM",
+				wUnits: "KG",
+			});
+		else
+			this.setState({
+				imperial: true,
+				hUnits: "Ft",
+				wUnits: "Lbs",
+			});
+
+	}
+
 	render() {
 		return(
 			<View style={styles.container}>
 
 				<ScrollView showsVerticalScrollIndicator={false} keyboardDismissMode='on-drag'>
-						<Form 
-							ref={c => this._form = c} 
-							type={GetThings} 
-							options={options} 
-							value={this.props.userInfo}
-						/> 
+						
+						<Text> Age: </Text>
+						<TextInput
+							style={styles.inputBox}
+							keyboardType = 'numeric'
+							onChangeText = {(text) => {}}
+						/>
+
+						<Text> Height (in {this.state.hUnits}): </Text> 
+						<TextInput
+							style={styles.inputBox}
+							keyboardType = 'numeric'
+							onChangeText = {(text) => {}}
+						/>
+
+						<Text> Weight (in {this.state.wUnits}): </Text> 
+						<TextInput
+							style={styles.inputBox}
+							keyboardType = 'numeric'
+							onChangeText = {(text) => {}}
+						/>
+
+						<View style={styles.imperialView}>
+
+							<Text> Imperial Units </Text> 
+							<Switch
+								onValueChange={this.imperialSwitch}
+								value={this.state.imperial}
+							/>
+
+						</View>
+
+						<Text> Gender: </Text> 
+						<Picker
+							selectedValue={this.state.gender}
+							onValueChange={(genderSelected) => {this.setState({gender: genderSelected})}}
+						>
+
+							<Picker.Item label="Male" value="M" />
+							<Picker.Item label="Female" value="F" />
+
+						</Picker>
+
+						<Text> Lifestyle: </Text> 
+						<Picker
+							selectedValue={this.state.lifestyle}
+							onValueChange={(lifestyleSelected) => {this.setState({lifeStyles: lifestyleSelected})}}
+						>
+
+							<Picker.Item label="Very Lightly Active" value="A" />
+							<Picker.Item label="Lightly Active" value="B" />
+							<Picker.Item label="Moderately Active" value="C" />
+							<Picker.Item label="Very Active" value="D" />
+							<Picker.Item label="Extremely Active" value="E" />
+
+						</Picker>
+
 
 						<TouchableHighlight style={styles.button} onPress={this.handleSubmit} underlayColor='#ff6a6a'>
 				          <Text style={styles.buttonText}>SAVE</Text>
@@ -191,6 +229,17 @@ const styles = StyleSheet.create({
     color: 'white',
     alignSelf: 'center'
   },
+  inputBox: {
+  	height: 40, 
+  	marginTop:5,
+  	marginBottom:10,
+  	paddingLeft: 5,
+  },
+  imperialView: {
+  	flexDirection: 'row',
+  	marginTop: 5,
+  	marginBottom: 8,
+  }
 });
 
 export default connect(
@@ -205,3 +254,5 @@ export default connect(
         }
     }
 )(GetInfo);
+
+
