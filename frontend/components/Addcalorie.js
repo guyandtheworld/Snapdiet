@@ -26,6 +26,7 @@ class Addcalorie extends React.Component{
             data:[],
             chosenFoods:[],
             chosenCalories:[],
+            chosenFoodMultiplier:[],
             totalCalorie:0
         };
     }
@@ -153,6 +154,12 @@ class Addcalorie extends React.Component{
                     this.setState({
                         chosenCalories:arr
                     },() => {
+                        //remove multiplier
+                        arr=this.state.chosenFoodMultiplier;
+                        arr.splice(i,1);
+                        this.setState({
+                            chosenFoodMultiplier:arr
+                        });
                         //Recalculate total
                         let total=0;
                         for(i in this.state.chosenCalories){
@@ -184,6 +191,15 @@ class Addcalorie extends React.Component{
                 this.setState({
                     chosenCalories:arr
                 },() => {
+                    //Update multiplier
+                    arr=this.state.chosenFoodMultiplier;
+                    if(arr[this.state.chosenFoods.indexOf(item)])
+                        arr[this.state.chosenFoods.indexOf(item)]+=1;
+                    else
+                        arr.push(1);
+                    this.setState({
+                        chosenFoodMultiplier:arr
+                    });
                     //Recalculate total
                     let total=0;
                     for(i in this.state.chosenCalories){
@@ -215,6 +231,15 @@ class Addcalorie extends React.Component{
                     this.setState({
                         chosenCalories:arr
                     },() => {
+                        //Update multiplier
+                        arr=this.state.chosenFoodMultiplier;
+                        if(arr[this.state.chosenFoods.indexOf(item)]-1>0)
+                            arr[this.state.chosenFoods.indexOf(item)]-=1;
+                        else if(arr[this.state.chosenFoods.indexOf(item)]-1==0)
+                            arr.splice(this.state.chosenFoods.indexOf(item),1);
+                        this.setState({
+                            chosenFoodMultiplier:arr
+                        });
                         //Recalculate total
                         let total=0;
                         for(i in this.state.chosenCalories){
@@ -242,6 +267,13 @@ class Addcalorie extends React.Component{
             return( <View>
                         <View style={styles.foodCard}>
                             <Text style={{color:'rgba(0,0,0,0.87)',fontFamily:'openSans'}}>{food}</Text>
+                            {
+                            (this.state.chosenFoodMultiplier.length-1>=this.state.chosenFoods.indexOf(food))?
+                            <Text style={{color:'rgba(0,0,0,0.5)',fontFamily:'openSans', fontSize:12}}>
+                                (x{this.state.chosenFoodMultiplier[this.state.chosenFoods.indexOf(food)]})
+                            </Text>
+                            :null
+                            }
                         </View>
                         <View style={{height:5}}/>
                     </View>
@@ -306,26 +338,6 @@ class Addcalorie extends React.Component{
                             );
                         }}
                     />
-                {/*<Form>
-                    <Picker
-                        mode="dialog"
-                        selectedValue={this.state.selectedItem}
-                        onValueChange={this.displaySubMenu}
-                        style={{color:'black', width:250}}
-                        >
-                        {this.state.items}
-                    </Picker>
-                    {this.state.displaySubItems?
-                        <Picker
-                            mode="dialog"
-                            selectedValue={this.state.selectedSubItem}
-                            onValueChange={this.selectSubMenu}
-                            style={{color:'black',width:250}}
-                            >
-                            {this.state.subItems}
-                        </Picker>
-                    :null}
-                    </Form>*/}
                 <View style={{height:20}}/>
                 {(this.state.chosenFoods.length>0)?
                 <Grid>
@@ -337,7 +349,7 @@ class Addcalorie extends React.Component{
                             {chosenFoods}
                         </Row>
                     </Col>
-                    <Col size={33}>
+                    <Col size={27}>
                         <Row size={8}>
                             <Text style={{fontFamily:'openSans-bold'}}>Calorie</Text>
                         </Row>
@@ -345,7 +357,7 @@ class Addcalorie extends React.Component{
                             {chosenCalories}
                         </Row>
                     </Col>
-                    <Col size={27}>
+                    <Col size={33}>
                          <Row size={8}/>
                         <Row size={92} style={{flexDirection:'column'}}>
                             {removeButtons}
@@ -396,11 +408,12 @@ const styles=StyleSheet.create({
         justifyContent:'center'
     },
     foodCard:{
+        flexDirection:'row',
         backgroundColor:'rgb(255,243,224)',
         height:40,
         shadowColor:'black',
         elevation:1,
-        justifyContent:'center',
+        alignItems:'center',
         paddingLeft:10
     }
   });

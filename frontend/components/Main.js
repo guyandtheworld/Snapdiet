@@ -114,23 +114,14 @@ class Main extends React.Component {
       getTimeOffline(); 
     
       getFirstLaunchOffline = async () => {
-        try{
-            await AsyncStorage.getItem('SNAPDIET_FIRSTLAUNCH_TEST',(error, data) => {
-              if(error){
-                console.log(error);
-              }
-              else if(data==null){
-                firstLaunchDone = async () => {
-                  await AsyncStorage.setItem('SNAPDIET_FIRSTLAUNCH_TEST','1');
-                }
-                firstLaunchDone();
-                this.props.navigation.navigate('FirstScreen');
-              }
-            });
-          }
-          catch(e){
-            console.log(e);
-          }
+          await AsyncStorage.getItem('SNAPDIET_FIRSTLAUNCH',(error, data) => {
+            if(error){
+              console.log(error);
+            }
+            else if(data==null){
+              this.props.navigation.navigate('FirstScreen');
+            }
+          });
         }
       getFirstLaunchOffline();
     }
