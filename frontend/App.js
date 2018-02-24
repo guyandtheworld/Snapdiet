@@ -12,6 +12,7 @@ import GetInfo from './components/getInfo';
 import Login from './components/Login';
 import Sidebar from './components/Sidebar';
 import Addcalorie from './components/Addcalorie';
+import History from './components/History';
 import FirstScreen from './components/FirstScreen';
 
 const DrawerButton = (props) => {
@@ -73,6 +74,16 @@ const Stacknavigation=StackNavigator(
         },
       })
     },
+    History:{
+      screen:History,
+      navigationOptions:({navigation}) => ({
+        title:'Your History',
+        headerStyle:{
+          backgroundColor:'#66b169',
+          color:'rgba(0,0,0,0.7)',
+        },
+      })
+    }
   }
 );
 

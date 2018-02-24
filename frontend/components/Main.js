@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState, Image} from 'react-native';
+import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState, Image, TouchableWithoutFeedback} from 'react-native';
 import {Picker, Text, Button, Form, Item, Label, Input, Icon, Fab} from 'native-base';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import foodData from './FoodCalorie.json';
@@ -162,26 +162,27 @@ class Main extends React.Component {
           
           <Tips />
           <View style={{height:35}}/>
-     
-          <AnimatedCircularProgress
-            size={225}
-            width={13}
-            fill={percent}
-            tintColor={(percent<100)?'#b166ae':'rgb(255,0,0)'}
-            onAnimationComplete={() => {  }}
-            backgroundColor="rgba(125,160,175,0.6)"
-            rotation={0}>
-            {
-              (fill) => (
-                <View style={{alignItems:'center'}}>
-                  <Text style={styles.percent}>
-                    {percent}%
-                  </Text>
-                  <Text style={styles.percentText}>Of your daily goal reached</Text>
-                </View>
-              )
-            }
-          </AnimatedCircularProgress>
+          
+            <AnimatedCircularProgress
+              size={225}
+              width={13}
+              fill={percent}
+              tintColor={(percent<100)?'#b166ae':'rgb(255,0,0)'}
+              onAnimationComplete={() => {  }}
+              backgroundColor="rgba(125,160,175,0.6)"
+              rotation={0}>
+              {
+                (fill) => (
+                  <View style={{alignItems:'center'}}>
+                    <Text style={styles.percent}>
+                      {percent}%
+                    </Text>
+                    <Text style={styles.percentText}>Of your daily goal reached</Text>
+                  </View>
+                )
+              }
+            </AnimatedCircularProgress>
+
           <View style={{height:18}}/>
 
           <View style={{height:70,justifyContent:'center',alignItems:'center'}}>
@@ -192,6 +193,11 @@ class Main extends React.Component {
               </Button>
             </TouchableNativeFeedback>
 
+            <TouchableNativeFeedback>
+              <Button style={styles.snapchatYellow} onPress={() => this.props.navigation.navigate('History')} bordered danger>
+                  <Text style={{color:'black'}}>History</Text>
+              </Button>
+            </TouchableNativeFeedback>
           </View>
           <Fab style={styles.fabDesign} onPress={() => {this.props.navigation.navigate('Addcalorie')}} position='bottomRight'>
               <Icon style={{color:'black'}} name='add'/>

@@ -224,7 +224,7 @@ class Addcalorie extends React.Component{
                             {
                             (this.state.chosenFoodMultiplier.length-1>=this.state.chosenFoods.indexOf(food))?
                             <Text style={{color:'rgba(0,0,0,0.5)',fontFamily:'openSans', fontSize:12}}>
-                                (x{this.state.chosenFoodMultiplier[this.state.chosenFoods.indexOf(food)]})
+                                (x{this.state.chosenFoodMultiplier[this.state.chosenFoods.indexOf(food)]+1})
                             </Text>
                             :null
                             }
