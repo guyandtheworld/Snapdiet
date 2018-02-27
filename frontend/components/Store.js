@@ -13,6 +13,12 @@ const reducer = (state, action) => {
     return Object.assign({}, state, {currentColor: action.payload.currentColor})
   } else if (action.type == 'updateInfo') {
     return Object.assign({}, state, {userInfo: action.payload.userInfo})
+  } else if (action.type == 'updateHistoryConsumed') {
+    return Object.assign({}, state, {actualCalories: action.payload.consumed})
+  } else if (action.type == 'updateHistoryGoals') {
+    return Object.assign({}, state, {goalCalories: action.payload.goals})
+  } else if (action.type == 'updateHistoryDates') {
+    return Object.assign({}, state, {dates: action.payload.dates})
   } else return state
 }
 
@@ -28,5 +34,8 @@ export default createStore(reducer, {
     weight: '',
     gender: '',
     lifestyle: ''
-  }
+  },
+  dates:['0'],
+  actualCalories:[0],
+  goalCalories:[0]
 })
