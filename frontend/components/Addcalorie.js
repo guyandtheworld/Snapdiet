@@ -1,9 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {ScrollView, StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState, FlatList, TextInput, TouchableOpacity} from 'react-native';
-import {Picker, Text, Button, Form, Item, Label, Input, Icon, Fab} from 'native-base';
+import { StyleSheet, View, AsyncStorage, FlatList, TouchableOpacity} from 'react-native';
+import {Text, Button, Input, Item, Icon} from 'native-base';
 import {Grid, Col, Row} from 'react-native-easy-grid';
-import foodData from './FoodCalorie.json';
 import foodInfo from './foodCalorieArrays.json';
 
 class Addcalorie extends React.Component{
@@ -11,15 +10,7 @@ class Addcalorie extends React.Component{
         super(props);
         this.state={
             currentCalorie:0,
-            selectedItem:'',
-            selectedSubItem:'',
-            foodItems:[],
-            foodSubItems:[],
-            items:'',
-            subItems:'',
-            displaySubItems:false,
             disableAddButton:true,
-
             foodNames:[],
             foodValues:[],
             foodNameEntered:'',
@@ -32,21 +23,10 @@ class Addcalorie extends React.Component{
     }
 
     componentWillMount(){
-        for (i in foodData){
-            this.setState({
-                foodItems:this.state.foodItems.push(i)
-            });
-        }
         this.setState({
-            items:this.state.foodItems.map((item) => {
-                return(<Picker.Item style={{height:8}} label={item} value={item} key={item}/>);
-            })
-        },()=>{
-            this.setState({
-                foodNames:foodInfo.foodNames,
-                foodValues:foodInfo.foodValues,
-                currentCalorie:this.props.currentCalorie
-            });
+            foodNames:foodInfo.foodNames,
+            foodValues:foodInfo.foodValues,
+            currentCalorie:this.props.currentCalorie
         });
     }
 
@@ -68,35 +48,6 @@ class Addcalorie extends React.Component{
             storeCurrentCalorieOffline();   
         });
       }
-
-      /*displaySubMenu=(value) => {
-        this.setState({
-            selectedItem:value,
-            foodSubItems:[],
-            displaySubItems:false
-        },
-        () => {
-            for (i in foodData[value]){
-                this.setState({
-                    foodSubItems:this.state.foodSubItems.push(i)
-                });
-            }
-            this.setState({
-                subItems:this.state.foodSubItems.map((item) => {
-                return(<Picker.Item style={{height:8}} label={item} value={item} key={item}/>);
-                }),
-                selectedSubItem:Object.keys(foodData[value])[0],
-                displaySubItems:true,
-                disableAddButton:false
-            });    
-        });
-    }
-
-    selectSubMenu=(value) => {
-        this.setState({
-            selectedSubItem:value
-        });
-    }*/
 
     updateList=(text) => {
         this.setState({
@@ -193,8 +144,9 @@ class Addcalorie extends React.Component{
                 },() => {
                     //Update multiplier
                     arr=this.state.chosenFoodMultiplier;
-                    if(arr[this.state.chosenFoods.indexOf(item)])
-                        arr[this.state.chosenFoods.indexOf(item)]+=1;
+                    let index=this.state.chosenFoods.indexOf(item);
+                    if(arr[index])
+                        arr[index]+=1;
                     else
                         arr.push(1);
                     this.setState({
@@ -226,17 +178,19 @@ class Addcalorie extends React.Component{
             if(this.state.chosenFoods[i]==item){
                 //Calorie decrement
                 let arr=this.state.chosenCalories;
-                if(arr[i]-this.state.foodValues[this.state.foodNames.indexOf(item)]>0){
-                    arr[i]-=this.state.foodValues[this.state.foodNames.indexOf(item)];
+                let index=this.state.foodNames.indexOf(item);
+                if(arr[i]-this.state.foodValues[index]>0){
+                    arr[i]-=this.state.foodValues[index];
                     this.setState({
                         chosenCalories:arr
                     },() => {
                         //Update multiplier
                         arr=this.state.chosenFoodMultiplier;
-                        if(arr[this.state.chosenFoods.indexOf(item)]-1>0)
-                            arr[this.state.chosenFoods.indexOf(item)]-=1;
-                        else if(arr[this.state.chosenFoods.indexOf(item)]-1==0)
-                            arr.splice(this.state.chosenFoods.indexOf(item),1);
+                        let index=this.state.chosenFoods.indexOf(item);
+                        if(arr[index]-1>0)
+                            arr[index]-=1;
+                        else if(arr[index]-1==0)
+                            arr.splice(index,1);
                         this.setState({
                             chosenFoodMultiplier:arr
                         });
@@ -270,7 +224,7 @@ class Addcalorie extends React.Component{
                             {
                             (this.state.chosenFoodMultiplier.length-1>=this.state.chosenFoods.indexOf(food))?
                             <Text style={{color:'rgba(0,0,0,0.5)',fontFamily:'openSans', fontSize:12}}>
-                                (x{this.state.chosenFoodMultiplier[this.state.chosenFoods.indexOf(food)]})
+                                (x{this.state.chosenFoodMultiplier[this.state.chosenFoods.indexOf(food)]+1})
                             </Text>
                             :null
                             }

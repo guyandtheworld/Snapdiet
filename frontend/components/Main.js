@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState, Image} from 'react-native';
+import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState, Image, TouchableWithoutFeedback} from 'react-native';
 import {Picker, Text, Button, Form, Item, Label, Input, Icon, Fab} from 'native-base';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import foodData from './FoodCalorie.json';
@@ -89,19 +89,42 @@ class Main extends React.Component {
     componentWillMount() {
       AppState.addEventListener('change',this.appStateChanged);
 
+      //Load history
+      AsyncStorage.getItem('SNAPDIET_HISTORY_CONSUMED',(error,data) => {
+        if(data!=null && data!=''){
+          this.props.update('updateHistoryConsumed',{consumed:JSON.parse(data)});
+        }
+        AsyncStorage.getItem('SNAPDIET_HISTORY_GOALS',(error,data) => {
+          if(data!=null && data!=''){
+            this.props.update('updateHistoryGoals',{goals:JSON.parse(data)});
+          }
+        });
+        AsyncStorage.getItem('SNAPDIET_HISTORY_DATES',(error,data) => {
+          if(data!=null && data!=''){
+            this.props.update('updateHistoryDates',{dates:JSON.parse(data)});
+          }
+        });
+      });
+
       getTimeOffline = async () => {
         try{
           await AsyncStorage.getItem('SNAPDIET_LASTSEENTIME',(error,data) => {
             d = new Date();
-            if(parseInt(data)>d.getHours()){
+            if(parseInt(data)>d.getHours()){ //Check for a new day
+              //Add yesterday's data to history
+              storeHistory = async () => {
+                let dobj = new Date();
+                let dstring = dobj.getDate()+'/'+dobj.getMonth()+'/'+dobj.getFullYear;
+                AsyncStorage.setItem('SNAPDIET_HISTORY_CONSUMED',JSON.stringify(this.props.actualCalorie.concat([this.props.currentCalorie])));
+                AsyncStorage.setItem('SNAPDIET_HISTORY_GOALS',JSON.stringify(this.props.goalCalorie.concat([this.props.dailyGoal])));
+                AsyncStorage.setItem('SNAPDIET_HISTORY_DATES',JSON.stringify(this.props.dates.concat([dstring])));
+              }
+              storeHistory();
+
+              //Reset calorie counter
               storeCurrentCalorieOffline = async () => {
-                try{
-                    await AsyncStorage.setItem('SNAPDIET_CURRENTCALORIE','0');
-                    this.props.update('updateCalorie',{currentCalorie:0});
-                }
-                catch(e){
-                    console.log(e);
-                }
+                await AsyncStorage.setItem('SNAPDIET_CURRENTCALORIE','0');
+                this.props.update('updateCalorie',{currentCalorie:0});
               }
               storeCurrentCalorieOffline(); 
             }
@@ -161,38 +184,44 @@ class Main extends React.Component {
         <View style={styles.container}> 
           
           <Tips />
-          <View style={{height:35}}/>
-     
-          <AnimatedCircularProgress
-            size={225}
-            width={13}
-            fill={percent}
-            tintColor={(percent<100)?'#b166ae':'rgb(255,0,0)'}
-            onAnimationComplete={() => {  }}
-            backgroundColor="rgba(125,160,175,0.6)"
-            rotation={0}>
-            {
-              (fill) => (
-                <View style={{alignItems:'center'}}>
-                  <Text style={styles.percent}>
-                    {percent}%
-                  </Text>
-                  <Text style={styles.percentText}>Of your daily goal reached</Text>
-                </View>
-              )
-            }
-          </AnimatedCircularProgress>
-          <View style={{height:18}}/>
+          <View style={{height:30}}/>
+          
+            <AnimatedCircularProgress
+              size={225}
+              width={13}
+              fill={percent}
+              tintColor={(percent<100)?'#b166ae':'rgb(255,0,0)'}
+              onAnimationComplete={() => {  }}
+              backgroundColor="rgba(125,160,175,0.6)"
+              rotation={0}>
+              {
+                (fill) => (
+                  <View style={{alignItems:'center'}}>
+                    <Text style={styles.percent}>
+                      {percent}%
+                    </Text>
+                    <Text style={styles.percentText}>Of your daily goal reached</Text>
+                  </View>
+                )
+              }
+            </AnimatedCircularProgress>
 
-          <View style={{height:70,justifyContent:'center',alignItems:'center'}}>
+          <View style={{height:40}}/>
 
-            <TouchableNativeFeedback>
-              <Button style={styles.snapchatYellow} onPress={() => {this.props.navigation.navigate('Calorie')}} bordered danger>
-                <Text style={{color:'black'}}>Calorie</Text><Icon style={{color:'black'}} name='create'/> 
-              </Button>
-            </TouchableNativeFeedback>
+          <View style={{flexDirection:'row', justifyContent:'center',alignItems:'center'}}>
+
+            <Button onPress={() => {this.props.navigation.navigate('Calorie')}} bordered danger>
+              <Text style={{color:'black'}}>Calorie</Text><Icon style={{color:'black'}} name='create'/> 
+            </Button>
+
+            <View style={{width:25}}/>
+            
+            <Button style={{alignSelf:'center'}} onPress={() => this.props.navigation.navigate('History')} bordered danger>
+              <Icon style={{color:'black'}} name='trending-up'/>
+            </Button>
 
           </View>
+          <View style={{height:80}}/>
           <Fab style={styles.fabDesign} onPress={() => {this.props.navigation.navigate('Addcalorie')}} position='bottomRight'>
               <Icon style={{color:'black'}} name='add'/>
           </Fab>

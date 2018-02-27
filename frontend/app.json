@@ -1,6 +1,10 @@
 {
   "expo": {
     "name":"SnapDiet-Alpha",
+    "splash":{
+      "image":"./snapdiet_logo.png",
+      "backgroundColor":"#66b169"
+    },
     "icon":"./snapdiet_logo.png",
     "version":"1.0.0",
     "slug": "snapdiet",
