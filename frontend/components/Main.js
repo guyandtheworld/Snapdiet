@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState, Image, TouchableWithoutFeedback} from 'react-native';
 import {Picker, Text, Button, Form, Item, Label, Input, Icon, Fab} from 'native-base';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
+import * as Animatable from 'react-native-animatable';
 import foodData from './FoodCalorie.json';
 import Tips from './Tips/Tips';
 
@@ -222,8 +223,11 @@ class Main extends React.Component {
 
           </View>
           <View style={{height:80}}/>
+
           <Fab style={styles.fabDesign} onPress={() => {this.props.navigation.navigate('Addcalorie')}} position='bottomRight'>
-              <Icon style={{color:'black'}} name='add'/>
+            <Animatable.View animation='flash' iterationCount={3}>
+                <Icon style={{color:'black'}} name='add'/>
+            </Animatable.View>
           </Fab>
 
         </View>

@@ -24,7 +24,7 @@
     "native-base": "^2.3.5",
     "react": "16.0.0",
     "react-native": "0.50.3",
-    "react-native-chart-view": "0.0.1",
+    "react-native-animatable": "^1.2.4",
     "react-native-circular-progress": "^0.1.2",
     "react-native-easy-grid": "^0.1.15",
     "react-native-pure-chart": "0.0.16",

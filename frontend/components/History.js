@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { StyleSheet, View, AsyncStorage, FlatList, TouchableOpacity, ScrollView} from 'react-native';
+import { StyleSheet, View, AsyncStorage, FlatList, TouchableOpacity, ScrollView, Animated, Easing} from 'react-native';
 import {Text, Button, Input, Item, Icon} from 'native-base';
 import PureChart from 'react-native-pure-chart';
+import * as Animatable from 'react-native-animatable';
 
 class History extends React.Component{
     constructor(props){
@@ -11,7 +12,9 @@ class History extends React.Component{
             dates:['23/02/18','24/02/18','25/02/18','26/02/18'],
             actualCalories:[1500,1800,1400,1750],
             goalCalories:[1600,1600,1600,1600],
-            historyHasloaded:false
+            historyHasloaded:false,
+            chartHeight: new Animated.Value(170),
+            chartOpacity: new Animated.Value(1.0),
         };
     }
 
@@ -21,6 +24,71 @@ class History extends React.Component{
             actualCalories:this.props.actualCalories,
             goalCalories:this.props.goalCalories,
             historyHasloaded:true
+        });
+    }
+
+    //chartRef = (ref) => this.chart = ref;
+    
+    fadeUp = () => {
+        // this.chart.fadeOutUp(1000);
+        // this.chart.setNativeProps({style:{height:0}});
+        // this.chart.transitionTo({height:0},1000,easeOutCubic);
+        Animated.parallel([
+            Animated.timing(
+                this.state.chartHeight,
+                { 
+                    toValue: 0,
+                    duration:250
+                }
+            ),
+            Animated.timing(
+                this.state.chartOpacity,
+                { 
+                    toValue: 0.0,
+                    duration:250
+                }
+            )
+        ]).start();
+    }
+
+    fadeDown = () => {
+        Animated.parallel([
+            Animated.timing(
+                this.state.chartHeight,
+                { 
+                    toValue: 170,
+                    duration:250
+                }
+            ),
+            Animated.timing(
+                this.state.chartOpacity,
+                { 
+                    toValue: 1.0,
+                    duration:250
+                }
+            )
+        ]).start();
+    }
+
+    handleScroll = (event) => {
+        //console.log(this.state.chartHeight);
+        if(event.nativeEvent.contentOffset.y==0)
+            this.fadeDown();
+        else if(event.nativeEvent.contentOffset.y>=0)
+            this.fadeUp();
+    }
+    
+    clearHistory = () => {
+        AsyncStorage.setItem('SNAPDIET_HISTORY_CONSUMED',JSON.stringify([0]));
+        AsyncStorage.setItem('SNAPDIET_HISTORY_GOALS',JSON.stringify([0]));
+        AsyncStorage.setItem('SNAPDIET_HISTORY_DATES',JSON.stringify(['0']));
+        this.props.update('updateHistoryConsumed',{consumed:[0]});
+        this.props.update('updateHistoryGoals',{goals:[0]});
+        this.props.update('updateHistoryDates',{dates:[0]});
+        this.setState({
+            dates:['0'],
+            actualCalories:[0],
+            goalCalories:[0]
         });
     }
 
@@ -50,15 +118,20 @@ class History extends React.Component{
           ];
 
         return(
-            <ScrollView contentContainerStyle={styles.container}>
+            <ScrollView contentContainerStyle={styles.container} onScroll={(event) => this.handleScroll(event)}>
             {
                 this.state.historyHasloaded?
                     this.state.dates[0]!='0'?
                         <View>
                             <View style={{height:20}}/>
-                            <View style={{padding:15}}>
-                                <PureChart data={data} type='line'/>
-                            </View>
+
+                            <TouchableOpacity onPress={() => this.fadeUp()}>
+                                <Animated.View style={{height:this.state.chartHeight, opacity:this.state.chartOpacity}}>
+                                    <View style={{padding:15}}>
+                                        <PureChart data={data} type='line'/>
+                                    </View>
+                                </Animated.View>
+                            </TouchableOpacity>
 
                             <View style={styles.listItemHeader}>
                                 <Text style={{color:'black',fontFamily:'openSans-bold',fontSize:14}}>Date</Text>
@@ -89,7 +162,7 @@ class History extends React.Component{
                             />
 
                             <View style={{height:20}}/>
-                            <Button style={styles.clearButton} onPress={() => {}} bordered danger>
+                            <Button style={styles.clearButton} onPress={() => this.clearHistory()} bordered danger>
                                 <Text style={{color:'black'}}> Clear History </Text>
                             </Button>
                             <View style={{height:20}}/>
