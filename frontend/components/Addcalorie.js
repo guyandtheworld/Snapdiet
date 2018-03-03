@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { StyleSheet, View, AsyncStorage, FlatList, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, AsyncStorage, FlatList, TouchableOpacity, ImageBackground } from 'react-native';
 import {Text, Button, Input, Item, Icon} from 'native-base';
 import {Grid, Col, Row} from 'react-native-easy-grid';
 import foodInfo from './foodCalorieArrays.json';
@@ -33,6 +33,11 @@ class Addcalorie extends React.Component{
     addCalories=() => {
         this.setState({
             currentCalorie:this.state.currentCalorie+this.state.totalCalorie,
+            totalCalorie:0,
+            disableAddButton:true,
+            chosenFoods:[],
+            chosenCalories:[],
+            chosenFoodMultiplier:[],
             totalCalorie:0
         },() => {
             this.props.update('updateCalorie',{currentCalorie:this.state.currentCalorie});
@@ -217,6 +222,8 @@ class Addcalorie extends React.Component{
     }
 
     render(){
+        const bgimg=require('./background.jpg');
+
         const chosenFoods=this.state.chosenFoods.map((food) => {
             return( <View>
                         <View style={styles.foodCard}>
@@ -274,6 +281,7 @@ class Addcalorie extends React.Component{
         });
 
         return(
+            <ImageBackground source={bgimg} style={{height:'auto', width:'auto', minHeight:'100%', minWidth:'100%'}}>
             <View style={styles.container}>
                 <Item>
                     <Input style={{color:'black'}} onChangeText={(text)=> {this.updateList(text)}} placeholder='Type food name...' value={this.state.foodNameEntered}/>
@@ -324,6 +332,7 @@ class Addcalorie extends React.Component{
                     <Button disabled={this.state.disableAddButton} onPress={() => {this.addCalories()}} style={{marginTop:'10%'}}><Text style={{color:'white'}}>Add</Text></Button>
                 </View>
             </View>
+            </ImageBackground>
         );
     }
 }
@@ -331,7 +340,7 @@ class Addcalorie extends React.Component{
 const styles=StyleSheet.create({
     container:{
         height:'100%',
-        backgroundColor:'rgba(255,255,255,0.87)', 
+        backgroundColor:'rgba(255,255,255,0.7)', 
         padding:10,
         alignItems:'center'
     },
@@ -364,9 +373,11 @@ const styles=StyleSheet.create({
     foodCard:{
         flexDirection:'row',
         backgroundColor:'rgb(255,243,224)',
+        borderTopColor:'rgb(175,175,175)',
+        borderTopWidth:0.5,
         height:40,
         shadowColor:'black',
-        elevation:1,
+        elevation:3,
         alignItems:'center',
         paddingLeft:10
     }
