@@ -210,7 +210,7 @@ class Main extends React.Component {
               }
             </AnimatedCircularProgress>
 
-          <View style={{height:40}}/>
+          <View style={{height:20}}/>
 
           <View style={{flexDirection:'row', justifyContent:'center',alignItems:'center'}}>
 

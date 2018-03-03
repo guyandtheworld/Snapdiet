@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, TouchableNativeFeedback, Image, ImageBackground} from 'react-native';
-import {Container, Text, H2, Thumbnail} from 'native-base';
+import {Container, Text, H2, Thumbnail, Icon} from 'native-base';
 import {Col, Row, Grid} from 'react-native-easy-grid';
 import Notif from './Notification';
 import Login from './Login';
@@ -33,14 +33,16 @@ export default class Sidebar extends React.Component {
                     <Row size={10}>
                         <TouchableNativeFeedback onPress={this.goToLogin}>
                             <View style={styles.sideBarView}>
-                                <Text style={styles.sideBarText}>Login/Sign up</Text>
+                                <Icon style={{color:'gray'}} name='contact'/>
+                                <Text style={styles.sideBarText}>  Login/Sign up</Text>
                             </View>
                         </TouchableNativeFeedback>
                     </Row>
                     <Row size={10}>
                         <TouchableNativeFeedback onPress={this.editInfo}>
                             <View style={styles.sideBarView}>
-                                <Text style={styles.sideBarText}>Edit Personal Info</Text>
+                                <Icon style={{color:'gray'}} name='create'/>
+                                <Text style={styles.sideBarText}>  Edit Personal Info</Text>
                             </View>
                         </TouchableNativeFeedback>
                     </Row>
@@ -59,12 +61,13 @@ export default class Sidebar extends React.Component {
 const styles=StyleSheet.create({
     sideBarText:{
         fontSize:18,
-        paddingLeft:20,
         fontFamily:'openSans'
     },
     sideBarView:{
         width:'100%',
-        justifyContent:'center'
+        alignItems:'center',
+        flexDirection:'row',
+        marginLeft:20
     },
     coverContainer:{
         height:'100%',

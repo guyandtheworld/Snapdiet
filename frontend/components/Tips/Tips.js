@@ -43,6 +43,11 @@ const styles = StyleSheet.create({
 		borderRadius: 7,
 		padding: 10,
 		justifyContent: 'center',
+		borderColor:'rgb(175,175,175)',
+		borderWidth:0.5,
+		shadowColor:'black',
+		elevation:1,
+		marginTop:20
   },
 });
 

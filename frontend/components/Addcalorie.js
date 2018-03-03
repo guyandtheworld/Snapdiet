@@ -33,6 +33,11 @@ class Addcalorie extends React.Component{
     addCalories=() => {
         this.setState({
             currentCalorie:this.state.currentCalorie+this.state.totalCalorie,
+            totalCalorie:0,
+            disableAddButton:true,
+            chosenFoods:[],
+            chosenCalories:[],
+            chosenFoodMultiplier:[],
             totalCalorie:0
         },() => {
             this.props.update('updateCalorie',{currentCalorie:this.state.currentCalorie});
