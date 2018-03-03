@@ -3,7 +3,7 @@ import React from 'react';
 import {StatusBar, Platform, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {Text, Icon} from 'native-base';
 import {Provider} from 'react-redux';
-import {StackNavigator, DrawerNavigator} from 'react-navigation';
+import {StackNavigator, DrawerNavigator, TabNavigator} from 'react-navigation';
 import Main from './components/Main';
 import CameraTest from './components/CameraTest';
 import Calorie from './components/Calorie';
@@ -25,13 +25,33 @@ const DrawerButton = (props) => {
   );
 };
 
+const Tabnavigation=TabNavigator(
+  {
+    Home:{
+      screen:Main
+    },
+    History:{
+      screen:History
+    },
+    Addcalorie:{
+      screen:Addcalorie
+    }
+  },
+  {
+    tabBarPosition:'bottom'
+  }
+);
+
 const Stacknavigation=StackNavigator(
   {
     Home:{
-      screen:Main,
-      navigationOptions:({navigation}) => ({ 
+      screen:Tabnavigation,
+      navigationOptions:({navigation}) => ({
         headerStyle:{
-          backgroundColor:'#66b169', 
+          // backgroundColor:'#66b169', 
+          backgroundColor:'rgba(255,255,255,0.0)',
+          elevation:0,
+          shadowColor:'rgba(255,255,255,0.0)'
         },
         headerTitleStyle: {
           alignSelf: 'center',

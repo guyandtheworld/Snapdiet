@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState, Image, TouchableWithoutFeedback} from 'react-native';
+import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState, Image, TouchableWithoutFeedback, ImageBackground} from 'react-native';
 import {Picker, Text, Button, Form, Item, Label, Input, Icon, Fab} from 'native-base';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import * as Animatable from 'react-native-animatable';
@@ -167,6 +167,8 @@ class Main extends React.Component {
     }
   
   render() {
+    const bgimg=require('./background.jpg');
+
     const percent=this.props.dailyGoal?(parseInt((this.props.currentCalorie/this.props.dailyGoal)*100)):0;
 //    this.props.update("updatePercent",{percent:percent});
     if(percent>=80 && percent<100){
@@ -180,6 +182,7 @@ class Main extends React.Component {
     }
     
     return (
+      <ImageBackground source={bgimg} style={{height:'auto', width:'auto', minHeight:'100%', minWidth:'100%'}}>
       <View> 
         
         <View style={styles.container}> 
@@ -232,6 +235,7 @@ class Main extends React.Component {
 
         </View>
       </View>
+      </ImageBackground>
     );
   }
 }
@@ -239,7 +243,7 @@ class Main extends React.Component {
 const styles = StyleSheet.create({
   container:{
     height:'100%',
-    backgroundColor:'rgba(255,255,255,0.87)', 
+    backgroundColor:'rgba(255,255,255,0.7)', 
     padding:10, 
     justifyContent:'center',
     alignItems:'center'

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { StyleSheet, View, AsyncStorage, FlatList, TouchableOpacity, ScrollView, Animated, Easing} from 'react-native';
+import { StyleSheet, View, AsyncStorage, FlatList, TouchableOpacity, ScrollView, Animated, Easing, ImageBackground} from 'react-native';
 import {Text, Button, Input, Item, Icon} from 'native-base';
 import PureChart from 'react-native-pure-chart';
 import * as Animatable from 'react-native-animatable';
@@ -93,6 +93,7 @@ class History extends React.Component{
     }
 
     render(){
+        const bgimg=require('./background.jpg');
 
         let consumedData=[];
         for(i in this.state.actualCalories){
@@ -118,7 +119,9 @@ class History extends React.Component{
           ];
 
         return(
+            <ImageBackground source={bgimg} style={{height:'auto', width:'auto', minHeight:'100%', minWidth:'100%'}}>
             <ScrollView contentContainerStyle={styles.container} onScroll={(event) => this.handleScroll(event)}>
+            
             {
                 this.state.historyHasloaded?
                     this.state.dates[0]!='0'?
@@ -172,7 +175,9 @@ class History extends React.Component{
                 
                 :<Text style={{fontSize:20, color:'grey'}}>Loading...</Text>
             }
+        
             </ScrollView>
+            </ImageBackground>
         );
     }
 }
@@ -180,7 +185,7 @@ class History extends React.Component{
 const styles=StyleSheet.create({
     container:{
         minHeight:'100%',
-        backgroundColor:'rgba(255,255,255,0.87)',
+        backgroundColor:'rgba(255,255,255,0.7)',
         alignItems:'center'
     },
     listItem:{
