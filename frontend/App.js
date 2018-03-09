@@ -38,7 +38,16 @@ const Tabnavigation=TabNavigator(
     }
   },
   {
-    tabBarPosition:'bottom'
+    tabBarPosition:'bottom',
+    tabBarOptions: {
+      style: {
+        backgroundColor: '#b166ae',
+      },
+      indicatorStyle: {
+        backgroundColor: '#66b169',
+        height: 5,
+      }
+    }
   }
 );
 
@@ -48,16 +57,15 @@ const Stacknavigation=StackNavigator(
       screen:Tabnavigation,
       navigationOptions:({navigation}) => ({
         headerStyle:{
-          // backgroundColor:'#66b169', 
-          backgroundColor:'rgba(255,255,255,0.0)',
+          backgroundColor:'#66b169',
           elevation:0,
-          shadowColor:'rgba(255,255,255,0.0)'
+          shadowColor:'rgba(255,255,255,0.0)',
         },
         headerTitleStyle: {
           alignSelf: 'center',
           fontSize: 26,
           color:'rgba(0,0,0,0.7)',
-          marginRight:70
+          marginRight:70,
         },
         title: 'SnapDiet',
         //<View> <Image source={require("/components/Resources/Icons/flour.png")} resizeMode="contain" /> </View>
