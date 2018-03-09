@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, KeyboardAvoidingView, AsyncStorage} from 'react-native';
+import {StyleSheet, View, KeyboardAvoidingView, AsyncStorage, ImageBackground} from 'react-native';
 import {Text, Button} from 'native-base';
 
 class Calorie extends React.Component{
@@ -58,8 +58,11 @@ class Calorie extends React.Component{
     }
 
     render(){
+        const bgimg=require('./background.jpg');
+
         return(
-            <KeyboardAvoidingView behavior='padding' >                
+            <ImageBackground source={bgimg} style={{height:'auto', width:'auto', minHeight:'100%', minWidth:'100%'}}>
+            <KeyboardAvoidingView style={{backgroundColor:'rgba(255,255,255,0.7)', minHeight:'100%', minWidth:'100%'}} behavior='padding' >                
 
                 <View style = {styles.container}>
                     <Text style = {styles.header} > Calories consumed </Text>
@@ -81,8 +84,8 @@ class Calorie extends React.Component{
 
                 </View> 
 
-
             </KeyboardAvoidingView>
+            </ImageBackground>
 
         );
     }
@@ -90,7 +93,6 @@ class Calorie extends React.Component{
 
 const styles = StyleSheet.create({
     container: {
-        marginVertical: 17,
         alignItems: 'center',
     },
     buttonContainer: {

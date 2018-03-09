@@ -27,14 +27,14 @@ const DrawerButton = (props) => {
 
 const Tabnavigation=TabNavigator(
   {
-    Home:{
-      screen:Main
-    },
     History:{
       screen:History
     },
-    Addcalorie:{
-      screen:Addcalorie
+    Home:{
+      screen:Main
+    },
+    Calorie:{
+      screen:Calorie
     }
   },
   {
