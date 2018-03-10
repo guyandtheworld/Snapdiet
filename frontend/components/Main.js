@@ -212,19 +212,6 @@ class Main extends React.Component {
 
           <View style={{height:20}}/>
 
-          <View style={{flexDirection:'row', justifyContent:'center',alignItems:'center'}}>
-
-            <Button onPress={() => {this.props.navigation.navigate('Calorie')}} bordered danger>
-              <Text style={{color:'black'}}>Calorie</Text><Icon style={{color:'black'}} name='create'/> 
-            </Button>
-
-            <View style={{width:25}}/>
-            
-            <Button style={{alignSelf:'center'}} onPress={() => this.props.navigation.navigate('History')} bordered danger>
-              <Icon style={{color:'black'}} name='trending-up'/>
-            </Button>
-
-          </View>
           <View style={{height:80}}/>
 
           <Fab style={styles.fabDesign} onPress={() => {this.props.navigation.navigate('Addcalorie')}} position='bottomRight'>
@@ -261,7 +248,7 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
   },
   fabDesign: {
-    backgroundColor:'#ff5a5a',
+    backgroundColor:'#66b169',
     width: 60,   
     height: 60,
     borderRadius: 40,
@@ -281,3 +268,19 @@ export default connect(
     }
 
 )(Main);
+
+/*
+          <View style={{flexDirection:'row', justifyContent:'center',alignItems:'center'}}>
+
+            <Button onPress={() => {this.props.navigation.navigate('Calorie')}} bordered danger>
+              <Text style={{color:'black'}}>Calorie</Text><Icon style={{color:'black'}} name='create'/> 
+            </Button>
+
+            <View style={{width:25}}/>
+            
+            <Button style={{alignSelf:'center'}} onPress={() => this.props.navigation.navigate('History')} bordered danger>
+              <Icon style={{color:'black'}} name='trending-up'/>
+            </Button>
+
+          </View>
+*/
