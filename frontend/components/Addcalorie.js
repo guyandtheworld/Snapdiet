@@ -281,7 +281,7 @@ class Addcalorie extends React.Component{
         });
 
         return(
-            <ImageBackground source={bgimg} style={{height:'auto', width:'auto', minHeight:'100%', minWidth:'100%'}}>
+            <ImageBackground source={bgimg} style={{minHeight:'80%', minWidth:'80%'}}>
             <View style={styles.container}>
                 <Item>
                     <Input style={{color:'black'}} onChangeText={(text)=> {this.updateList(text)}} placeholder='Type food name...' value={this.state.foodNameEntered}/>
@@ -329,7 +329,7 @@ class Addcalorie extends React.Component{
                 :null}
 
                 <View>
-                    <Button disabled={this.state.disableAddButton} onPress={() => {this.addCalories()}} style={{marginTop:'10%'}}><Text style={{color:'white'}}>Add</Text></Button>
+                    <Button disabled={this.state.disableAddButton} onPress={() => {this.addCalories()}}><Text style={{color:'white'}}>Add</Text></Button>
                 </View>
             </View>
             </ImageBackground>

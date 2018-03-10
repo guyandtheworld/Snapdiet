@@ -41,11 +41,11 @@ const Tabnavigation=TabNavigator(
     tabBarPosition:'bottom',
     tabBarOptions: {
       style: {
-        backgroundColor: '#b166ae',
+        backgroundColor: '#b166ae'
       },
       indicatorStyle: {
         backgroundColor: '#66b169',
-        height: 5,
+        height: 5
       }
     }
   }
