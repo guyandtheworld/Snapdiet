@@ -15,7 +15,9 @@ export default class FirstScreen extends React.Component{
                     <View style={{height:100}}/>
 				    <Text style={styles.content}>Please fill in some information on the next screen to calculate an optimized daily calorie goal for you.</Text>
                 </View>
-                <GetInfo navigation={this.props.navigation}/>
+                <View style={styles.slide2}>
+                    <GetInfo navigation={this.props.navigation}/>
+                </View>
             </Swiper>
         );
     }
@@ -28,6 +30,9 @@ const styles= StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'rgb(255,252,0)',
         padding:20
+    },
+    slide2: {
+        backgroundColor: 'rgb(255,252,0)',
     },
     header: {
         color: 'rgba(0,0,0,0.87)',

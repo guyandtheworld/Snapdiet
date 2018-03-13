@@ -108,32 +108,38 @@ class Main extends React.Component {
       });
 
       getTimeOffline = async () => {
-        try{
-          await AsyncStorage.getItem('SNAPDIET_LASTSEENTIME',(error,data) => {
-            d = new Date();
-            if(parseInt(data)>d.getHours()){ //Check for a new day
-              //Add yesterday's data to history
-              storeHistory = async () => {
-                let dobj = new Date();
-                let dstring = dobj.getDate()+'/'+dobj.getMonth()+'/'+dobj.getFullYear;
+        await AsyncStorage.getItem('SNAPDIET_LASTSEENDATE',(error,data) => {
+          d = new Date();
+          if(
+            JSON.parse(data)[0]<d.getDate() ||
+            JSON.parse(data)[1]<d.getMonth() ||
+            JSON.parse(data)[2]<d.getFullYear()
+          ){ //Check for a new day
+            //Add yesterday's data to history
+            storeHistory = async () => {
+              let dobj = new Date();
+              let dstring = dobj.getDate()+'/'+dobj.getMonth()+'/'+dobj.getFullYear();
+              if(this.props.dates[0]=='0'){
+                AsyncStorage.setItem('SNAPDIET_HISTORY_CONSUMED',JSON.stringify([this.props.currentCalorie]));
+                AsyncStorage.setItem('SNAPDIET_HISTORY_GOALS',JSON.stringify([this.props.dailyGoal]));
+                AsyncStorage.setItem('SNAPDIET_HISTORY_DATES',JSON.stringify([dstring]));
+              }
+              else{
                 AsyncStorage.setItem('SNAPDIET_HISTORY_CONSUMED',JSON.stringify(this.props.actualCalorie.concat([this.props.currentCalorie])));
                 AsyncStorage.setItem('SNAPDIET_HISTORY_GOALS',JSON.stringify(this.props.goalCalorie.concat([this.props.dailyGoal])));
                 AsyncStorage.setItem('SNAPDIET_HISTORY_DATES',JSON.stringify(this.props.dates.concat([dstring])));
               }
-              storeHistory();
-
-              //Reset calorie counter
-              storeCurrentCalorieOffline = async () => {
-                await AsyncStorage.setItem('SNAPDIET_CURRENTCALORIE','0');
-                this.props.update('updateCalorie',{currentCalorie:0});
-              }
-              storeCurrentCalorieOffline(); 
             }
-          });
-        }
-        catch(e){
-          console.log(e);
-        }
+            storeHistory();
+
+            //Reset calorie counter
+            storeCurrentCalorieOffline = async () => {
+              await AsyncStorage.setItem('SNAPDIET_CURRENTCALORIE','0');
+              this.props.update('updateCalorie',{currentCalorie:0});
+            }
+            storeCurrentCalorieOffline(); 
+          }
+        });
       }
       getTimeOffline(); 
     
@@ -155,12 +161,7 @@ class Main extends React.Component {
       if(nextstate=='background'){
         d = new Date();
         storeTimeOffline = async () => {
-          try{
-            await AsyncStorage.setItem('SNAPDIET_LASTSEENTIME',d.getHours().toString());
-          }
-          catch(e){
-            console.log(e);
-          }
+          await AsyncStorage.setItem('SNAPDIET_LASTSEENDATE',JSON.stringify([d.getDate(), d.getMonth(), d.getFullYear()]));
         }
         storeTimeOffline();
       }
