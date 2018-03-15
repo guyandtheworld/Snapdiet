@@ -123,7 +123,7 @@ class GetInfo extends React.Component {
 
 				<ScrollView showsVerticalScrollIndicator={false} keyboardDismissMode='on-drag'>
 						
-						<Text style={{fontFamily:'openSans'}}> Age: </Text>
+						<Text style={styles.titleText}> Age: </Text>
 						<TextInput
 							style={styles.inputBox}
 							keyboardType = 'numeric'
@@ -131,7 +131,17 @@ class GetInfo extends React.Component {
 							value={this.state.userInfo.age}
 						/>
 
-						<Text style={{fontFamily:'openSans'}}> Height (in {this.state.hUnits}): </Text> 
+						<View style={styles.imperialView}>
+
+							<Text style={styles.titleText}> Imperial Units </Text> 
+							<Switch
+								onValueChange={this.imperialSwitch}
+								value={this.state.imperial}
+							/>
+
+						</View>						
+
+						<Text style={styles.titleText}> Height (in {this.state.hUnits}): </Text> 
 						<TextInput
 							style={styles.inputBox}
 							keyboardType = 'numeric'
@@ -139,7 +149,7 @@ class GetInfo extends React.Component {
 							value={this.state.userInfo.height}
 						/>
 
-						<Text style={{fontFamily:'openSans'}}> Weight (in {this.state.wUnits}): </Text> 
+						<Text style={styles.titleText}> Weight (in {this.state.wUnits}): </Text> 
 						<TextInput
 							style={styles.inputBox}
 							keyboardType = 'numeric'
@@ -147,17 +157,8 @@ class GetInfo extends React.Component {
 							value={this.state.userInfo.weight}
 						/>
 
-						<View style={styles.imperialView}>
 
-							<Text style={{fontFamily:'openSans'}}> Imperial Units </Text> 
-							<Switch
-								onValueChange={this.imperialSwitch}
-								value={this.state.imperial}
-							/>
-
-						</View>
-
-						<Text style={{fontFamily:'openSans'}}> Gender: </Text> 
+						<Text style={styles.titleText}> Gender: </Text> 
 						<Picker
 							selectedValue={this.state.userInfo.gender}
 							onValueChange={(genderSelected) => {this.setState({userInfo: Object.assign({},this.state.userInfo,{gender:genderSelected}) })}}
@@ -167,7 +168,8 @@ class GetInfo extends React.Component {
 							<Picker.Item label="Female" value="F" />
 
 						</Picker>
-						<Text style={{fontFamily:'openSans'}}> Lifestyle: </Text> 
+
+						<Text style={styles.titleText}> Lifestyle: </Text> 
 						<Picker
 							selectedValue={this.state.userInfo.lifeStyles}
 							onValueChange={(lifestyleSelected) => {this.setState({userInfo: Object.assign({},this.state.userInfo,{lifeStyles:lifestyleSelected})})}}
@@ -183,8 +185,8 @@ class GetInfo extends React.Component {
 
 
 						<TouchableHighlight style={styles.button} onPress={() => this.handleSubmit()} underlayColor='#ff6a6a'>
-				          <Text style={styles.buttonText}>SAVE</Text>
-				    </TouchableHighlight>
+				        	<Text style={styles.buttonText}>SAVE</Text>
+				    	</TouchableHighlight>
 
 				</ScrollView>
 				
@@ -194,38 +196,55 @@ class GetInfo extends React.Component {
 }
 
 const styles = StyleSheet.create({
+
   container: {
-		minHeight:'100%',
+	height:'100%', 
     justifyContent: 'center',
-		padding: 20,
+	padding: 20,
+	flex:1,
+    flexDirection:'row',
+    alignItems:'center',
   },
+
   button: {
     height: 36,
     backgroundColor: '#ff5a5a',
     borderColor: '#ff5a5a',
     borderWidth: 1,
     borderRadius: 8,
-    marginBottom: 10,
+    marginTop: 10,
+    marginBottom:10,
     alignSelf: 'stretch',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    elevation: 1,
+  }, 
+
+  titleText: {
+  	fontFamily:'openSans',
+  	fontSize: 19,
   },
+
   buttonText: {
-		fontSize: 18,
-		fontFamily:'openSans',
+	fontSize: 18,
+	fontFamily:'openSans',
     color: 'white',
     alignSelf: 'center'
-  },
+  }, 
+
   inputBox: {
   	height: 40, 
   	marginTop:5,
   	marginBottom:10,
   	paddingLeft: 5,
+  	fontSize: 17,
   },
+
   imperialView: {
   	flexDirection: 'row',
-  	marginTop: 5,
-  	marginBottom: 8,
-  }
+  	marginTop: 3,
+  	marginBottom: 10,
+  },
+
 });
 
 export default connect(
