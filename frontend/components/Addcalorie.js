@@ -76,11 +76,14 @@ class Addcalorie extends React.Component{
 
     choseItem=(item) => {
         let total=0;
+        let arr = this.state.chosenFoodMultiplier;
+        arr.push(0);
         this.setState({
             data:[],
             foodNameEntered:'',
             chosenFoods:this.state.chosenFoods.concat([item]),
-            chosenCalories:this.state.chosenCalories.concat([this.state.foodValues[this.state.foodNames.indexOf(item)]])
+            chosenCalories:this.state.chosenCalories.concat([this.state.foodValues[this.state.foodNames.indexOf(item)]]),
+            chosenFoodMultiplier:arr
         },() => {
             for(i in this.state.chosenCalories){
                 total+=parseInt(this.state.chosenCalories[i]);
@@ -150,10 +153,9 @@ class Addcalorie extends React.Component{
                     //Update multiplier
                     arr=this.state.chosenFoodMultiplier;
                     let index=this.state.chosenFoods.indexOf(item);
-                    if(arr[index])
+                    if(arr[index]+1)
                         arr[index]+=1;
-                    else
-                        arr.push(1);
+                    console.log(arr);
                     this.setState({
                         chosenFoodMultiplier:arr
                     });
@@ -192,10 +194,8 @@ class Addcalorie extends React.Component{
                         //Update multiplier
                         arr=this.state.chosenFoodMultiplier;
                         let index=this.state.chosenFoods.indexOf(item);
-                        if(arr[index]-1>0)
+                        if(arr[index]>0)
                             arr[index]-=1;
-                        else if(arr[index]-1==0)
-                            arr.splice(index,1);
                         this.setState({
                             chosenFoodMultiplier:arr
                         });
@@ -230,7 +230,7 @@ class Addcalorie extends React.Component{
                             <Text style={{color:'rgba(0,0,0,0.87)',fontFamily:'openSans'}}>{food}</Text>
                             {
                             (this.state.chosenFoodMultiplier.length-1>=this.state.chosenFoods.indexOf(food))?
-                            <Text style={{color:'rgba(0,0,0,0.5)',fontFamily:'openSans', fontSize:12}}>
+                            <Text style={{color:'rgba(0,0,0,0.5)',fontFamily:'openSans', fontSize:12, paddingLeft:2}}>
                                 (x{this.state.chosenFoodMultiplier[this.state.chosenFoods.indexOf(food)]+1})
                             </Text>
                             :null
@@ -243,7 +243,7 @@ class Addcalorie extends React.Component{
 
         const chosenCalories=this.state.chosenCalories.map((calorie) => {
             return( <View>
-                        <View style={styles.foodCard}>
+                        <View style={styles.foodCard2}>
                             <Text style={{color:'rgba(0,0,0,0.87)', fontFamily:'openSans-bold'}}>{calorie}</Text>
                         </View>
                         <View style={{height:5}}/>
@@ -254,7 +254,7 @@ class Addcalorie extends React.Component{
         const removeButtons=this.state.chosenFoods.map((food) => {
                 return( 
                     <View>
-                        <View style={[{flexDirection:'row', paddingRight:10, alignItems:'center'}, styles.foodCard]}>
+                        <View style={[{flexDirection:'row', paddingRight:10, alignItems:'center'}, styles.foodCard3]}>
                             <TouchableOpacity onPress={() => {this.addQty(food)}}>
                                 <View style={[styles.buttons,{backgroundColor:'rgb(46,204,113)'}]}>
                                     <Icon style={{fontSize:14, color:'white'}} name='add'/>
@@ -328,8 +328,8 @@ class Addcalorie extends React.Component{
                 </Grid>
                 :null}
 
-                <View>
-                    <Button disabled={this.state.disableAddButton} onPress={() => {this.addCalories()}}><Text style={{color:'white'}}>Add</Text></Button>
+                <View style={{width:'95%'}}>
+                    <Button block disabled={this.state.disableAddButton} onPress={() => {this.addCalories()}}><Text style={{color:'white'}}>Add</Text></Button>
                 </View>
             </View>
             </ImageBackground>
@@ -372,14 +372,38 @@ const styles=StyleSheet.create({
     },
     foodCard:{
         flexDirection:'row',
-        backgroundColor:'rgb(255,243,224)',
+        backgroundColor:'rgb(240,235,230)',
         borderTopColor:'rgb(175,175,175)',
         borderTopWidth:0.5,
         height:40,
         shadowColor:'black',
         elevation:3,
         alignItems:'center',
-        paddingLeft:10
+        paddingLeft:10,
+        borderTopLeftRadius:50,
+        borderBottomLeftRadius:50  
+    },
+    foodCard2:{
+        flexDirection:'row',
+        backgroundColor:'rgb(240,235,230)',
+        height:40,
+        shadowColor:'black',
+        elevation:3,
+        alignItems:'center',
+        paddingLeft:10,
+    },
+    foodCard3:{
+        flexDirection:'row',
+        backgroundColor:'rgb(240,235,230)',
+        borderTopColor:'rgb(175,175,175)',
+        borderTopWidth:0.5,
+        height:40,
+        shadowColor:'black',
+        elevation:3,
+        alignItems:'center',
+        paddingLeft:10,
+        borderTopRightRadius:50,
+        borderBottomRightRadius:50  
     }
   });
   

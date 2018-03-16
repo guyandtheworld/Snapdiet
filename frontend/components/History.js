@@ -26,13 +26,8 @@ class History extends React.Component{
             historyHasloaded:true
         });
     }
-
-    //chartRef = (ref) => this.chart = ref;
     
     fadeUp = () => {
-        // this.chart.fadeOutUp(1000);
-        // this.chart.setNativeProps({style:{height:0}});
-        // this.chart.transitionTo({height:0},1000,easeOutCubic);
         Animated.parallel([
             Animated.timing(
                 this.state.chartHeight,
