@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState, Image, TouchableWithoutFeedback, ImageBackground} from 'react-native';
+import {NetInfo, StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState, Image, TouchableWithoutFeedback, ImageBackground} from 'react-native';
 import {Picker, Text, Button, Form, Item, Label, Input, Icon, Fab} from 'native-base';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
 import * as Animatable from 'react-native-animatable';
@@ -105,6 +105,43 @@ class Main extends React.Component {
             this.props.update('updateHistoryDates',{dates:JSON.parse(data)});
           }
         });
+      });
+
+      NetInfo.getConnectionInfo().then((connectionInfo) => {
+        if(connectionInfo=="wifi" || connectionInfo=="cellular"){
+          let reqBody={
+              "data":{
+              "dates":this.props.dates,
+              "actualCalories":this.props.actualCalorie,
+              "goalCalories":this.props.goalCalorie
+              }
+          };
+
+          let options = {
+            method: 'POST',
+            body:JSON.stringify(reqBody),
+
+            headers:{
+              'Content-Type': 'application/json',
+            }
+          };
+
+          fetch("https://us-central1-snapdiet-alpha.cloudfunctions.net/addData", options).then((res) => {
+            console.log(res);
+          });
+        }
+      });
+
+      NetInfo.getConnectionInfo().then((connectionInfo) => {
+        if(connectionInfo=="wifi" || connectionInfo=="cellular"){
+          fetch("https://us-central1-snapdiet-alpha.cloudfunctions.net/getData").then((res) => {
+            return(data.json())
+          }).then((data) => {
+            this.props.update('updateHistoryConsumed',{consumed:data.actualCalories});
+            this.props.update('updateHistoryGoals',{goals:data.goalCalories});
+            this.props.update('updateHistoryDates',{dates:data.dates});
+          });
+        }
       });
 
       getTimeOffline = async () => {
