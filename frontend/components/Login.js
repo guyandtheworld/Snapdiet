@@ -4,6 +4,7 @@ import {StyleSheet, View, KeyboardAvoidingView} from 'react-native';
 import {Grid, Row, Col} from 'react-native-easy-grid';
 import {Text, H1, Container, Content, Button, Card, CardItem, Body, Form, Item, Label, Input, Icon} from 'native-base';
 
+
 class Login extends React.Component {
     constructor(){
         super();
@@ -22,10 +23,43 @@ class Login extends React.Component {
     }
 
     setShowLogin=() => {
-      this.setState({showLogin:true});
+	this.setState({showLogin:true});
     }
-  
-  render() {
+
+    fbLogin=() => {
+    	firebase.initializeApp(firebaseConfig);
+
+firebase.auth().onAuthStateChanged((user) => {
+  if (user != null) {
+    console.log("We are authenticated now!");
+  }
+
+  // Do other things
+});
+
+async function loginWithFacebook() {
+  const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(
+    '<2074407626180948>',
+    { permissions: ['public_profile'] }
+  );
+
+  if (type === 'success') {
+    const credential = firebase.auth.FacebookAuthProvider.credential(token);
+
+    firebase.auth().signInWithCredential(credential).catch((error) => {
+      // Handle Errors here.
+    });
+  }
+}}
+		      		
+    fbLogout=() => {
+	firebase.auth().signOut().then(function() {
+}).catch(function(error) {
+  // An error happened.
+});	
+}  
+
+render() {
     return (
       <KeyboardAvoidingView keyboardVerticalOffset={-64} behavior='padding' style={styles.container}>
           
@@ -58,10 +92,14 @@ class Login extends React.Component {
             <View style={{height:20}}/>
 
             {(this.state.showLogin)?
-              <Button full success style={{marginLeft:15, marginRight:15}} onPress={this.props.update}><Text>Log In</Text></Button>
+              <Button full success style={{marginLeft:15, marginRight:15}} onPress={this.props.update}><Text>Login</Text></Button>
             :null}
             <View style={{height:10}}/>
-            <Button full primary style={{marginLeft:15, marginRight:15}} onPress={this.handleSignup}><Text>Sign Up</Text></Button>
+            <Button full primary style={{marginLeft:15, marginRight:15}} onPress={this.handleSignup}><Text>Signup</Text></Button>
+	    <View style={{height:10}}/>
+            <Button full primary style={{marginLeft:15, marginRight:15}} onPress={this.fbLogin}><Text>Login with Facebook</Text></Button>
+	    <View style={{height:10}}/>
+            <Button full primary style={{marginLeft:15, marginRight:15}} onPress={this.fbLogout}><Text>Logout</Text></Button>	
           </Form>
 
       </KeyboardAvoidingView>
