@@ -2,7 +2,7 @@ import {createStore} from 'redux';
 
 const reducer = (state, action) => {
   if (action.type == 'TEST') {
-    return Object.assign({}, state, {name: 'SUCCESS'})
+    return Object.assign({}, state, {name: action.payload.uid})
   } else if (action.type == 'updateCalorie') {
     return Object.assign({}, state, {currentCalorie: action.payload.currentCalorie})
   } else if (action.type == 'updateGoal') {
@@ -37,5 +37,6 @@ export default createStore(reducer, {
   },
   dates:['0'],
   actualCalories:[0],
-  goalCalories:[0]
+  goalCalories:[0],
+  uid:'testuser'
 })

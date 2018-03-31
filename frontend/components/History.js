@@ -119,7 +119,7 @@ class History extends React.Component{
             
             {
                 this.state.historyHasloaded?
-                    this.state.dates[0]!='0'?
+                    this.props.dates[0]!='0'?
                         <View>
                             <View style={{height:20}}/>
 
