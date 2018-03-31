@@ -27,7 +27,7 @@ export function readFromDatabase(uid){
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user != null) {
-    console.log("We are authenticated now!");
+    console.log("User authentication complete!");
   }
 });
 

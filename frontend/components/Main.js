@@ -131,7 +131,8 @@ class Main extends React.Component {
           });
         });
       });
-
+      
+      //if(this.props.uid != null && this.props.uid != ''){
       // NetInfo.getConnectionInfo().then((connectionInfo) => {
       //   if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular"){
       //     let dataBody={
@@ -149,6 +150,7 @@ class Main extends React.Component {
       //     this.fetchUserInfo(this.props.uid);
       //   }
       // });
+      //}
 
        
     

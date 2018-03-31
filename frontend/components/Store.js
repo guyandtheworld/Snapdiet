@@ -19,11 +19,17 @@ const reducer = (state, action) => {
     return Object.assign({}, state, {goalCalories: action.payload.goals})
   } else if (action.type == 'updateHistoryDates') {
     return Object.assign({}, state, {dates: action.payload.dates})
+  } else if (action.type == 'UID') {
+    return Object.assign({}, state, {uid: action.payload.uid})
+  } else if (action.type == 'USERNAME') {
+    return Object.assign({}, state, {name: action.payload.name})
+  } else if (action.type == 'USERPIC') {
+    return Object.assign({}, state, {pic: action.payload.pic})
   } else return state
 }
 
 export default createStore(reducer, {
-  name: 'REDUX TEST',
+  name: 'Snapdiet',
   dailyGoal: 0,
   currentCalorie: 0,
   showNotif: true,
@@ -38,5 +44,6 @@ export default createStore(reducer, {
   dates:['0'],
   actualCalories:[0],
   goalCalories:[0],
-  uid:'testuser'
+  uid:'testuser',
+  pic:''
 })
