@@ -80,7 +80,7 @@ class GetInfo extends React.Component {
 					ToastAndroid.show("Error occured.",ToastAndroid.SHORT);
 				}
 				else if(data==null){
-					ToastAndroid.show("Data does not exist",ToastAndroid.SHORT);
+					//ToastAndroid.show("Data does not exist",ToastAndroid.SHORT);
 				}
 				else{
 					data=JSON.parse(data);

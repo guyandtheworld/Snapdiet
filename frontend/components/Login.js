@@ -137,5 +137,4 @@ export default connect(
             }
         }
     }
-
 )(Login);

@@ -93,63 +93,64 @@ class Main extends React.Component {
             if(data!=null && data!=''){
               this.props.update('UID',{uid:data});
             }
-                // if(this.props.uid != null && this.props.uid != ''){
-                //   NetInfo.getConnectionInfo().then((connectionInfo) => {
-                //     if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular"){
-                //       this.fetchUserInfo(this.props.uid);
-                //     }
-                //   });
-                // }
+                if(this.props.uid != null && this.props.uid != ''){
+                  NetInfo.getConnectionInfo().then((connectionInfo) => {
+                    if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular"){
+                      this.fetchUserInfo(this.props.uid);
+                    }
+                  });
+                }
 
                 //Check for a new day
                 getTimeOffline = async () => {
                   await AsyncStorage.getItem('SNAPDIET_LASTSEENDATE',(error,data) => {
                     d = new Date();
-                    if(
-                      JSON.parse(data)[0]<d.getDate() ||
-                      JSON.parse(data)[1]<d.getMonth() ||
-                      JSON.parse(data)[2]<d.getFullYear()
-                    ){
-                      //Add yesterday's data to history
-                      storeHistory = async () => {
-                        let dobj = new Date();
-                        let dstring = dobj.getDate()+'/'+dobj.getMonth()+'/'+dobj.getFullYear();
-                        if(this.props.dates[0]=='0'){
-                          console.log("No history present");
-                          AsyncStorage.setItem('SNAPDIET_HISTORY_CONSUMED',JSON.stringify([this.props.currentCalorie]));
-                          AsyncStorage.setItem('SNAPDIET_HISTORY_GOALS',JSON.stringify([this.props.dailyGoal]));
-                          AsyncStorage.setItem('SNAPDIET_HISTORY_DATES',JSON.stringify([dstring]));
+                    if(data!=null && data!='')
+                      if(
+                        JSON.parse(data)[0]<d.getDate() ||
+                        JSON.parse(data)[1]<d.getMonth() ||
+                        JSON.parse(data)[2]<d.getFullYear()
+                      ){
+                        //Add yesterday's data to history
+                        storeHistory = async () => {
+                          let dobj = new Date();
+                          let dstring = dobj.getDate()+'/'+dobj.getMonth()+'/'+dobj.getFullYear();
+                          if(this.props.dates[0]=='0'){
+                            console.log("No history present");
+                            AsyncStorage.setItem('SNAPDIET_HISTORY_CONSUMED',JSON.stringify([this.props.currentCalorie]));
+                            AsyncStorage.setItem('SNAPDIET_HISTORY_GOALS',JSON.stringify([this.props.dailyGoal]));
+                            AsyncStorage.setItem('SNAPDIET_HISTORY_DATES',JSON.stringify([dstring]));
+                          }
+                          else{
+                            console.log("history already present");
+                            AsyncStorage.setItem('SNAPDIET_HISTORY_CONSUMED',JSON.stringify(this.props.actualCalories.concat([this.props.currentCalorie])));
+                            AsyncStorage.setItem('SNAPDIET_HISTORY_GOALS',JSON.stringify(this.props.goalCalories.concat([this.props.dailyGoal])));
+                            AsyncStorage.setItem('SNAPDIET_HISTORY_DATES',JSON.stringify(this.props.dates.concat([dstring])));
+                            
+                            if(this.props.uid != null && this.props.uid != ''){
+                            NetInfo.getConnectionInfo().then((connectionInfo) => {
+                              if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular"){
+                                  let dataBody={
+                                      "uid":this.props.uid,
+                                      "dates":this.props.dates,
+                                      "actualCalories":this.props.actualCalories,
+                                      "goalCalories":this.props.goalCalories
+                                  };
+                                  writeToDatabase(dataBody);
+                                }
+                              });
+                            }
+                          }
                         }
-                        else{
-                          console.log("history already present");
-                          AsyncStorage.setItem('SNAPDIET_HISTORY_CONSUMED',JSON.stringify(this.props.actualCalories.concat([this.props.currentCalorie])));
-                          AsyncStorage.setItem('SNAPDIET_HISTORY_GOALS',JSON.stringify(this.props.goalCalories.concat([this.props.dailyGoal])));
-                          AsyncStorage.setItem('SNAPDIET_HISTORY_DATES',JSON.stringify(this.props.dates.concat([dstring])));
-                          
-                          // if(this.props.uid != null && this.props.uid != ''){
-                          // NetInfo.getConnectionInfo().then((connectionInfo) => {
-                          //   if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular"){
-                          //       let dataBody={
-                          //           "uid":this.props.uid,
-                          //           "dates":this.props.dates,
-                          //           "actualCalories":this.props.actualCalories,
-                          //           "goalCalories":this.props.goalCalories
-                          //       };
-                          //       writeToDatabase(dataBody);
-                          //     }
-                          //   });
-                          // }
+                        storeHistory();
+            
+                        //Reset calorie counter
+                        storeCurrentCalorieOffline = async () => {
+                          await AsyncStorage.setItem('SNAPDIET_CURRENTCALORIE','0');
+                          this.props.update('updateCalorie',{currentCalorie:0});
                         }
+                        storeCurrentCalorieOffline(); 
                       }
-                      storeHistory();
-          
-                      //Reset calorie counter
-                      storeCurrentCalorieOffline = async () => {
-                        await AsyncStorage.setItem('SNAPDIET_CURRENTCALORIE','0');
-                        this.props.update('updateCalorie',{currentCalorie:0});
-                      }
-                      storeCurrentCalorieOffline(); 
-                    }
                   });
                 }
                 getTimeOffline();
@@ -169,17 +170,17 @@ class Main extends React.Component {
         }
       });
 
-      // getFirstLaunchOffline = async () => {
-      //     await AsyncStorage.getItem('SNAPDIET_FIRSTLAUNCH',(error, data) => {
-      //       if(error){
-      //         console.log(error);
-      //       }
-      //       else if(data==null){
-      //         this.props.navigation.navigate('FirstScreen');
-      //       }
-      //     });
-      //   }
-      // getFirstLaunchOffline();
+      getFirstLaunchOffline = async () => {
+          await AsyncStorage.getItem('SNAPDIET_FIRSTLAUNCH',(error, data) => {
+            if(error){
+              console.log(error);
+            }
+            else if(data==null){
+              this.props.navigation.navigate('FirstScreen');
+            }
+          });
+        }
+      getFirstLaunchOffline();
     }
 
     appStateChanged=(nextstate) => {
@@ -295,19 +296,3 @@ export default connect(
     }
 
 )(Main);
-
-/*
-          <View style={{flexDirection:'row', justifyContent:'center',alignItems:'center'}}>
-
-            <Button onPress={() => {this.props.navigation.navigate('Calorie')}} bordered danger>
-              <Text style={{color:'black'}}>Calorie</Text><Icon style={{color:'black'}} name='create'/> 
-            </Button>
-
-            <View style={{width:25}}/>
-            
-            <Button style={{alignSelf:'center'}} onPress={() => this.props.navigation.navigate('History')} bordered danger>
-              <Icon style={{color:'black'}} name='trending-up'/>
-            </Button>
-
-          </View>
-*/
