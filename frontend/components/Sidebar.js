@@ -1,13 +1,31 @@
 import React from 'react';
-import {StyleSheet, View, TouchableNativeFeedback, Image, ImageBackground} from 'react-native';
-import {Container, Text, H2, Thumbnail, Icon} from 'native-base';
-import {Col, Row, Grid} from 'react-native-easy-grid';
+import { StyleSheet, View, TouchableNativeFeedback, Image, ImageBackground, NetInfo } from 'react-native';
+import { Container, Text, H2, Thumbnail, Icon } from 'native-base';
+import { Col, Row, Grid } from 'react-native-easy-grid';
+import { connect } from 'react-redux';
 import Notif from './Notification';
 import Login from './Login';
 import GetInfo from './getInfo';
 
 
-export default class Sidebar extends React.Component {
+class Sidebar extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state={
+            isOnline:false
+        }
+    }
+
+    componentWillMount(){
+        NetInfo.getConnectionInfo().then((connectionInfo) => {
+            if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular"){
+                this.setState({
+                    isOnline:true
+                })
+            }
+        });
+    }
 
     goToLogin=() => {
         this.props.navigation.navigate('Login');
@@ -25,8 +43,11 @@ export default class Sidebar extends React.Component {
                     <Row size={30}>    
                         <ImageBackground source={cover} style={{width:'100%'}}>
                             <View style={styles.coverContainer}>
+                                {(this.props.pic=='' || this.props.pic==null || this.state.isOnline==false)?
                                 <Thumbnail large source={pic} />
-                                <Text style={{color:'white', fontSize:38, fontWeight:'800'}}>SnapDiet</Text>
+                                :<Thumbnail large source={{uri:this.props.pic}}/>
+                                }
+                                <Text style={{color:'white', fontSize:38, fontWeight:'800'}}>{this.props.name}</Text>
                             </View>
                         </ImageBackground>
                     </Row>
@@ -76,3 +97,9 @@ const styles=StyleSheet.create({
         backgroundColor:'rgba(0,0,0,0.2)'
     }
 });
+
+export default connect(
+    (store) => {
+        return store;
+    }
+)(Sidebar);

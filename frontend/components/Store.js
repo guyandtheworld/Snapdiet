@@ -44,6 +44,6 @@ export default createStore(reducer, {
   dates:['0'],
   actualCalories:[0],
   goalCalories:[0],
-  uid:'testuser',
+  uid:'',
   pic:''
 })
