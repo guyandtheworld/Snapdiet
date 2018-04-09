@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { StyleSheet, View, AsyncStorage, FlatList, TouchableOpacity, ScrollView, Animated, Easing, ImageBackground} from 'react-native';
+import { StyleSheet, View, AsyncStorage, FlatList, TouchableOpacity, ScrollView, Animated, Easing, ImageBackground, Alert} from 'react-native';
 import {Text, Button, Input, Item, Icon} from 'native-base';
 import PureChart from 'react-native-pure-chart';
 import * as Animatable from 'react-native-animatable';
@@ -9,9 +9,9 @@ class History extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            dates:['23/02/18','24/02/18','25/02/18','26/02/18'],
-            actualCalories:[1500,1800,1400,1750],
-            goalCalories:[1600,1600,1600,1600],
+            dates:['23/02/18','24/02/18','25/02/18','26/02/18','27/02/18','28/02/18'],
+            actualCalories:[1500,1800,1400,1750,1450,1100],
+            goalCalories:[1600,1600,1600,1600,1600,1600],
             historyHasloaded:false,
             chartHeight: new Animated.Value(170),
             chartOpacity: new Animated.Value(1.0),
@@ -74,6 +74,18 @@ class History extends React.Component{
     }
     
     clearHistory = () => {
+        Alert.alert(
+            'This will clear your history',
+            '',
+            [
+              {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+              {text: 'OK', onPress: () => this.clearConfirmed()},
+            ],
+            { cancelable: true }
+        )
+    }
+
+    clearConfirmed = () => {
         AsyncStorage.setItem('SNAPDIET_HISTORY_CONSUMED',JSON.stringify([0]));
         AsyncStorage.setItem('SNAPDIET_HISTORY_GOALS',JSON.stringify([0]));
         AsyncStorage.setItem('SNAPDIET_HISTORY_DATES',JSON.stringify(['0']));
@@ -115,7 +127,7 @@ class History extends React.Component{
 
         return(
             <ImageBackground source={bgimg} style={{height:'auto', width:'auto', minHeight:'100%', minWidth:'100%'}}>
-            <ScrollView contentContainerStyle={styles.container} onScroll={(event) => this.handleScroll(event)}>
+            <ScrollView contentContainerStyle={styles.container} onScroll={(event) => {}}>
             
             {
                 this.state.historyHasloaded?
@@ -123,7 +135,7 @@ class History extends React.Component{
                         <View>
                             <View style={{height:20}}/>
 
-                            <TouchableOpacity onPress={() => this.fadeUp()}>
+                            <TouchableOpacity onPress={() => {}}>
                                 <Animated.View style={{height:this.state.chartHeight, opacity:this.state.chartOpacity}}>
                                     <View style={{padding:15}}>
                                         <PureChart data={data} type='line'/>
@@ -133,7 +145,7 @@ class History extends React.Component{
 
                             <View style={styles.listItemHeader}>
                                 <Text style={{color:'black',fontFamily:'openSans-bold',fontSize:14}}>Date</Text>
-                                <View style={{width:40}}/>
+                                <View style={{width:30}}/>
                                 <Text style={{color:'black',fontFamily:'openSans-bold', fontSize:14}}>Calories consumed</Text>
                                 <View style={{width:30}}/>
                                 <Text style={{color:'black',fontFamily:'openSans-bold',fontSize:14}}>Target</Text>
@@ -166,9 +178,15 @@ class History extends React.Component{
                             <View style={{height:20}}/>
 
                         </View>
-                    :<Text style={{fontSize:20, color:'grey'}}>No History Found</Text>
+                    :
+                    <View style={{height:'100%', justifyContent:'center'}}>
+                        <Text style={{fontSize:20, color:'grey'}}>No History Found</Text>
+                    </View>
                 
-                :<Text style={{fontSize:20, color:'grey'}}>Loading...</Text>
+                :
+                <View style={{height:'100%', justifyContent:'center'}}>
+                        <Text style={{fontSize:20, color:'grey'}}>Loading...</Text>
+                </View>
             }
         
             </ScrollView>
@@ -185,13 +203,14 @@ const styles=StyleSheet.create({
     },
     listItem:{
         width:'100%',
-        height:50,
+        height:45,
         flexDirection:'row',
         justifyContent:'center',
         alignItems:'center',
         shadowColor:'black',
         elevation:1,
-        backgroundColor:'rgb(255,248,225)'
+        backgroundColor:'rgb(240,235,230)',
+        borderRadius:50
     },
     listItemHeader:{
         width:'100%',
@@ -199,7 +218,7 @@ const styles=StyleSheet.create({
         flexDirection:'row',
         justifyContent:'center',
         alignItems:'center',
-        marginLeft:20
+        marginLeft:0
     },
     clearButton:{
         marginLeft:20,

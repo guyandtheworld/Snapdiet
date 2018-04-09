@@ -67,7 +67,7 @@ const Stacknavigation=StackNavigator(
           color:'rgba(0,0,0,0.7)',
           marginRight:70,
         },
-        title: 'SnapDiet',
+        title: 'Snapdiet',
         //<View> <Image source={require("/components/Resources/Icons/flour.png")} resizeMode="contain" /> </View>
         headerLeft:<DrawerButton navigation={navigation}/>
       })
