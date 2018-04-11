@@ -131,13 +131,15 @@ class History extends React.Component{
             
             {
                 this.state.historyHasloaded?
-                    this.props.dates[0]!='0'?
+                    this.state.dates[0]!='0'?
                         <View>
                             <View style={{height:20}}/>
-
+                            <View style={{marginLeft:40}}>
+                                <Text style={{fontFamily:'openSans'}}>Your Calorie Consumption</Text>
+                            </View>
                             <TouchableOpacity onPress={() => {}}>
                                 <Animated.View style={{height:this.state.chartHeight, opacity:this.state.chartOpacity}}>
-                                    <View style={{padding:15}}>
+                                    <View style={{padding:15, backgroundColor:'rgba(0,0,0,0.0)'}}>
                                         <PureChart data={data} type='line'/>
                                     </View>
                                 </Animated.View>
@@ -218,7 +220,7 @@ const styles=StyleSheet.create({
         flexDirection:'row',
         justifyContent:'center',
         alignItems:'center',
-        marginLeft:0
+        marginLeft:10
     },
     clearButton:{
         marginLeft:20,
