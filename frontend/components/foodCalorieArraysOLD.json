@@ -1,0 +1,32 @@
+{
+	"foodNames": ["Sweet Corn and Chicken Soup", "Clear Vegetable Soup", "Green Pea Soup", "Lentil Soup", "Tomato Soup", "Mutton Soup", "Minestrone Soup", "Doodhi Raita", "Curd Salad",
+		"Tomato Raita", "Sprouted Greengram", "Boondhi Raita", "Cucumber and Tomato Salad", "Carrot Raita", "Cucumber Raita", "Biscuits", "Sesam Biscuits", "Groundnut Biscuits",
+		"Nut Biscuits", "Fish Fried (big)", "Fish Cutlet", "Prawn Curry", "Fish Jhol", "Prawn Dopiaza", "Fillet of Fish", "Bagara Baingan", "Vegetable Kofta",
+		"Beans and Potato Curry", "Potato with Gravy", "Vegetables with Gravy", "Chana Masala", "Rava Dosa", "Perugu Atukulu (Pohe + Curd)", "Pongal", "Dosa (Plain)",
+		"Idli", "Upma", "Pesarattu", "Ragi Idli", "Onion Dosa", "Adai", "Seviyan Upma", "Puri", "Masala Dosa", "Puttu", "Appam", "Lemon Tart", "Queen Cakes (Cup Cake)",
+		"Jam Tart", "Fruit Cake", "Icecream", "Suji Kheer", "Custard/Pudding", "Fruit Cake", "Floating Island", "Jelly/Jam", "Aloo Pattice", "Bhel", "Papdi Chat", "Aloo Chat",
+		"Pea Kachori", "Chat", "Namak Para", "Potato Bonda", "Sago Vada", "Bajji/Pakora (small)", "Vada", "Masala Vada", "Chidwa (Mixture)", "Dahi Vada", "Cheese Balls",
+		"Besan Puri", "Samosa", "Vegetable Puff", "Mutton Cutlet", "Sandwiches", "Grilled Chicken (leg)", "Chicken Vindaloo", "Chicken Curry", "Dam-ka-Chicken", "Chicken Fry",
+		"Wheat Porridge", "Puffed Wheat", "Sandwiches", "Bread Toasted", "Ragi Ambali (Porridge)", "Semolina Porridge", "Cereal Flakes with Milk (corn/wheat/rice)",
+		"Barfi", "Chikki", "Srikhand", "Coconut Laddu", "Black Gram Dal Laddu", "Puran Poli", "Dalia", "Besan Barfi (small)", "Sandesh", "Kesari Halwa", "Rice Puttu",
+		"Double ka Meetha", "Mint Chutney", "Tomato Chutney", "Tamarind (with Jaggery)", "Coriander Chutney", "Groundnut Chutney", "Til Chutney", "Instant Chutney",
+		"Tamarind Chutney", "Coconut Chutney", "Grapes (30)", "Pineapple", "Papaya", "Muskmelon", "Pear", "Figs", "Jackfruit", "Custard Apple (medium size)",
+		"Sapota/Chickoo (medium size)", "Guava (medium size)", "Banana (medium size)", "Mosambi/Orange (medium size)", "Watermelon", "Mango (medium size)",
+		"Dhoodi with Chana Dal", "Potato with Other Vegetables", "Ridge Gourd Curry", "Ladies Fingers", "Cabbage Foogath", "Brinjal and Potato", "Dry Vegetable Preparations",
+		"Yams and Fenugreek Leaves", "Vegetable Kootu", "Green Leafy Vegetables", "Stuffed Tomato", "Capsicum and Potato", "Dondakaya (Ivy Gourd)",
+		"Beetroot and Cauliflower (steamed)", "Vegetable Stew", "Cauliflower and Carrot Bhaji", "Cauliflower with Green Peas", "Pumpkin Curry", "Cabbage", "Spinach with Dal", "Beans Foogath", "Vegetables with Gravy", "Paneer Masala", "Aloo Muttar", "Sambar", "Chole/Sundal", "Palak Paneer", "Fried Egg", "Scrambled Egg", "Ommelette",
+		"Boiled Egg", "Egg Curry (with one Boiled Egg)", "Vegetable Fried Rice", "Prawn Pulao", "Lemon Rice", "Vegetable Briyani", "Puliyodharai", "Mutton Briyani",
+		"Plain Rice", "Masoor Briyani", "Pulao", "Green Pea Pulao", "Bisi Bele Huli Anna", "Khicheri", "Coconut Rice", "Curd Rice", "Vegetable Pulao", "Navratna Pulao",
+		"Chicken Fried Rice", "Rajmah", "Lentil Dal (Bengali)", "Black Gram Dal", "Varan", "Bengal Gram Dal", "Lentil Dal", "Lentil(whole)", "Green Gram(whole)", "Cudhy ",
+		"Green Gram Dal", "Red Gram Dal", "Dhoodi with Chana Dal", "Chole/Sundal", "Sambar", "Phulka", "Methi Paratha", "Paratha", "Ragi Roti", "Bathura",
+		"Cauliflower Stuffed Paratha (small)", "Tandoori Roti", "Aloo Paratha", "Horlicks (with milk)", "Coffee", "Black Tea", "Cocoa (with milk)", "Bournvita (with milk)",
+		"Cow milk (2 tsp sugar)", "Buffalo milk (2 tsp sugar)", "Tea (2 tsp sugar)", "Mutton Rogan Josh", "Mutton Cutlet", "Mutton Curry", "Liver Dopiaza",
+		"Keema Kofta Curry (6 small koftas)", "Mutton Ball Curry (6 small balls)", "Beef Roast", "Syrups (Sherbat)", "Squash", "Soft Drinks", "Fresh Lime Juice", "Milk Shakes"
+	],
+	"foodValues": [170, 178, 109, 73, 46, 99, 176, 130, 86, 50, 149, 169, 12, 59, 71, 110, 155, 95, 104, 95, 95, 219, 141, 275, 179, 230, 220, 94, 130, 130, 269, 176, 175, 270, 125, 75, 203, 145, 86, 155, 145, 168, 100, 200,
+		125, 120, 204, 214, 331, 270, 400, 260, 180, 270, 131, 20, 137, 150, 285, 116, 190, 44, 68, 100, 105, 35, 70, 75, 217, 90, 125, 220, 200, 200, 169, 100, 199, 340, 320, 257, 192, 220, 53, 100, 85, 77, 220,
+		220, 60, 145, 570, 116, 130, 270, 211, 200, 70, 430, 420, 420, 7, 32, 60, 47, 66, 60, 62, 65, 62, 70, 50, 80, 15, 56, 18, 23, 130, 80, 50, 90, 40, 15, 180, 115, 120, 97, 151, 104, 134, 115, 121, 145, 130, 84,
+		116, 78, 68, 100, 100, 167, 110, 131, 115, 100, 130, 421, 41, 81, 115, 165, 160, 101, 160, 90, 170, 148, 485, 211, 178, 185, 236, 462, 255, 111, 179, 179, 260, 304, 215, 379, 433, 269, 217, 228, 153, 79,
+		161, 100, 124, 248, 95, 113, 118, 316, 109, 115, 115, 81, 80, 128, 150, 150, 154, 80, 147, 213, 148, 100, 60, 133, 139, 180, 320, 75, 127, 169, 346, 330, 320, 237, 358, 200, 75, 150, 60, 350
+	]
+}
