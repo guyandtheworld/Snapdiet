@@ -222,7 +222,7 @@ class Main extends React.Component {
               size={225}
               width={13}
               fill={percent}
-              tintColor={(percent<100)?'#b166ae':'rgb(255,0,0)'}
+              tintColor={(percent<100)? '#CB4D4C':'rgb(255,0,0)'} //'#b166ae'
               onAnimationComplete={() => {  }}
               backgroundColor="rgba(125,160,175,0.6)"
               rotation={0}>
@@ -244,7 +244,7 @@ class Main extends React.Component {
 
           <Fab style={styles.fabDesign} onPress={() => {this.props.navigation.navigate('Addcalorie')}} position='bottomRight'>
             <Animatable.View animation='flash' iterationCount={3}>
-                <Icon style={{color:'black'}} name='add'/>
+                <Icon style={{color:'#F2F2EB'}} name='add'/>
             </Animatable.View>
           </Fab>
 
@@ -255,7 +255,7 @@ class Main extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ 
   container:{
     height:'100%',
     backgroundColor:'rgba(255,255,255,0.7)', 
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
   },
   fabDesign: {
-    backgroundColor:'#66b169',
+    backgroundColor: '#CB4D4C',//'#66b169',
     width: 60,   
     height: 60,
     borderRadius: 40,
