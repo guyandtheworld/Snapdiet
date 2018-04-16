@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {View, TextInput, Switch, Picker, StyleSheet, ScrollView, AsyncStorage, ToastAndroid, TouchableHighlight} from 'react-native';
-import {Text} from 'native-base';
-import {connect} from 'react-redux';
+import { View, TextInput, Switch, Picker, StyleSheet, ScrollView, AsyncStorage, ToastAndroid, TouchableHighlight } from 'react-native';
+import { Text } from 'native-base';
+import { connect } from 'react-redux';
 
 
 class GetInfo extends React.Component {

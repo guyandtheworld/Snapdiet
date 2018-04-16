@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, StyleSheet, Button, ScrollView, AsyncStorage, ToastAndroid} from 'react-native';
-import {Text} from 'native-base';
+import { View, StyleSheet, Button, ScrollView, AsyncStorage, ToastAndroid } from 'react-native';
+import { Text } from 'native-base';
 import Swiper from 'react-native-swiper';
 import GetInfo from './getInfo';
 

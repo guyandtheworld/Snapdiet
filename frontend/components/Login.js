@@ -1,10 +1,9 @@
 import * as Expo from 'expo';
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { StyleSheet, View, KeyboardAvoidingView, NetInfo, ToastAndroid, AsyncStorage } from 'react-native';
 import { writeToDatabase, readFromDatabase } from '../firebase';
-import {Grid, Row, Col} from 'react-native-easy-grid';
-import {Text, H1, Container, Content, Button, Card, CardItem, Body, Form, Item, Label, Input, Icon} from 'native-base';
+import { Text, Button, Form } from 'native-base';
 import firebase from '../firebase';
 
 
@@ -12,7 +11,7 @@ class Login extends React.Component {
     constructor(props){
         super(props);
         this.state={
-          placeholder:''
+          
         };
     }
 
@@ -107,7 +106,11 @@ render() {
           <Form>
           {
             (this.props.uid=='' || this.props.uid==null)?
-              <Button full primary style={{marginLeft:15, marginRight:15}} onPress={this.loginWithFacebook}><Text>Login with Facebook</Text></Button>
+              <View>
+                <Button full warning style={{marginLeft:15, marginRight:15}} onPress={ () => this.props.navigation.navigate('LoginWithEmail')}><Text>Login with Email</Text></Button>
+                <View style={{ height:10 }} />
+                <Button full primary style={{marginLeft:15, marginRight:15}} onPress={this.loginWithFacebook}><Text>Login with Facebook</Text></Button>
+              </View>
               :<Button full primary style={{marginLeft:15, marginRight:15}} onPress={this.logout}><Text>Logout</Text></Button>	
           }
           </Form>
