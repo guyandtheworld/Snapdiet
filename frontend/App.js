@@ -10,6 +10,7 @@ import Calorie from './components/Calorie';
 import Store from './components/Store';
 import GetInfo from './components/getInfo';
 import Login from './components/Login';
+import LoginWithEmail from './components/loginWithEmail';
 import Sidebar from './components/Sidebar';
 import Addcalorie from './components/Addcalorie';
 import History from './components/History';
@@ -72,10 +73,10 @@ const Stacknavigation=StackNavigator(
         headerLeft:<DrawerButton navigation={navigation}/>
       })
     },
-    Calorie:{
-      screen:Calorie,
-      navigationOptions:({navigation}) => ({
-        title:'Calorie',
+    LoginWithEmail:{
+      screen:LoginWithEmail,
+      navigationOptions:({ navigation }) => ({
+        title:'Login With Email',
         headerStyle:{
           backgroundColor:'#66b169',
           color:'rgba(0,0,0,0.7)',
@@ -92,26 +93,6 @@ const Stacknavigation=StackNavigator(
         },
       })
     },
-    GetInfo:{
-      screen:GetInfo,
-      navigationOptions:({navigation}) => ({
-        title:'Personal Details',
-        headerStyle:{
-          backgroundColor:'#66b169',
-          color:'rgba(0,0,0,0.7)',
-        },
-      })
-    },
-    History:{
-      screen:History,
-      navigationOptions:({navigation}) => ({
-        title:'Your History',
-        headerStyle:{
-          backgroundColor:'#66b169',
-          color:'rgba(0,0,0,0.7)',
-        },
-      })
-    }
   }
 );
 
