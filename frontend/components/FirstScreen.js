@@ -5,7 +5,6 @@ import Swiper from 'react-native-swiper';
 import GetInfo from './getInfo';
 
 export default class FirstScreen extends React.Component{
-    
     render(){
         return(
             <Swiper style={styles.wrapper} loop={false} showsButtons={true}>
@@ -44,5 +43,5 @@ const styles= StyleSheet.create({
         color:'rgba(0,0,0,0.7)',
         fontFamily:'openSans',
         margin:20
-    }
+    },
 });

@@ -1,8 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { StyleSheet, View, AsyncStorage, FlatList, TouchableOpacity, ImageBackground } from 'react-native';
-import {Text, Button, Input, Item, Icon} from 'native-base';
-import {Grid, Col, Row} from 'react-native-easy-grid';
+import { Text, Button, Input, Item, Icon } from 'native-base';
+import { Grid, Col, Row } from 'react-native-easy-grid';
 import foodInfo from './foodCalorieArrays.json';
 
 class Addcalorie extends React.Component{
@@ -18,7 +18,7 @@ class Addcalorie extends React.Component{
             chosenFoods:[],
             chosenCalories:[],
             chosenFoodMultiplier:[],
-            totalCalorie:0
+            totalCalorie:0,
         };
     }
 
@@ -404,7 +404,7 @@ const styles=StyleSheet.create({
         paddingLeft:10,
         borderTopRightRadius:50,
         borderBottomRightRadius:50  
-    }
+    },
   });
   
   export default connect(

@@ -1,8 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {NetInfo, StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState, Image, TouchableWithoutFeedback, ImageBackground} from 'react-native';
-import {Picker, Text, Button, Form, Item, Label, Input, Icon, Fab} from 'native-base';
-import {AnimatedCircularProgress} from 'react-native-circular-progress';
+import { connect } from 'react-redux';
+import { NetInfo, StyleSheet, View, AsyncStorage, TouchableNativeFeedback, AppState, Image, TouchableWithoutFeedback, ImageBackground } from 'react-native';
+import { Picker, Text, Button, Form, Item, Label, Input, Icon, Fab } from 'native-base';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { writeToDatabase, readFromDatabase } from '../firebase';
 import * as Animatable from 'react-native-animatable';
 import Tips from './Tips/Tips';
@@ -16,7 +16,6 @@ class Main extends React.Component {
     }
     
     componentDidMount(){
-
       getCurrentCalorieOffline = async () => {
         try{
           await AsyncStorage.getItem('SNAPDIET_CURRENTCALORIE',(error,data) => {
@@ -60,7 +59,6 @@ class Main extends React.Component {
         }
         getCurrentCalorieOffline();
       }
-
       getDailyGoalOffline();
     }
 
@@ -75,7 +73,6 @@ class Main extends React.Component {
 
     componentWillMount() {
       AppState.addEventListener('change',this.appStateChanged);
-
       //Load history
       AsyncStorage.getItem('SNAPDIET_HISTORY_CONSUMED',(error,data) => {
         if(data!=null && data!=''){
@@ -100,7 +97,6 @@ class Main extends React.Component {
                     }
                   });
                 }
-
                 //Check for a new day
                 getTimeOffline = async () => {
                   await AsyncStorage.getItem('SNAPDIET_LASTSEENDATE',(error,data) => {
@@ -143,7 +139,6 @@ class Main extends React.Component {
                           }
                         }
                         storeHistory();
-            
                         //Reset calorie counter
                         storeCurrentCalorieOffline = async () => {
                           await AsyncStorage.setItem('SNAPDIET_CURRENTCALORIE','0');
@@ -184,7 +179,6 @@ class Main extends React.Component {
     }
 
     appStateChanged=(nextstate) => {
-
       if(nextstate=='background'){
         d = new Date();
         storeTimeOffline = async () => {
@@ -196,9 +190,8 @@ class Main extends React.Component {
   
   render() {
     const bgimg=require('./background.jpg');
-
     const percent=this.props.dailyGoal?(parseInt((this.props.currentCalorie/this.props.dailyGoal)*100)):0;
-//    this.props.update("updatePercent",{percent:percent});
+    //this.props.update("updatePercent",{percent:percent});
     if(percent>=80 && percent<100){
       this.props.update('updateColor',{currentColor:'#FFCC00'});
     }
@@ -212,12 +205,9 @@ class Main extends React.Component {
     return (
       <ImageBackground source={bgimg} style={{height:'auto', width:'auto', minHeight:'100%', minWidth:'100%'}}>
       <View> 
-        
         <View style={styles.container}> 
-          
           <Tips />
           <View style={{height:30}}/>
-          
             <AnimatedCircularProgress
               size={225}
               width={13}
@@ -237,17 +227,13 @@ class Main extends React.Component {
                 )
               }
             </AnimatedCircularProgress>
-
           <View style={{height:20}}/>
-
           <View style={{height:80}}/>
-
           <Fab style={styles.fabDesign} onPress={() => {this.props.navigation.navigate('Addcalorie')}} position='bottomRight'>
             <Animatable.View animation='flash' iterationCount={3}>
                 <Icon style={{color:'black'}} name='add'/>
             </Animatable.View>
           </Fab>
-
         </View>
       </View>
       </ImageBackground>
@@ -272,15 +258,12 @@ const styles = StyleSheet.create({
     fontFamily:'openSans',
     color:'rgba(0,0,0,0.5)'
   },
-  snapchatYellow:{
-    backgroundColor:'white',
-  },
   fabDesign: {
     backgroundColor:'#66b169',
     width: 60,   
     height: 60,
     borderRadius: 40,
-  }
+  },
 });
 
 export default connect(
@@ -294,5 +277,4 @@ export default connect(
             }
         }
     }
-
 )(Main);

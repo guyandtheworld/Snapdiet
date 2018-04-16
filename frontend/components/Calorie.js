@@ -1,7 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {StyleSheet, View, KeyboardAvoidingView, AsyncStorage, ImageBackground} from 'react-native';
-import {Text, Button} from 'native-base';
+import { connect } from 'react-redux';
+import { StyleSheet, View, KeyboardAvoidingView, AsyncStorage, ImageBackground } from 'react-native';
+import { Text, Button } from 'native-base';
 
 class Calorie extends React.Component{
     constructor(props){
@@ -62,31 +62,24 @@ class Calorie extends React.Component{
 
         return(
             <ImageBackground source={bgimg} style={{height:'auto', width:'auto', minHeight:'100%', minWidth:'100%'}}>
-            <KeyboardAvoidingView style={{backgroundColor:'rgba(255,255,255,0.7)', minHeight:'100%', minWidth:'100%'}} behavior='padding' >                
-
+            <KeyboardAvoidingView style={{backgroundColor:'rgba(255,255,255,0.7)', minHeight:'100%', minWidth:'100%'}} behavior='padding' >
                 <View style = {styles.container}>
                     <Text style = {styles.header} > Calories consumed </Text>
                     <Text style = {[styles.currentCal,{color:this.props.currentColor}]} > {this.props.currentCalorie} </Text>
                     <Text style = {styles.header} > Daily Calorie Goal </Text>
                     <Text style = {styles.goalCal}> {this.props.dailyGoal} </Text>
-
                     <View style = {styles.buttonContainer}>
                         <Button success onPress={()=>{this.decreaseDailyGoal()}}> 
                             <Text> -100 </Text>                    
                         </Button>
-                        
                         <Button warning style={{marginLeft: 10}} onPress={() => {this.increaseDailyGoal()}}> 
                             <Text> +100 </Text>                    
                         </Button>
                     </View>
-
                     <Text style={{color:'rgba(0,0,0,0.5)', fontFamily:'openSans'}}> Change Daily Calorie Goal </Text>
-
                 </View> 
-
             </KeyboardAvoidingView>
             </ImageBackground>
-
         );
     }
 }
@@ -129,7 +122,7 @@ const styles = StyleSheet.create({
         paddingLeft:20,
         paddingRight:20,
         fontSize:12
-    }
+    },
 });
 
 export default connect(

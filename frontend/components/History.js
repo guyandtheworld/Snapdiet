@@ -1,9 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import { StyleSheet, View, AsyncStorage, FlatList, TouchableOpacity, ScrollView, Animated, Easing, ImageBackground, Alert} from 'react-native';
-import {Text, Button, Input, Item, Icon} from 'native-base';
+import { connect } from 'react-redux';
+import { StyleSheet, View, AsyncStorage, FlatList, TouchableOpacity, ScrollView, Animated, Easing, ImageBackground, Alert } from 'react-native';
+import { Text, Button, Input, Item, Icon } from 'native-base';
 import PureChart from 'react-native-pure-chart';
-import * as Animatable from 'react-native-animatable';
 
 class History extends React.Component{
     constructor(props){
@@ -128,7 +127,6 @@ class History extends React.Component{
         return(
             <ImageBackground source={bgimg} style={{height:'auto', width:'auto', minHeight:'100%', minWidth:'100%'}}>
             <ScrollView contentContainerStyle={styles.container} onScroll={(event) => {}}>
-            
             {
                 this.state.historyHasloaded?
                     this.state.dates[0]!='0'?
@@ -144,7 +142,6 @@ class History extends React.Component{
                                     </View>
                                 </Animated.View>
                             </TouchableOpacity>
-
                             <View style={styles.listItemHeader}>
                                 <Text style={{color:'black',fontFamily:'openSans-bold',fontSize:14}}>Date</Text>
                                 <View style={{width:30}}/>
@@ -152,7 +149,6 @@ class History extends React.Component{
                                 <View style={{width:30}}/>
                                 <Text style={{color:'black',fontFamily:'openSans-bold',fontSize:14}}>Target</Text>
                             </View>
-                            
                             <FlatList 
                                 data={this.state.actualCalories}
                                 renderItem={({item,index}) => {
@@ -172,13 +168,11 @@ class History extends React.Component{
                                 }}
                                 scrollEnabled={false}
                             />
-
                             <View style={{height:20}}/>
                             <Button style={styles.clearButton} onPress={() => this.clearHistory()} bordered danger>
                                 <Text style={{color:'black'}}> Clear History </Text>
                             </Button>
                             <View style={{height:20}}/>
-
                         </View>
                     :
                     <View style={{height:'100%', justifyContent:'center'}}>
@@ -190,7 +184,6 @@ class History extends React.Component{
                         <Text style={{fontSize:20, color:'grey'}}>Loading...</Text>
                 </View>
             }
-        
             </ScrollView>
             </ImageBackground>
         );
@@ -225,7 +218,7 @@ const styles=StyleSheet.create({
     clearButton:{
         marginLeft:20,
         alignSelf:'center'
-    }
+    },
   });
   
   export default connect(
