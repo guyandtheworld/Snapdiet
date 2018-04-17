@@ -44,7 +44,6 @@ class Login extends React.Component {
             AsyncStorage.setItem('LOCAL_PIC',result.providerData[0].photoURL);
 
             if(this.props.uid != null && this.props.uid != ''){
-              console.log("fetching details of invalid user");
               NetInfo.getConnectionInfo().then((connectionInfo) => {
                 if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular"){
                   this.fetchUserInfo(this.props.uid);

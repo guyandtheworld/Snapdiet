@@ -65,7 +65,6 @@ class History extends React.Component{
     }
 
     handleScroll = (event) => {
-        //console.log(this.state.chartHeight);
         if(event.nativeEvent.contentOffset.y==0)
             this.fadeDown();
         else if(event.nativeEvent.contentOffset.y>=0)

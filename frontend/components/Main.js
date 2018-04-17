@@ -17,32 +17,24 @@ class Main extends React.Component {
     
     componentDidMount(){
       getCurrentCalorieOffline = async () => {
-        try{
-          await AsyncStorage.getItem('SNAPDIET_CURRENTCALORIE',(error,data) => {
-            if(error){
-              console.log(error);
-              this.props.update('updateCalorie',{currentCalorie:0});
-            }
-            else if(data==null){
-              console.log("Data does not exist");
-              this.props.update('updateCalorie',{currentCalorie:0});
-            }
-            else{
-              this.props.update('updateCalorie',{currentCalorie:parseInt(data)});
-            }
-          });
-        }
-        catch(e){
-          console.log(e);
-        }
+        await AsyncStorage.getItem('SNAPDIET_CURRENTCALORIE',(error,data) => {
+          if(error){
+            this.props.update('updateCalorie',{currentCalorie:0});
+          }
+          else if(data==null){
+            console.log("Data does not exist");
+            this.props.update('updateCalorie',{currentCalorie:0});
+          }
+          else{
+            this.props.update('updateCalorie',{currentCalorie:parseInt(data)});
+          }
+        });
       }
 
       getDailyGoalOffline = async () => {
-        console.log("Getting daily goal");
         try{
           await AsyncStorage.getItem('SNAPDIET_DAILYGOAL',(error,data) => {
             if(error){
-              console.log(error);
               this.props.update('updateGoal',{dailyGoal:0});
             }
             else if(data==null){
@@ -87,9 +79,9 @@ class Main extends React.Component {
               this.props.update('updateHistoryDates',{dates:JSON.parse(data)});
             }
             AsyncStorage.getItem('LOCAL_UID',(error,data) => {
-            if(data!=null && data!=''){
-              this.props.update('UID',{uid:data});
-            }
+                if(data!=null && data!=''){
+                  this.props.update('UID',{uid:data});
+                }
                 if(this.props.uid != null && this.props.uid != ''){
                   NetInfo.getConnectionInfo().then((connectionInfo) => {
                     if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular"){
