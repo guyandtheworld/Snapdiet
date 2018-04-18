@@ -84,9 +84,7 @@ class History extends React.Component{
     }
 
     clearConfirmed = () => {
-        AsyncStorage.setItem('SNAPDIET_HISTORY_CONSUMED',JSON.stringify([0]));
-        AsyncStorage.setItem('SNAPDIET_HISTORY_GOALS',JSON.stringify([0]));
-        AsyncStorage.setItem('SNAPDIET_HISTORY_DATES',JSON.stringify(['0']));
+        AsyncStorage.setItem('SNAPDIET_HISTORY','');
         this.props.update('updateHistoryConsumed',{consumed:[0]});
         this.props.update('updateHistoryGoals',{goals:[0]});
         this.props.update('updateHistoryDates',{dates:[0]});
