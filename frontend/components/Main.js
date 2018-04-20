@@ -54,15 +54,6 @@ class Main extends React.Component {
     getDailyGoalOffline();
   }
 
-
-  fetchUserInfo = async (uid) => {
-    let userInfo = await readFromDatabase(uid);
-    console.log(userInfo);
-    this.props.update('updateHistoryConsumed',{consumed:userInfo.actualCalories});
-    this.props.update('updateHistoryGoals',{goals:userInfo.goalCalories});
-    this.props.update('updateHistoryDates',{dates:userInfo.dates});
-  }
-
   storeUserInfo = async (history) => {
     if(this.props.uid != null && this.props.uid != ''){
       NetInfo.getConnectionInfo().then((connectionInfo) => {
@@ -72,7 +63,7 @@ class Main extends React.Component {
                 "name":this.props.name,
                 "data":history,
             };
-            //writeToDatabase(dataBody);
+            writeToDatabase(dataBody);
         }
       });
     }
@@ -96,15 +87,8 @@ class Main extends React.Component {
         this.props.update('updateHistoryDates',{dates:history.dates});
       }
       AsyncStorage.getItem('LOCAL_UID',(error,data) => {
-        console.log("UDIUIDUID");
-        console.log(data);
         if(data != null && data != '') {
           this.props.update('UID',{uid:data});
-          NetInfo.getConnectionInfo().then((connectionInfo) => {
-            if(connectionInfo.type == "wifi" || connectionInfo.type == "cellular") {
-              //this.fetchUserInfo(data);
-            }
-          });
         }
         //Check for a new day
         getTimeOffline = async () => {
@@ -112,7 +96,7 @@ class Main extends React.Component {
             d = new Date();
             if(data!=null && data!='')
               if(
-                JSON.parse(data)[0]<d.getMinutes() ||
+                JSON.parse(data)[0]<d.getDate() ||
                 JSON.parse(data)[1]<d.getMonth() ||
                 JSON.parse(data)[2]<d.getFullYear()
               ) {
@@ -121,7 +105,7 @@ class Main extends React.Component {
                 storeHistory = async () => {
                   let dobj = new Date();
                   dobj.setDate(dobj.getDate()-1);
-                  let dstring = dobj.getMinutes()+'/'+dobj.getMonth()+'/'+dobj.getFullYear();
+                  let dstring = dobj.getDate()+'/'+dobj.getMonth()+'/'+dobj.getFullYear();
                   if(this.props.dates[0]=='0') {
                     console.log("No history present");
                     let history = {
