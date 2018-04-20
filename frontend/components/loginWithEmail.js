@@ -11,7 +11,8 @@ class LoginWithEmail extends React.Component {
     constructor(props){
         super(props);
         this.state={
-
+		email: '',
+		password: ''
         };
     }
 
@@ -25,8 +26,16 @@ class LoginWithEmail extends React.Component {
     }
     
     loginWithEmail = () => {
-      login = async () => {
-            //ADD LOGIN LOGIC HERE
+      login = async (email,password) => {
+            try{
+
+		firebase.auth().signInWithEmailAndPassword(email,password).then(function (user) {
+			console.log(user)
+		})
+	    }
+	    catch(error){
+		console.log(error,toString())	     
+	    } 
       }
       NetInfo.getConnectionInfo().then((connectionInfo) => {
         if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular"){
@@ -41,7 +50,39 @@ class LoginWithEmail extends React.Component {
     logout = () => {
       NetInfo.getConnectionInfo().then((connectionInfo) => {
         if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular"){
-          //ADD LOGOUT LOGIC HERE
+          firebase.auth().signOut().then(() => {
+            console.log("User signed out");
+            AsyncStorage.setItem('LOCAL_UID','');
+            AsyncStorage.setItem('LOCAL_NAME','Snapdiet');
+            AsyncStorage.setItem('LOCAL_PIC','');
+            this.props.update('UID',{uid:''});
+            this.props.update('USERNAME',{name:'Snapdiet'});
+            this.props.update('USERPIC',{pic:''});
+
+	}).catch((error) => {
+            console.log(error);
+          });		
+        }
+        else{
+          ToastAndroid.show('Network error. Please check your connection.', ToastAndroid.LONG);
+        }
+      });
+    }
+
+    signUpWithEmail = () => {
+      signUp = async (email,password) => {
+            try{
+
+		firebase.auth().createUserWithEmailAndPassword(email,password)
+	    }
+	    catch(error){
+		console.log(error,toString())	     
+	    } 
+	    
+      }
+      NetInfo.getConnectionInfo().then((connectionInfo) => {
+        if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular"){
+          signUp();
         }
         else{
           ToastAndroid.show('Network error. Please check your connection.', ToastAndroid.LONG);
@@ -67,7 +108,7 @@ render() {
                     <View style={{ height: 16 }} />
                     <Button full info style={{ marginLeft:15, marginRight:15 }} onPress={this.loginWithEmail}><Text>Login</Text></Button>	
                     <View style={{ height: 16 }} />
-                    <Button full info style={{ marginLeft:15, marginRight:15 }} onPress={this.loginWithEmail}><Text>Sign up</Text></Button>	
+                    <Button full info style={{ marginLeft:15, marginRight:15 }} onPress={this.signUpWithEmail}><Text>Sign up</Text></Button>	
                 </View>
                 :
                 <Button full warning style={{ marginLeft:15, marginRight:15 }} onPress={this.logout}><Text>Logout</Text></Button>	
