@@ -8,17 +8,17 @@ import firebase from '../firebase';
 
 
 class LoginWithEmail extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-		email: '',
-		password: ''
+        this.state = {
+          email: '',
+          password: ''
         };
     }
 
     fetchUserInfo = async (uid) => {
       let userInfo = await readFromDatabase(uid);
-      if(userInfo!=null || userInfo!=undefined){
+      if(userInfo!=null || userInfo!=undefined) {
         this.props.update('updateHistoryConsumed',{consumed:userInfo.actualCalories});
         this.props.update('updateHistoryGoals',{goals:userInfo.goalCalories});
         this.props.update('updateHistoryDates',{dates:userInfo.dates});
@@ -27,29 +27,28 @@ class LoginWithEmail extends React.Component {
     
     loginWithEmail = () => {
       login = async (email,password) => {
-            try{
-
-		firebase.auth().signInWithEmailAndPassword(email,password).then(function (user) {
-			console.log(user)
-		})
-	    }
-	    catch(error){
-		console.log(error,toString())	     
-	    } 
+        try{
+          firebase.auth().signInWithEmailAndPassword(email,password).then(function (user) {
+            console.log(user);
+          })
+	      }
+	      catch(error){
+		      console.log(error,toString());
+	      }
       }
       NetInfo.getConnectionInfo().then((connectionInfo) => {
-        if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular"){
+        if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular") {
           login();
         }
         else{
-          ToastAndroid.show('Network error. Please check your connection.', ToastAndroid.LONG);
+          ToastAndroid.show('Network error. Please check your connection.',ToastAndroid.LONG);
         }
       });
     }
 
     logout = () => {
       NetInfo.getConnectionInfo().then((connectionInfo) => {
-        if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular"){
+        if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular") {
           firebase.auth().signOut().then(() => {
             console.log("User signed out");
             AsyncStorage.setItem('LOCAL_UID','');
@@ -58,34 +57,31 @@ class LoginWithEmail extends React.Component {
             this.props.update('UID',{uid:''});
             this.props.update('USERNAME',{name:'Snapdiet'});
             this.props.update('USERPIC',{pic:''});
-
-	}).catch((error) => {
+	        }).catch((error) => {
             console.log(error);
           });		
         }
         else{
-          ToastAndroid.show('Network error. Please check your connection.', ToastAndroid.LONG);
+          ToastAndroid.show('Network error. Please check your connection.',ToastAndroid.LONG);
         }
       });
     }
 
     signUpWithEmail = () => {
       signUp = async (email,password) => {
-            try{
-
-		firebase.auth().createUserWithEmailAndPassword(email,password)
-	    }
-	    catch(error){
-		console.log(error,toString())	     
-	    } 
-	    
+        try{
+          firebase.auth().createUserWithEmailAndPassword(email,password)
+        }
+        catch(error){
+          console.log(error,toString())	     
+        }   
       }
       NetInfo.getConnectionInfo().then((connectionInfo) => {
-        if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular"){
-          signUp();
+        if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular") {
+          signUp(this.state.email,this.state.password);
         }
         else{
-          ToastAndroid.show('Network error. Please check your connection.', ToastAndroid.LONG);
+          ToastAndroid.show('Network error. Please check your connection.',ToastAndroid.LONG);
         }
       });
     }
