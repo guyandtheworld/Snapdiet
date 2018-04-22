@@ -65,8 +65,7 @@ const Stacknavigation=StackNavigator(
         headerTitleStyle: {
           alignSelf: 'center',
           fontSize: 26,
-          color:'rgba(255,255,255,1)',
-          font: 'Lobster',          
+          color:'rgba(255,255,255,1)',        
           //marginRight:70,
         },
         title: 'Snapdiet',

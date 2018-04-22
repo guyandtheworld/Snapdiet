@@ -60,7 +60,6 @@ class GetInfo extends React.Component {
 							dailyGoal *= 1.9;
 							break;
 			}
-			console.log(dailyGoal);
 			dailyGoal = Math.floor(dailyGoal);
 			this.props.update('updateGoal',{dailyGoal:dailyGoal});
 			AsyncStorage.setItem('SNAPDIET_DAILYGOAL',dailyGoal.toString());

@@ -30,7 +30,7 @@ class Addcalorie extends React.Component{
         });
     }
 
-    addCalories=() => {
+    addCalories = () => {
         this.setState({
             currentCalorie:this.state.currentCalorie+this.state.totalCalorie,
             totalCalorie:0,
@@ -54,7 +54,7 @@ class Addcalorie extends React.Component{
         });
       }
 
-    updateList=(text) => {
+    updateList = (text) => {
         this.setState({
             foodNameEntered:text
         },() => {
@@ -74,7 +74,7 @@ class Addcalorie extends React.Component{
         });
     }
 
-    choseItem=(item) => {
+    choseItem = (item) => {
         let total=0;
         let arr = this.state.chosenFoodMultiplier;
         arr.push(0);
@@ -82,7 +82,7 @@ class Addcalorie extends React.Component{
             data:[],
             foodNameEntered:'',
             chosenFoods:this.state.chosenFoods.concat([item]),
-            chosenCalories:this.state.chosenCalories.concat([this.state.foodValues[this.state.foodNames.indexOf(item)]]),
+            chosenCalories:this.state.chosenCalories.concat([parseInt(this.state.foodValues[this.state.foodNames.indexOf(item)])]),
             chosenFoodMultiplier:arr
         },() => {
             for(i in this.state.chosenCalories){
@@ -97,8 +97,7 @@ class Addcalorie extends React.Component{
         });
     }
 
-    removeItem=(item) => {
-        console.log(item);
+    removeItem = (item) => {
         for(i in this.state.chosenFoods){
             if(this.state.chosenFoods[i]==item){
                 //Remove food name
@@ -141,12 +140,12 @@ class Addcalorie extends React.Component{
         }
     }
 
-    addQty=(item) => {
+    addQty = (item) => {
         for(i in this.state.chosenFoods){
             if(this.state.chosenFoods[i]==item){
                 //Calorie increment
                 let arr=this.state.chosenCalories;
-                arr[i]+=this.state.foodValues[this.state.foodNames.indexOf(item)];
+                arr[i]+=parseInt(this.state.foodValues[this.state.foodNames.indexOf(item)]);
                 this.setState({
                     chosenCalories:arr
                 },() => {
@@ -155,7 +154,6 @@ class Addcalorie extends React.Component{
                     let index=this.state.chosenFoods.indexOf(item);
                     if(arr[index]+1)
                         arr[index]+=1;
-                    console.log(arr);
                     this.setState({
                         chosenFoodMultiplier:arr
                     });
@@ -180,14 +178,14 @@ class Addcalorie extends React.Component{
         }
     }
 
-    removeQty=(item) => {
+    removeQty = (item) => {
         for(i in this.state.chosenFoods){
             if(this.state.chosenFoods[i]==item){
                 //Calorie decrement
                 let arr=this.state.chosenCalories;
-                let index=this.state.foodNames.indexOf(item);
-                if(arr[i]-this.state.foodValues[index]>0){
-                    arr[i]-=this.state.foodValues[index];
+                let calVal=parseInt(this.state.foodValues[this.state.foodNames.indexOf(item)]);
+                if(arr[i]-calVal>0){
+                    arr[i]-=calVal;
                     this.setState({
                         chosenCalories:arr
                     },() => {

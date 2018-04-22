@@ -37,7 +37,6 @@ class Notif extends React.Component {
 				priority:'max'
 			}
 		}
-		console.log(AppState.currentState);
 		if (AppState.currentState == 'background') {
 			Notifications.dismissAllNotificationsAsync();
 			Notifications.presentLocalNotificationAsync(localNotification);

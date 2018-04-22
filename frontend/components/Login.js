@@ -17,53 +17,57 @@ class Login extends React.Component {
 
     fetchUserInfo = async (uid) => {
       let userInfo = await readFromDatabase(uid);
-      if(userInfo!=null || userInfo!=undefined){
-        this.props.update('updateHistoryConsumed',{consumed:userInfo.actualCalories});
-        this.props.update('updateHistoryGoals',{goals:userInfo.goalCalories});
-        this.props.update('updateHistoryDates',{dates:userInfo.dates});
+      if(userInfo == null || userInfo == undefined) {
+        let history = {
+          'consumed':[this.props.currentCalorie],
+          'goals':[this.props.dailyGoal],
+          'dates':[this.props.dates],
+        };
+        let dataBody={
+          "uid":this.props.uid,
+          "name":this.props.name,
+          "data":history,
+        };
+        writeToDatabase(dataBody);
+      }
+      else if(userInfo != null || userInfo != undefined && this.props.dates == ['0']) {
+        userInfo = JSON.parse(userInfo);
+        this.props.update('updateHistoryConsumed',{consumed:userInfo.history.consumed});
+        this.props.update('updateHistoryGoals',{goals:userInfo.history.goals});
+        this.props.update('updateHistoryDates',{dates:userInfo.history.dates});
+        AsyncStorage.setItem('SNAPDIET_HISTORY', JSON.stringify(userInfo.history));
+      }
+      else {
+        Alert.alert(
+          'Overwrite history?',
+          'Select OK to overwrite locally stored data with data from your online account',
+          [
+            {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+            {text: 'OK', onPress: () => this.overwriteConfirmed(userInfo)},
+          ],
+          { cancelable: true }
+      )
       }
     }
     
+    overwriteConfirmed = (userInfo) => {
+      userInfo = JSON.parse(userInfo);
+      this.props.update('updateHistoryConsumed',{consumed:userInfo.history.consumed});
+      this.props.update('updateHistoryGoals',{goals:userInfo.history.goals});
+      this.props.update('updateHistoryDates',{dates:userInfo.history.dates});
+      AsyncStorage.setItem('SNAPDIET_HISTORY', JSON.stringify(userInfo.history));
+    }
+
     loginWithFacebook = () => {
       loginFB = async () => {
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync(
           '2074407626180948',{ permissions: ['public_profile'] }
         );
-      
         if (type == 'success') {
           const credential = firebase.auth.FacebookAuthProvider.credential(token);
-      
           firebase.auth().signInWithCredential(credential).then((result) => {
             console.log(result);
-            this.props.update('UID',{uid:result.providerData[0].uid});
-            this.props.update('USERNAME',{name:result.providerData[0].displayName});
-            this.props.update('USERPIC',{pic:result.providerData[0].photoURL});
-
-            AsyncStorage.setItem('LOCAL_UID',result.providerData[0].uid);
-            AsyncStorage.setItem('LOCAL_NAME',result.providerData[0].displayName);
-            AsyncStorage.setItem('LOCAL_PIC',result.providerData[0].photoURL);
-
-            if(this.props.uid != null && this.props.uid != ''){
-              console.log("fetching details of invalid user");
-              NetInfo.getConnectionInfo().then((connectionInfo) => {
-                if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular"){
-                  this.fetchUserInfo(this.props.uid);
-                }
-              });
-
-              NetInfo.getConnectionInfo().then((connectionInfo) => {
-                if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular"){
-                  let dataBody={
-                      "uid":this.props.uid,
-                      "dates":this.props.dates,
-                      "actualCalories":this.props.actualCalories,
-                      "goalCalories":this.props.goalCalories
-                  };
-                  writeToDatabase(dataBody);
-                }
-              });
-
-            }
+            this.fetchUserInfo(result.providerData[0].uid);
           });
         }
       }

@@ -20,10 +20,8 @@ class Tips extends React.Component {
 	}
 
 	componentWillMount() {
-    	console.log("Tips did mount!!");
     	this.state.current = "T" + this.state.tipNumber.toString();
     	this.state.tip = generalTips[this.state.current];
-    	console.log("tipnumber:" + this.state.tipNumber.toString());
   	}
 
 
