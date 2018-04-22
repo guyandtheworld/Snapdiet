@@ -1,7 +1,7 @@
 import * as Expo from 'expo';
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, View, KeyboardAvoidingView, NetInfo, ToastAndroid, AsyncStorage } from 'react-native';
+import { StyleSheet, View, KeyboardAvoidingView, NetInfo, ToastAndroid, AsyncStorage, Alert } from 'react-native';
 import { writeToDatabase, readFromDatabase } from '../firebase';
 import { Text, Button, Input, Form, Item, Label } from 'native-base';
 import firebase from '../firebase';
@@ -18,27 +18,65 @@ class LoginWithEmail extends React.Component {
 
     fetchUserInfo = async (uid) => {
       let userInfo = await readFromDatabase(uid);
-      if(userInfo!=null || userInfo!=undefined) {
-        this.props.update('updateHistoryConsumed',{consumed:userInfo.actualCalories});
-        this.props.update('updateHistoryGoals',{goals:userInfo.goalCalories});
-        this.props.update('updateHistoryDates',{dates:userInfo.dates});
+      if(userInfo == null || userInfo == undefined) {
+        let history = {
+          'consumed':[this.props.currentCalorie],
+          'goals':[this.props.dailyGoal],
+          'dates':[this.props.dates],
+        };
+        let dataBody={
+          "uid":this.props.uid,
+          "name":this.props.name,
+          "data":history,
+        };
+        writeToDatabase(dataBody);
+      }
+      else if(userInfo != null || userInfo != undefined && this.props.dates == ['0']) {
+        userInfo = JSON.parse(userInfo);
+        this.props.update('updateHistoryConsumed',{consumed:userInfo.history.consumed});
+        this.props.update('updateHistoryGoals',{goals:userInfo.history.goals});
+        this.props.update('updateHistoryDates',{dates:userInfo.history.dates});
+        AsyncStorage.setItem('SNAPDIET_HISTORY', JSON.stringify(userInfo.history));
+      }
+      else {
+        Alert.alert(
+          'Overwrite history?',
+          'Select OK to overwrite locally stored data with data from your online account',
+          [
+            {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+            {text: 'OK', onPress: () => this.overwriteConfirmed(userInfo)},
+          ],
+          { cancelable: true }
+      )
       }
     }
     
+    overwriteConfirmed = (userInfo) => {
+      userInfo = JSON.parse(userInfo);
+      this.props.update('updateHistoryConsumed',{consumed:userInfo.history.consumed});
+      this.props.update('updateHistoryGoals',{goals:userInfo.history.goals});
+      this.props.update('updateHistoryDates',{dates:userInfo.history.dates});
+      AsyncStorage.setItem('SNAPDIET_HISTORY', JSON.stringify(userInfo.history));
+    }
+
     loginWithEmail = () => {
       login = async (email,password) => {
         try{
-          firebase.auth().signInWithEmailAndPassword(email,password).then(function (user) {
+          firebase.auth().signInWithEmailAndPassword(email,password).then((user) => {
             console.log(user);
-          })
+            this.props.update('UID',{uid:user.uid});
+            this.fetchUserInfo(user.uid);
+            ToastAndroid.show('Logged in successfully',ToastAndroid.LONG);
+            this.props.navigation.goBack();
+          });
 	      }
 	      catch(error){
 		      console.log(error,toString());
 	      }
       }
       NetInfo.getConnectionInfo().then((connectionInfo) => {
-        if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular") {
-          login();
+        if(connectionInfo.type == "wifi" || connectionInfo.type == "cellular") {
+          login(this.state.email,this.state.password);
         }
         else{
           ToastAndroid.show('Network error. Please check your connection.',ToastAndroid.LONG);
@@ -70,7 +108,13 @@ class LoginWithEmail extends React.Component {
     signUpWithEmail = () => {
       signUp = async (email,password) => {
         try{
-          firebase.auth().createUserWithEmailAndPassword(email,password)
+          firebase.auth().createUserWithEmailAndPassword(email,password).then((user) => {
+            console.log(user);
+            this.props.update('UID',{uid:user.uid});
+            this.fetchUserInfo(user.uid);
+            ToastAndroid.show('Account created successfully',ToastAndroid.LONG);
+            this.props.navigation.goBack();
+          });
         }
         catch(error){
           console.log(error,toString())	     
@@ -78,7 +122,10 @@ class LoginWithEmail extends React.Component {
       }
       NetInfo.getConnectionInfo().then((connectionInfo) => {
         if(connectionInfo.type=="wifi" || connectionInfo.type=="cellular") {
-          signUp(this.state.email,this.state.password);
+          (this.state.password.length >= 8)?
+            signUp(this.state.email,this.state.password)
+            :
+            ToastAndroid.show('Password has to be longer than 8 characters',ToastAndroid.LONG);
         }
         else{
           ToastAndroid.show('Network error. Please check your connection.',ToastAndroid.LONG);
@@ -86,29 +133,36 @@ class LoginWithEmail extends React.Component {
       });
     }
 
-render() {
+  updateEmail = (value) => {
+    this.setState({
+      email:value,
+    });
+  }
+
+  updatePass = (value) => {
+    this.setState({
+      password:value,
+    });
+  }
+
+  render() {
     return (
       <KeyboardAvoidingView keyboardVerticalOffset={-64} behavior='padding' style={styles.container}>
           <Form style={styles.formStyle}>
-          {
-            (this.props.uid=='' || this.props.uid==null)?
-                <View style={{ width:'90%' }}>
-                     <Item floatingLabel>
-                        <Label>Username</Label>
-                        <Input />
-                    </Item>
-                    <Item floatingLabel>
-                        <Label>Password</Label>
-                        <Input secureTextEntry />
-                    </Item>
-                    <View style={{ height: 16 }} />
-                    <Button full info style={{ marginLeft:15, marginRight:15 }} onPress={this.loginWithEmail}><Text>Login</Text></Button>	
-                    <View style={{ height: 16 }} />
-                    <Button full info style={{ marginLeft:15, marginRight:15 }} onPress={this.signUpWithEmail}><Text>Sign up</Text></Button>	
-                </View>
-                :
-                <Button full warning style={{ marginLeft:15, marginRight:15 }} onPress={this.logout}><Text>Logout</Text></Button>	
-          }
+            <View style={{ width:'90%' }}>
+                  <Item floatingLabel>
+                    <Label>Email</Label>
+                    <Input onChangeText={(value) => this.updateEmail(value)} />
+                </Item>
+                <Item floatingLabel>
+                    <Label>Password</Label>
+                    <Input secureTextEntry onChangeText={(value) => this.updatePass(value)} />
+                </Item>
+                <View style={{ height: 16 }} />
+                <Button full info style={{ marginLeft:15, marginRight:15 }} onPress={this.loginWithEmail}><Text>Login</Text></Button>	
+                <View style={{ height: 16 }} />
+                <Button full info style={{ marginLeft:15, marginRight:15 }} onPress={this.signUpWithEmail}><Text>Sign up</Text></Button>	
+            </View>
           </Form>
       </KeyboardAvoidingView>
     );
