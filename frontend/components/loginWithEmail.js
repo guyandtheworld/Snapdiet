@@ -1,7 +1,7 @@
 import * as Expo from 'expo';
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, View, KeyboardAvoidingView, NetInfo, ToastAndroid, AsyncStorage, Alert } from 'react-native';
+import { StyleSheet, View, KeyboardAvoidingView, NetInfo, ToastAndroid, AsyncStorage, Alert, TouchableOpacity } from 'react-native';
 import { writeToDatabase, readFromDatabase } from '../firebase';
 import { Text, Button, Input, Form, Item, Label } from 'native-base';
 import firebase from '../firebase';
@@ -47,7 +47,7 @@ class LoginWithEmail extends React.Component {
             {text: 'OK', onPress: () => this.overwriteConfirmed(userInfo)},
           ],
           { cancelable: true }
-      )
+      );
       }
     }
     
@@ -145,6 +145,30 @@ class LoginWithEmail extends React.Component {
     });
   }
 
+  resetPass = () => {
+    sendResetMail = () => {
+      firebase.auth().sendPasswordResetEmail(this.state.email).then(() => {
+        ToastAndroid.show('Password reset mail sent',ToastAndroid.LONG);
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
+    if(this.state.email == '') {
+      ToastAndroid.show('Please enter your email',ToastAndroid.SHORT);
+    }
+    else{
+      Alert.alert(
+        'Send password reset email?',
+        `Email will be sent to ${this.state.email}`,
+        [
+          {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+          {text: 'OK', onPress: () => sendResetMail()},
+        ],
+        { cancelable: true }
+      );
+    }
+  }
+
   render() {
     return (
       <KeyboardAvoidingView keyboardVerticalOffset={-64} behavior='padding' style={styles.container}>
@@ -161,7 +185,8 @@ class LoginWithEmail extends React.Component {
                 <View style={{ height: 16 }} />
                 <Button full info style={{ marginLeft:15, marginRight:15 }} onPress={this.loginWithEmail}><Text>Login</Text></Button>	
                 <View style={{ height: 16 }} />
-                <Button full info style={{ marginLeft:15, marginRight:15 }} onPress={this.signUpWithEmail}><Text>Sign up</Text></Button>	
+                <Button full info style={{ marginLeft:15, marginRight:15 }} onPress={this.signUpWithEmail}><Text>Sign up</Text></Button>
+               <TouchableOpacity onPress={this.resetPass}><Text style={styles.forgotPass} >Forgot password?</Text></TouchableOpacity>		
             </View>
           </Form>
       </KeyboardAvoidingView>
@@ -170,18 +195,23 @@ class LoginWithEmail extends React.Component {
 }
 
 const styles=StyleSheet.create({
-  container:{
-    height:'100%',
-    backgroundColor:'rgb(230,230,230)', 
-    padding:16, 
-    justifyContent:'center',
-    alignItems:'center',
+  container: {
+    height: '100%',
+    backgroundColor: 'rgb(230,230,230)', 
+    padding: 16, 
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  formStyle:{
-      height:'100%',
-      width:'100%',
-      justifyContent:'center',
-      alignItems:'center',
+  formStyle: {
+      height: '100%',
+      width: '100%',
+      justifyContent: 'center',
+      alignItems: 'center',
+  },
+  forgotPass: {
+    textAlign: 'center',
+    margin: 16,
+    color: 'rgb(30,30,30)',
   }
 });
 
