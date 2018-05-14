@@ -16,7 +16,7 @@ import firebase from "../firebase";
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { googleDetails:'' };
   }
 
   fetchUserInfo = async uid => {
@@ -90,7 +90,12 @@ class Login extends React.Component {
           .auth()
           .signInWithCredential(credential)
           .then(result => {
-            console.log(result);
+            this.props.update('UID',{uid:result.providerData[0].uid});
+            this.props.update('USERNAME',{name:result.providerData[0].displayName});
+            this.props.update('USERPIC',{pic:result.providerData[0].photoURL});
+            AsyncStorage.setItem('LOCAL_UID',result.providerData[0].uid);
+            AsyncStorage.setItem('LOCAL_NAME',result.providerData[0].displayName);
+            AsyncStorage.setItem('LOCAL_PIC',result.providerData[0].photoURL);
             this.fetchUserInfo(result.providerData[0].uid);
           });
       }
@@ -106,6 +111,47 @@ class Login extends React.Component {
       }
     });
   };
+
+  loginWithGoogle = () => {
+    signInWithGoogleAsync = async () => {
+      try {
+        const result = await Expo.Google.logInAsync({
+          androidClientId: '1069277353491-uroe4n7o2ddqnkimupbui3tlecu9fsla.apps.googleusercontent.com',
+          iosClientId: '1069277353491-uroe4n7o2ddqnkimupbui3tlecu9fsla.apps.googleusercontent.com',
+          scopes: ['profile', 'email'],
+        });
+        console.log("HERE"+JSON.stringify(result));
+        if (result.type === 'success') {
+          console.log(result.accessToken);
+          const credential = firebase.auth.GoogleAuthProvider.credential(null,result.accessToken);
+          firebase
+            .auth()
+            .signInWithCredential(credential)
+            .then(result => {
+              console.log(result);
+              this.setState({
+                googleDetails: JSON.stringify(result)
+              })
+              //this.fetchUserInfo(result.providerData[0].user.id);
+            });
+        } else {
+          return {cancelled: true};
+        }
+      } catch(e) {
+        return {error: true};
+      }
+    }
+    NetInfo.getConnectionInfo().then(connectionInfo => {
+      if (connectionInfo.type == "wifi" || connectionInfo.type == "cellular") {
+        signInWithGoogleAsync();
+      } else {
+        ToastAndroid.show(
+          "Network error. Please check your connection.",
+          ToastAndroid.LONG
+        );
+      }
+    });
+  }
 
   logout = () => {
     NetInfo.getConnectionInfo().then(connectionInfo => {
@@ -141,6 +187,7 @@ class Login extends React.Component {
         behavior="padding"
         style={styles.container}
       >
+        <Text>{this.state.googleDetails}</Text>
         <Form>
           {this.props.uid == "" || this.props.uid == null ? (
             <View>
@@ -160,6 +207,15 @@ class Login extends React.Component {
                 onPress={this.loginWithFacebook}
               >
                 <Text>Login with Facebook</Text>
+              </Button>
+              <View style={{ height: 10 }} />
+              <Button
+                full
+                light
+                style={{ marginLeft: 15, marginRight: 15 }}
+                onPress={this.loginWithGoogle}
+              >
+                <Text>Login with Google</Text>
               </Button>
             </View>
           ) : (
