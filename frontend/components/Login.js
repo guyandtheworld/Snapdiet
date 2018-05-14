@@ -16,7 +16,7 @@ import firebase from "../firebase";
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { googleDetails:'' };
+    this.state = { googleDetails: "" };
   }
 
   fetchUserInfo = async uid => {
@@ -90,12 +90,19 @@ class Login extends React.Component {
           .auth()
           .signInWithCredential(credential)
           .then(result => {
-            this.props.update('UID',{uid:result.providerData[0].uid});
-            this.props.update('USERNAME',{name:result.providerData[0].displayName});
-            this.props.update('USERPIC',{pic:result.providerData[0].photoURL});
-            AsyncStorage.setItem('LOCAL_UID',result.providerData[0].uid);
-            AsyncStorage.setItem('LOCAL_NAME',result.providerData[0].displayName);
-            AsyncStorage.setItem('LOCAL_PIC',result.providerData[0].photoURL);
+            this.props.update("UID", { uid: result.providerData[0].uid });
+            this.props.update("USERNAME", {
+              name: result.providerData[0].displayName
+            });
+            this.props.update("USERPIC", {
+              pic: result.providerData[0].photoURL
+            });
+            AsyncStorage.setItem("LOCAL_UID", result.providerData[0].uid);
+            AsyncStorage.setItem(
+              "LOCAL_NAME",
+              result.providerData[0].displayName
+            );
+            AsyncStorage.setItem("LOCAL_PIC", result.providerData[0].photoURL);
             this.fetchUserInfo(result.providerData[0].uid);
           });
       }
@@ -116,14 +123,19 @@ class Login extends React.Component {
     signInWithGoogleAsync = async () => {
       try {
         const result = await Expo.Google.logInAsync({
-          androidClientId: '1069277353491-uroe4n7o2ddqnkimupbui3tlecu9fsla.apps.googleusercontent.com',
-          iosClientId: '1069277353491-uroe4n7o2ddqnkimupbui3tlecu9fsla.apps.googleusercontent.com',
-          scopes: ['profile', 'email'],
+          androidClientId:
+            "1069277353491-uroe4n7o2ddqnkimupbui3tlecu9fsla.apps.googleusercontent.com",
+          iosClientId:
+            "1069277353491-uroe4n7o2ddqnkimupbui3tlecu9fsla.apps.googleusercontent.com",
+          scopes: ["profile", "email"]
         });
-        console.log("HERE"+JSON.stringify(result));
-        if (result.type === 'success') {
+        console.log("HERE" + JSON.stringify(result));
+        if (result.type === "success") {
           console.log(result.accessToken);
-          const credential = firebase.auth.GoogleAuthProvider.credential(null,result.accessToken);
+          const credential = firebase.auth.GoogleAuthProvider.credential(
+            null,
+            result.accessToken
+          );
           firebase
             .auth()
             .signInWithCredential(credential)
@@ -131,16 +143,16 @@ class Login extends React.Component {
               console.log(result);
               this.setState({
                 googleDetails: JSON.stringify(result)
-              })
+              });
               //this.fetchUserInfo(result.providerData[0].user.id);
             });
         } else {
-          return {cancelled: true};
+          return { cancelled: true };
         }
-      } catch(e) {
-        return {error: true};
+      } catch (e) {
+        return { error: true };
       }
-    }
+    };
     NetInfo.getConnectionInfo().then(connectionInfo => {
       if (connectionInfo.type == "wifi" || connectionInfo.type == "cellular") {
         signInWithGoogleAsync();
@@ -151,7 +163,7 @@ class Login extends React.Component {
         );
       }
     });
-  }
+  };
 
   logout = () => {
     NetInfo.getConnectionInfo().then(connectionInfo => {
