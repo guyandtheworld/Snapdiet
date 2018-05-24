@@ -16,7 +16,6 @@ import firebase from "../firebase";
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { googleDetails: "" };
   }
 
   fetchUserInfo = async uid => {
@@ -123,13 +122,12 @@ class Login extends React.Component {
     signInWithGoogleAsync = async () => {
       try {
         const result = await Expo.Google.logInAsync({
-          androidClientId:
-            "1069277353491-uroe4n7o2ddqnkimupbui3tlecu9fsla.apps.googleusercontent.com",
-          iosClientId:
-            "1069277353491-uroe4n7o2ddqnkimupbui3tlecu9fsla.apps.googleusercontent.com",
+          androidStandaloneAppClientId:
+            "1069277353491-67jffqvo9or7comd5l5e1mlj6gg0ma44.apps.googleusercontent.com",
+          iosStandaloneAppClientId:
+            "1069277353491-67jffqvo9or7comd5l5e1mlj6gg0ma44.apps.googleusercontent.com",
           scopes: ["profile", "email"]
         });
-        console.log("HERE" + JSON.stringify(result));
         if (result.type === "success") {
           console.log(result.accessToken);
           const credential = firebase.auth.GoogleAuthProvider.credential(
@@ -140,11 +138,20 @@ class Login extends React.Component {
             .auth()
             .signInWithCredential(credential)
             .then(result => {
-              console.log(result);
-              this.setState({
-                googleDetails: JSON.stringify(result)
+              this.props.update("UID", { uid: result.providerData[0].uid });
+              this.props.update("USERNAME", {
+                name: result.providerData[0].displayName
               });
-              //this.fetchUserInfo(result.providerData[0].user.id);
+              this.props.update("USERPIC", {
+                pic: result.providerData[0].photoURL
+              });
+              AsyncStorage.setItem("LOCAL_UID", result.providerData[0].uid);
+              AsyncStorage.setItem(
+                "LOCAL_NAME",
+                result.providerData[0].displayName
+              );
+              AsyncStorage.setItem("LOCAL_PIC", result.providerData[0].photoURL);
+              this.fetchUserInfo(result.providerData[0].uid);
             });
         } else {
           return { cancelled: true };
@@ -199,7 +206,6 @@ class Login extends React.Component {
         behavior="padding"
         style={styles.container}
       >
-        <Text>{this.state.googleDetails}</Text>
         <Form>
           {this.props.uid == "" || this.props.uid == null ? (
             <View>
