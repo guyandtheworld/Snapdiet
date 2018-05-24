@@ -14,7 +14,13 @@
       "bundleIdentifier": "com.agzuniverse.snapdiet"
     },
     "android": {
-      "package": "com.agzuniverse.snapdiet"
+      "package": "com.agzuniverse.snapdiet",
+      "config": {
+        "googleSignIn": {
+          "apiKey": "AIzaSyAQ--HyVweOy7kbm4C7AsAffKlpEHIXkEc",
+          "certificateHash": "DC2FC018E5E61585601D7B3566366CA2D33FBC6F"
+        }
+      }
     }
   }
 }
