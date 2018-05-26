@@ -79,6 +79,7 @@ class Calorie extends React.Component {
   };
 
   render() {
+
     const bgimg = require("./background.jpg");
 
     return (
@@ -100,6 +101,7 @@ class Calorie extends React.Component {
           behavior="padding"
         >
           <View style={styles.container}>
+
             <Text style={styles.header}> Calories consumed </Text>
             <Text
               style={[styles.currentCal, { color: this.props.currentColor }]}
@@ -107,9 +109,12 @@ class Calorie extends React.Component {
               {" "}
               {this.props.currentCalorie}{" "}
             </Text>
+
             <Text style={styles.header}> Daily Calorie Goal </Text>
             <Text style={styles.goalCal}> {this.props.dailyGoal} </Text>
+            
             <View style={styles.buttonContainer}>
+
               <Button
                 success
                 onPress={() => {
@@ -118,21 +123,27 @@ class Calorie extends React.Component {
               >
                 <Text> -100 </Text>
               </Button>
+
               <Button
                 warning
                 style={{ marginLeft: 10 }}
-                onPress={() => {
+                onPress={ () => {
                   this.increaseDailyGoal();
-                }}
+                  }
+                }
               >
                 <Text> +100 </Text>
               </Button>
+
             </View>
-            <Text style={{ color: "rgba(0,0,0,0.5)", fontFamily: "openSans" }}>
+
+            <Text style={styles.bottomText}>
               {" "}
               Change Daily Calorie Goal{" "}
             </Text>
+
           </View>
+
         </KeyboardAvoidingView>
       </ImageBackground>
     );
@@ -145,20 +156,20 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-    padding: 10
+    padding: 10,
   },
   header: {
     fontSize: 33,
-    fontFamily: "openSans-bold",
-    marginTop: 10,
-    color: "rgba(0,0,0,0.7)"
+    fontFamily: "openSans-bold", 
+    color: "rgba(0,0,0,0.7)",
+    marginTop: 5,
   },
   currentCal: {
-    fontSize: 100,
+    fontSize: 90,
     fontWeight: "bold"
   },
   goalCal: {
-    fontSize: 100,
+    fontSize: 90,
     fontWeight: "bold",
     color: "#57CBFF"
   },
@@ -177,6 +188,10 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     fontSize: 12
+  },
+  bottomText: {
+    color: "rgba(0,0,0,0.5)",
+    fontFamily: "openSans",
   }
 });
 
