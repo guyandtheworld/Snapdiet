@@ -421,13 +421,13 @@ class Addcalorie extends React.Component {
 
           <View style={{ width: "95%" }}>
             <Button
-              block
               disabled={this.state.disableAddButton}
               onPress={() => {
                 this.addCalories();
               }}
+              block
             >
-              <Text style={{ color: "white" }}>Add</Text>
+            <Text style={{ color: "white" }}>Add</Text>
             </Button>
           </View>
         </View>

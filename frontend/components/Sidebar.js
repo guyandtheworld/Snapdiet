@@ -1,5 +1,7 @@
 import React from "react";
 import {
+  StatusBar,
+  Platform,
   StyleSheet,
   View,
   TouchableNativeFeedback,
@@ -40,13 +42,15 @@ class Sidebar extends React.Component {
     this.props.navigation.navigate("GetInfo");
   };
   render() {
+
     cover = require("./sidebar_cover.jpg");
     pic = require("./sidebar_pic.png");
+
     return (
       <Container>
         <Grid>
           <Row size={30}>
-            <ImageBackground source={cover} style={{ width: "100%" }}>
+            <ImageBackground source={cover} style={{ width: "100%"}}>
               <View style={styles.coverContainer}>
                 {this.props.pic == "" ||
                 this.props.pic == null ||
@@ -106,10 +110,13 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "flex-end",
     alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0.2)"
+    backgroundColor: "rgba(0,0,0,0.2)",
+    paddingTop:Platform.OS=='ios'?0:StatusBar.currentHeight,
   }
 });
 
 export default connect(store => {
   return store;
 })(Sidebar);
+
+//  style={{marginTop:Platform.OS=='ios'?0:StatusBar.currentHeight}}

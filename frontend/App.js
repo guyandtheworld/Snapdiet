@@ -78,7 +78,7 @@ const Stacknavigation=StackNavigator(
       navigationOptions:({ navigation }) => ({
         title:'Login With Email',
         headerStyle:{
-          backgroundColor:'#66b169',
+          backgroundColor:'#CB4D4C',
           color:'rgba(0,0,0,0.7)',
         },
       })
@@ -88,7 +88,7 @@ const Stacknavigation=StackNavigator(
       navigationOptions:({navigation}) => ({
         title:'Add Food',
         headerStyle:{
-          backgroundColor:'#66b169',
+          backgroundColor:'#CB4D4C',
           color:'rgba(0,0,0,0.7)',
         },
       })

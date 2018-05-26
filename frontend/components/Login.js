@@ -207,47 +207,55 @@ class Login extends React.Component {
         behavior="padding"
         style={styles.container}
       >
-        <Form>
-          {this.props.uid == "" || this.props.uid == null ? (
-            <View>
-              <Button
-                full
-                warning
-                style={{ marginLeft: 15, marginRight: 15 }}
-                onPress={() => this.props.navigation.navigate("LoginWithEmail")}
-              >
-                <Text>Login with Email</Text>
-              </Button>
-              <View style={{ height: 10 }} />
+
+        <View>
+
+          <Form>
+            {this.props.uid == "" || this.props.uid == null ? (
+              <View>
+
+                <Button
+                  full
+                  warning
+                  style={{ marginLeft: 15, marginRight: 15 }}
+                  onPress={() => this.props.navigation.navigate("LoginWithEmail")}
+                >
+                  <Text>Login with Email</Text>
+                </Button>
+                <View style={{ height: 10 }} />
+                <Button
+                  full
+                  primary
+                  style={{ marginLeft: 15, marginRight: 15 }}
+                  onPress={this.loginWithFacebook}
+                >
+                  <Text>Login with Facebook</Text>
+                </Button>
+                <View style={{ height: 10 }} />
+                <Button
+                  full
+                  light
+                  style={{ marginLeft: 15, marginRight: 15 }}
+                  onPress={this.loginWithGoogle}
+                >
+                  <Text>Login with Google</Text>
+                </Button>
+              </View>
+            ) : (
               <Button
                 full
                 primary
                 style={{ marginLeft: 15, marginRight: 15 }}
-                onPress={this.loginWithFacebook}
+                onPress={this.logout}
               >
-                <Text>Login with Facebook</Text>
+                <Text>Logout</Text>
               </Button>
-              <View style={{ height: 10 }} />
-              <Button
-                full
-                light
-                style={{ marginLeft: 15, marginRight: 15 }}
-                onPress={this.loginWithGoogle}
-              >
-                <Text>Login with Google</Text>
-              </Button>
-            </View>
-          ) : (
-            <Button
-              full
-              primary
-              style={{ marginLeft: 15, marginRight: 15 }}
-              onPress={this.logout}
-            >
-              <Text>Logout</Text>
-            </Button>
-          )}
-        </Form>
+            )}
+
+          </Form>
+
+        </View>
+
       </KeyboardAvoidingView>
     );
   }
@@ -256,7 +264,7 @@ class Login extends React.Component {
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    backgroundColor: "rgb(230,230,230)",
+    backgroundColor: "#CB4D4C", //rgb(230,230,230)",
     padding: 10,
     justifyContent: "center",
     alignItems: "center"
