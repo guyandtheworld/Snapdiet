@@ -1,7 +1,7 @@
 import * as firebase from 'firebase';
 
 const config = {
-  apiKey: "AIzaSyBmErNRB_6zuLdf-MTk03Fa0i1Dx5S-ltM ",
+  apiKey: "AIzaSyBmErNRB_6zuLdf-MTk03Fa0i1Dx5S-ltM",
   authDomain: "snapdiet-alpha.firebaseapp.com",
   databaseURL: "https://snapdiet-alpha.firebaseio.com",
   storageBucket: "snapdiet-alpha.appspot.com"
