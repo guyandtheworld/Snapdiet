@@ -264,10 +264,10 @@ class Login extends React.Component {
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    backgroundColor: "#CB4D4C", //rgb(230,230,230)",
+    backgroundColor: "#CB4D4C",
     padding: 10,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   }
 });
 
