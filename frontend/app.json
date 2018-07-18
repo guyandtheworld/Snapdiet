@@ -1,20 +1,20 @@
 {
   "expo": {
-    "name":"SnapDiet-Alpha",
+    "name":"SnapDiet-Test",
     "splash":{
       "image":"./snapdiet_logo.png",
       "backgroundColor":"#66b169"
     },
     "icon":"./snapdiet_logo.png",
     "version":"1.0.0",
-    "slug": "snapdiet",
+    "slug": "snapdiet_test",
     "sdkVersion": "23.0.0",
     "orientation":"portrait",
     "ios": {
-      "bundleIdentifier": "com.agzuniverse.snapdiet"
+      "bundleIdentifier": "com.arvytech.snapdiet"
     },
     "android": {
-      "package": "com.agzuniverse.snapdiet",
+      "package": "com.arvytech.snapdiet",
       "config": {
         "googleSignIn": {
           "apiKey": "AIzaSyAQ--HyVweOy7kbm4C7AsAffKlpEHIXkEc",
