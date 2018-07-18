@@ -237,7 +237,6 @@ class Main extends React.Component {
       >
         <View>
           <View style={styles.container}>
-            <Tips />
             <View style={{ height: 30 }} />
             <AnimatedCircularProgress
               size={225}
