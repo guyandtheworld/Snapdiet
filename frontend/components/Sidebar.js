@@ -64,14 +64,6 @@ class Sidebar extends React.Component {
             </ImageBackground>
           </Row>
           <Row size={10}>
-            <TouchableNativeFeedback onPress={this.goToLogin}>
-              <View style={styles.sideBarView}>
-                <Icon style={{ color: "gray" }} name="contact" />
-                <Text style={styles.sideBarText}> Login/Sign up</Text>
-              </View>
-            </TouchableNativeFeedback>
-          </Row>
-          <Row size={10}>
             <TouchableNativeFeedback onPress={this.editInfo}>
               <View style={styles.sideBarView}>
                 <Icon style={{ color: "gray" }} name="create" />
