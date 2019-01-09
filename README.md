@@ -1,7 +1,17 @@
-# Stuff
+# Snapdiet
+
+SnapDiet is a calorie tracking application built with React Native with persistent notification bar which none of the current alternatives offer. You have no way to make the notifications go away so you're only alternative is to diet. We would make you forcefully diet and get in shape. You're only redemption is to uninstall this app, which your guilt would stop you from doing.
 
 
-## Ground rules on github.
+![](https://i.imgur.com/ld7oZmr.jpg)
+![](https://i.imgur.com/B2h29r2.jpg)
+![](https://i.imgur.com/me9Grc7.jpg)
+![](https://i.imgur.com/b5HlmUn.jpg)
+![](https://i.imgur.com/ZHS1qWG.jpg)
+![](https://i.imgur.com/9YlJPyz.jpg)
+
+
+## Ground Rules Github.
 
 * Always keep your fork (origin) updated with the master branch of the master (upstream).
 
@@ -9,9 +19,7 @@
 
     `git rebase upstream/master`
 
-    where upstream is https://github.com/isht3/stuff.
-
-* Two people shouldn't work on the same file. Keep your work seperate and collaborate to avoid confusion.
+    where upstream is https://github.com/isht3/Snapdiet.
 
 * Don't push directly to the repository, always push to your own fork first and from there do a Pull request to the main repo.
 
@@ -19,7 +27,7 @@
 
 * Keep the frontend and backend in code separated.
 
-* The master is always stable, you don't have access to edit the master branch directly.
+* The master is always stable, please don't edit the master branch directly.
 
 * Don't work on master branch, whatever you're doing, make a feature branch, the master branch should always be stable.
 
@@ -51,7 +59,7 @@
 <br>
 
 
--  [ ] Do a UI overhaul, copy from popular apps, and make it visually pleasing and round the edges and fonts. JUST LOOK AT HOW POPULAR APPS HANDLES SIMILAR FEATURES.
+-  [x] Do a UI overhaul, copy from popular apps, and make it visually pleasing and round the edges and fonts. JUST LOOK AT HOW POPULAR APPS HANDLES SIMILAR FEATURES.
 <br>
 
 
@@ -67,19 +75,5 @@
 <br>
 
 
--  [ ] The food history of the user of each day should be shown. Along with the top five favourite user foods in a sliding view. (Look at Quality time)
+-  [x] The food history of the user of each day should be shown. Along with the top five favourite user foods in a sliding view. (Look at Quality time)
 <br>
-
-## How to.
-<br>
-<br>
-
-* From the first, the three of you can claim one issue at once, complete it as quick as possible, and do a PR along with the name of the issue/feature as the PR heading along with screenshots. Each time you claim an issue, add claimed by in brackets near to the issue/feature here, in the README.md along with the date you claimed it. E.G (Claimed by Adarsh S, January 23, 2018) just after the issue/featuer. If completed, and PR is merged, you can tick the checkbox.
-<br>
-<br>
-
-* Some of the issues are big, some are small. Keep in mind that number of issues solved won't make a difference.
-<br>
-<br>
-
-### Follow a UI first approach, the feature is secondary. Before working on one of the issue, look at similar apps and how they execute similar feature and try to mimick the UI here, color combinations are important too.
