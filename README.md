@@ -2,6 +2,13 @@
 
 SnapDiet is a calorie tracking application built with React Native with persistent notification bar which none of the current alternatives offer. You have no way to make the notifications go away so you're only alternative is to diet. We would make you forcefully diet and get in shape. You're only redemption is to uninstall this app, which your guilt would stop you from doing.
 
+Solarized dark             |  Solarized Ocean
+:-------------------------:|:-------------------------:
+
+<img src="https://i.imgur.com/ld7oZmr.jpg" width="350" height="700" title="hover text">
+  |  <img src="https://i.imgur.com/B2h29r2.jpg" width="350" height="700" title="hover text">
+
+
 <img src="https://i.imgur.com/ld7oZmr.jpg" width="350" height="700" title="hover text">
 
 <img src="https://i.imgur.com/B2h29r2.jpg" width="350" height="700" title="hover text">
@@ -13,6 +20,12 @@ SnapDiet is a calorie tracking application built with React Native with persiste
 <img src="https://i.imgur.com/ZHS1qWG.jpg" width="350" height="700" title="hover text">
 
 <img src="https://i.imgur.com/9YlJPyz.jpg" width="350" height="700" title="hover text">
+
+<img src="https://i.imgur.com/7mJgkTS.jpg" width="350" height="700" title="hover text">
+
+<img src="https://i.imgur.com/qnovEjp.jpg" width="350" height="700" title="hover text">
+
+
 
 
 ## Ground Rules Github.
